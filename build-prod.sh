@@ -7,13 +7,13 @@ ActiveProfiles=prod
 
 #基本信息需要配置
 #内部端口
-targetPort=8081
+targetPort=8880
 #旧镜像版本号
 oldVendor=1.0.0
 #镜像版本号
 vendor=1.0.0
 #项目名
-projectName=eureka
+projectName=demo-test
 
 #进入target文件夹
 #直接的构建是再容器里，这个是在 Jenkins 容器里，所以空间不一样
