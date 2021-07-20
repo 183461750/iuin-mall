@@ -19,7 +19,7 @@ projectName=demo-test
 #直接的构建是再容器里，这个是在 Jenkins 容器里，所以空间不一样
 #容器的空间是原空间路径后面多了 @2
 #cd $WORKSPACE@2/$projectName/target
-cd $WORKSPACE/target
+cd $WORKSPACE@2/target
 
 #创建Dockerfile文件
 #-jar -Duser.timezone=GMT+08 保证生成出来的容器的时区与服务器一致
