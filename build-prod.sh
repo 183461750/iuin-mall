@@ -9,7 +9,7 @@ ActiveProfiles=prod
 #内部端口
 targetPort=8880
 #旧镜像版本号
-oldVendor=1.0.0
+oldVendor=1.0.1
 #镜像版本号
 vendor=1.0.1
 #项目名
