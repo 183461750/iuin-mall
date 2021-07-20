@@ -11,7 +11,7 @@ targetPort=8880
 #旧镜像版本号
 oldVendor=1.0.0
 #镜像版本号
-vendor=1.0.0
+vendor=1.0.1
 #项目名
 projectName=demo-test
 
