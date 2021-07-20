@@ -31,7 +31,6 @@ LABEL app="$projectName" version="$vendor" by="$projectName"
 COPY $projectName.jar $projectName.jar
 EXPOSE $targetPort
 CMD java -Xmx100m -Xms100m -jar -Duser.timezone=GMT+08 $projectName.jar --spring.profiles.active=$ActiveProfiles
-ENTRYPOINT java
 EOF
 
 #删除镜像下所有容器
