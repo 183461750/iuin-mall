@@ -5,5 +5,5 @@ logging:
     root: info
 spring:
   application:
-    name: demo-test
+    name: @project.name@
 #    com.example.demo.repository.UserRepository: debug

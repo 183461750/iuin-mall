@@ -13,7 +13,7 @@
     <groupId>com.example</groupId>
     <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
+    <name>demo-test</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -66,6 +66,8 @@
     </dependencies>
 
     <build>
+        <!-- 指定package生成的文件名为myApplication.jar -->
+        <finalName>${project.name}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
