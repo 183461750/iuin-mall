@@ -1,14 +1,6 @@
 pipeline {
     agent any
-    parameters {
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
-    }
     stages {
-        stage('Example') {
-          steps {
-            git branch: "${params.BRANCH}", url: 'git@gitlab.ihaozhuo.com:Java_Service/YJK-Java.git'
-          }
-        }
         stage('package') {
             agent {
                 docker {
