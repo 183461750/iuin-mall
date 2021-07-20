@@ -31,7 +31,7 @@ LABEL app="$projectName" version="$vendor" by="$projectName"
 COPY $projectName.jar $projectName.jar
 EXPOSE $targetPort
 # 唯一，参数不可被覆盖
-ENTRYPOINT java
+ENTRYPOINT ["java"]
 # 给 ENTRYPOINT 添加参数 CMD可多个，参数可被docker run覆盖
 CMD ["-Xmx100m", "-Xms100m", "-jar", "-Duser.timezone=GMT+08", "$projectName.jar", "--spring.profiles.active=$ActiveProfiles"]
 EOF
