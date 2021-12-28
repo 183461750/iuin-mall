@@ -113,7 +113,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>1.2.2</version>
                 <configuration>
-                    <imageName>${project.build.finalName}</imageName><!--[a-z0-9-_.] 不然docker:build会报错-->
+                    <imageName>${project.build.finalName}:${project.version}</imageName><!--[a-z0-9-_.] 不然docker:build会报错-->
                     <baseImage>openjdk:8-jdk-alpine</baseImage>
                     <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
                     <dockerDirectory>${project.build.directory}/${project.build.finalName}.jar</dockerDirectory>
