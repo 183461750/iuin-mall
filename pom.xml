@@ -111,10 +111,12 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.13</version>
+                <version>1.2.2</version>
                 <configuration>
-                    <imageName>demo</imageName><!--[a-z 0-9] 不然docker:build会报错-->
-                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    <imageName>${project.build.finalName}</imageName><!--[a-z0-9-_.] 不然docker:build会报错-->
+                    <baseImage>openjdk:8-jdk-alpine</baseImage>
+                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <dockerDirectory>${project.build.directory}/${project.build.finalName}.jar</dockerDirectory>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
@@ -122,7 +124,38 @@
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
+                    <dockerHost>http://10.0.0.73:2375</dockerHost>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>tag-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>tag</goal>
+                        </goals>
+                        <configuration>
+                            <image>${project.build.finalName}:${project.version}</image>
+                            <newName>registry.docker.com:5000/${project.build.finalName}:${project.version}</newName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>push-image</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                        <configuration>
+                            <imageName>registry.docker.com:5000/${project.build.finalName}:${project.version}</imageName>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <!-- Docker maven plugin end -->
         </plugins>
