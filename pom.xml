@@ -126,36 +126,6 @@
                     </resources>
                     <dockerHost>http://10.0.0.73:2375</dockerHost>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>build-image</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>tag-image</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>tag</goal>
-                        </goals>
-                        <configuration>
-                            <image>${project.build.finalName}:${project.version}</image>
-                            <newName>registry.docker.com:5000/${project.build.finalName}:${project.version}</newName>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>push-image</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>push</goal>
-                        </goals>
-                        <configuration>
-                            <imageName>registry.docker.com:5000/${project.build.finalName}:${project.version}</imageName>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <!-- Docker maven plugin end -->
         </plugins>
