@@ -1,5 +1,5 @@
 server:
-  port: 8880
+  port: @appPort@
 logging:
   level:
     root: info
