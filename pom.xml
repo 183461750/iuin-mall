@@ -131,7 +131,7 @@
                     <!-- 注意，repository的格式必须为：<username>/<repository_name>
                      username就是登录Docker Hub的用户名，例如我的用户名是longyonggang。
                     repository_name就是上一步在Docker Hub上创建的repository名字。 -->
-                    <repository>${docker.image.prefix}/app/${project.build.finalName}</repository>
+                    <repository>${docker.image.prefix}/${project.build.finalName}</repository>
                     <!--                    <username>longyonggang</username>-->
                     <!--                    <password>xxxx</password>-->
                     <tag>${project.version}</tag>
