@@ -136,8 +136,8 @@
                     <!--                    <password>xxxx</password>-->
                     <tag>${project.version}</tag>
                     <buildArgs>
-                        <JAR_FILE>./target/${project.build.finalName}.jar</JAR_FILE>
-                        <APP_PORT>${project.build.finalName}.jar</APP_PORT>
+                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                        <APP_PORT>${appPort}</APP_PORT>
                     </buildArgs>
                 </configuration>
             </plugin>
