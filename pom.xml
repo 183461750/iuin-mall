@@ -66,16 +66,16 @@
             <version>${fastjson.version}</version>
         </dependency>
 
-        <!--监控-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <!--适配prometheus-->
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-        </dependency>
+<!--        &lt;!&ndash;监控&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash;适配prometheus&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.micrometer</groupId>-->
+<!--            <artifactId>micrometer-registry-prometheus</artifactId>-->
+<!--        </dependency>-->
 
     </dependencies>
 
@@ -180,6 +180,26 @@
                                 <goals>
                                     <goal>build</goal>
                                 </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.graalvm.nativeimage</groupId>
+                        <artifactId>native-image-maven-plugin</artifactId>
+                        <version>21.2.0</version>
+                        <configuration>
+                            <mainClass>com.example.demo.DemoApplication</mainClass>
+                            <buildArgs>
+                                -Dspring.native.remove-yaml-support=false
+                                -Dspring.spel.ignore=true
+                            </buildArgs>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>native-image</goal>
+                                </goals>
+                                <phase>package</phase>
                             </execution>
                         </executions>
                     </plugin>
