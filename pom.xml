@@ -183,26 +183,28 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
-                        <groupId>org.graalvm.nativeimage</groupId>
-                        <artifactId>native-image-maven-plugin</artifactId>
-                        <version>21.2.0</version>
-                        <configuration>
-                            <mainClass>com.example.demo.DemoApplication</mainClass>
-                            <buildArgs>
-                                -Dspring.native.remove-yaml-support=false
-                                -Dspring.spel.ignore=true
-                            </buildArgs>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>native-image</goal>
-                                </goals>
-                                <phase>package</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
+<!--                    <plugin>-->
+<!--                        <groupId>org.graalvm.nativeimage</groupId>-->
+<!--                        <artifactId>native-image-maven-plugin</artifactId>-->
+<!--                        <version>21.2.0</version>-->
+<!--                        <configuration>-->
+<!--                            <mainClass>com.example.demo.DemoApplication</mainClass>-->
+<!--                            <buildArgs>-->
+<!--                                -Dspring.native.remove-yaml-support=false-->
+<!--                                -Dspring.spel.ignore=true-->
+<!--                                -H:+ReportExceptionStackTraces-->
+<!--                                -H:PrintFlags=-->
+<!--                            </buildArgs>-->
+<!--                        </configuration>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <goals>-->
+<!--                                    <goal>native-image</goal>-->
+<!--                                </goals>-->
+<!--                                <phase>package</phase>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                    </plugin>-->
                 </plugins>
             </build>
         </profile>
