@@ -2,6 +2,7 @@ package com.example.demoserver.controller;
 
 import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.sso.SaSsoUtil;
+import cn.dev33.satoken.util.SaResult;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +48,7 @@ public class TestController {
         List<Integer> list = Arrays.asList(10041, 10042, 10043, 10044);
 
         // 返回
-        return list;
+        return SaResult.data(list);
     }
 
 }

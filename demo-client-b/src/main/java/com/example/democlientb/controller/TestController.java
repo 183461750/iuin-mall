@@ -13,7 +13,7 @@ public class TestController {
     @RequestMapping("/sso/myFollowList")
     public Object myFollowList() {
         // 组织url，加上签名参数
-        String url = SaSsoUtil.addSignParams("http://127.0.0.1:9000/sso/getFollowList", StpUtil.getLoginId());
+        String url = SaSsoUtil.addSignParams("http://127.0.0.1:9000/test/sso/getFollowList", StpUtil.getLoginId());
 
         // 调用，并返回 SaResult 结果
         SaResult res = SaSsoUtil.request(url);
