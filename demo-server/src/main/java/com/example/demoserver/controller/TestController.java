@@ -2,6 +2,7 @@ package com.example.demoserver.controller;
 
 import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.sso.SaSsoUtil;
+import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,8 @@ public class TestController {
     // 获取指定用户的关注列表
     @RequestMapping("/sso/getFollowList")
     public Object ssoRequest(Long loginId) {
+
+        StpUtil.checkLogin();
 
         // 校验签名，签名不通过直接抛出异常
         SaSsoUtil.checkSign(SaHolder.getRequest());

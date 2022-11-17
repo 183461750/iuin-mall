@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/test")
 public class TestController {
 
     // 查询我的账号信息
@@ -20,6 +21,13 @@ public class TestController {
 
         // 返回给前端
         return res;
+    }
+
+    @RequestMapping("/demo")
+    public Object testDemo(String str) {
+
+        // 返回给前端
+        return SaResult.data(str);
     }
 
 }

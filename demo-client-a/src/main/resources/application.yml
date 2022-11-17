@@ -4,6 +4,9 @@ server:
 
 # sa-token配置
 sa-token:
+  timeout: 300
+  activity-timeout: 60
+
   # SSO-相关配置
   sso:
     # SSO-Server端 统一认证地址
