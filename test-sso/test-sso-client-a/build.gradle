@@ -1,28 +1,23 @@
-plugins {
-    id 'java'
-    id 'org.springframework.boot' version '2.7.5'
-    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-}
+archivesBaseName = 'test-sso-client-a'
 
-group = 'com.iuin'
-version = '0.0.1-SNAPSHOT'
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
-repositories {
-    mavenCentral()
+bootJar {
+    setProperty('archiveClassifier', 'boot')
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // 子模块间的依赖
+    implementation project(':test-sso-common') /* 子模块之间的依赖 */
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // eureka注册 及 ribbon负载平衡
+//    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
+//    implementation 'org.spring、framework.cloud:spring-cloud-starter-netflix-eureka-client'
 
 
     implementation 'cn.hutool:hutool-all:5.8.10'
@@ -43,6 +38,17 @@ dependencies {
     // Http请求工具（在模式三的单点注销功能下用到，如不需要可以注释掉）
     implementation 'com.dtflys.forest:forest-spring-boot-starter:1.5.26'
 
+}
+
+
+
+
+version = '0.0.1-SNAPSHOT'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 tasks.named('test') {

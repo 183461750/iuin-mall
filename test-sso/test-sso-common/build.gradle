@@ -1,0 +1,10 @@
+
+archivesBaseName='test-sso-common'
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+
+    implementation 'cn.hutool:hutool-all:5.8.10'
+
+}
