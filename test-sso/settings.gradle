@@ -1,0 +1,5 @@
+rootProject.name = 'test-sso'
+
+include("test-sso-server")
+include("test-sso-client-a")
+include("test-sso-client-b")
