@@ -1,18 +1,21 @@
-package com.example.demoserver.controller;
+package com.iuin.testssoserver.controller;
 
 import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.sso.SaSsoUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
-import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @author fa
+ */
 @Slf4j
 @RestController
 @RequestMapping("/test")
@@ -20,20 +23,20 @@ public class TestController {
 
 
     @GetMapping("/demo")
-    public JSONObject demo(String test) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("1", 1);
-        jsonObject.put("test", test);
-        return jsonObject;
+    public HashMap<String, Object> demo(String test) {
+        HashMap<String, Object> map = new HashMap<>(2);
+        map.put("1", 1);
+        map.put("test", test);
+        return map;
     }
 
     @GetMapping("/demo2")
-    public JSONObject demo2(String test) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("1", 1);
-        jsonObject.put("test", test);
+    public HashMap<String, Object> demo2(String test) {
+        HashMap<String, Object> map = new HashMap<>(2);
+        map.put("1", 1);
+        map.put("test", test);
         log.info("test: {}", test);
-        return jsonObject;
+        return map;
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.demoserver.sso;
+package com.iuin.testssoserver.sso;
 
 import cn.dev33.satoken.config.SaSsoConfig;
 import cn.dev33.satoken.sso.SaSsoProcessor;

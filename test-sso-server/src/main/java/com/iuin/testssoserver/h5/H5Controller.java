@@ -1,4 +1,4 @@
-package com.example.demoserver.h5;
+package com.iuin.testssoserver.h5;
 
 import cn.dev33.satoken.sso.SaSsoConsts;
 import cn.dev33.satoken.sso.SaSsoUtil;

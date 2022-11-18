@@ -1,4 +1,4 @@
-package com.example.demoserver.h5;
+package com.iuin.testssoserver.h5;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
