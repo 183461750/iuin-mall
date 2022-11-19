@@ -8,12 +8,10 @@ dependencies {
     // 子模块间的依赖
     implementation project(':test-sso-common') /* 子模块之间的依赖 */
 
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
 
     // eureka注册 及 ribbon负载平衡
 //    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
@@ -38,17 +36,6 @@ dependencies {
     // Http请求工具（在模式三的单点注销功能下用到，如不需要可以注释掉）
     implementation 'com.dtflys.forest:forest-spring-boot-starter:1.5.26'
 
-}
-
-
-
-
-version = '0.0.1-SNAPSHOT'
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
 }
 
 tasks.named('test') {

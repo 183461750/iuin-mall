@@ -1,12 +1,3 @@
-plugins {
-    id 'java'
-}
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
 
 dependencies {
     // implementation 'org.springframework.boot:spring-boot-starter-web'
