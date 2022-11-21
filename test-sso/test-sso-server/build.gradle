@@ -1,14 +1,10 @@
 
 dependencies {
-    // implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation project(':test-sso-common')
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
-    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-    implementation 'cn.hutool:hutool-all:5.8.10'
 
     // Sa-Token 权限认证，在线文档：https://sa-token.cc
     implementation 'cn.dev33:sa-token-spring-boot-starter:1.32.0'
