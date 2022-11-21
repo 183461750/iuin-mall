@@ -2,6 +2,8 @@ package com.iuin.testssoserver.dto;
 
 import lombok.Data;
 
+import javax.persistence.Column;
+
 /**
  * @author fa
  */
@@ -14,7 +16,13 @@ public class StudentAddRequest {
 
     private String name;
 
-    private String address;
+
+    private String province;
+
+    private String city;
+
+    private String area;
+
 
 
 

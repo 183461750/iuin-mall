@@ -24,6 +24,10 @@ public class StudentDO {
     @SequenceGenerator(sequenceName = "student_seq", name = "student_seq", allocationSize = 1)
     private Long id;
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private AddressDO addressDO;
+
     /**
      * 年龄
      */
@@ -39,13 +43,7 @@ public class StudentDO {
     /**
      * 姓名
      */
-    @Column(columnDefinition = "varchar(100)")
+    @Column(columnDefinition = "varchar(128)")
     private String name;
-
-    /**
-     * 地址
-     */
-    @Column(columnDefinition = "varchar")
-    private String address;
 
 }

@@ -2,6 +2,7 @@ package com.iuin.testssoserver.serviceimpl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.iuin.testssoserver.dto.StudentAddRequest;
+import com.iuin.testssoserver.entity.AddressDO;
 import com.iuin.testssoserver.entity.StudentDO;
 import com.iuin.testssoserver.repository.StudentRepository;
 import com.iuin.testssoserver.service.IStudentService;
@@ -22,6 +23,11 @@ public class StudentServiceImpl implements IStudentService {
     public StudentDO add(StudentAddRequest studentAddRequest) {
         StudentDO studentDO = new StudentDO();
         BeanUtil.copyProperties(studentAddRequest, studentDO);
+        AddressDO addressDO = new AddressDO();
+        BeanUtil.copyProperties(studentAddRequest, addressDO);
+
+        studentDO.setAddressDO(addressDO);
+
         return studentRepository.save(studentDO);
     }
 
