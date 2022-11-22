@@ -24,6 +24,14 @@ public class StudentAddRequest {
     private String area;
 
 
+    private String roleName;
+
+
+    private Integer petAge;
+
+    private Integer petSex;
+
+    private String petName;
 
 
 }

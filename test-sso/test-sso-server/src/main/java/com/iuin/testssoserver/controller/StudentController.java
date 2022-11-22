@@ -25,6 +25,8 @@ public class StudentController {
 
         StudentDO studentDO = studentService.add(studentAddRequest);
 
+        studentDO.getPetDOList().forEach(petDO -> petDO.setStudentDO(null));
+
         return SaResult.data(studentDO);
     }
 
