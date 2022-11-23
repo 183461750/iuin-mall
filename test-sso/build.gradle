@@ -93,6 +93,7 @@ subprojects {
 		imports {
 			mavenBom(SpringBootPlugin.BOM_COORDINATES)
 			mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+			mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
 			mavenBom "org.camunda.bpm:camunda-bom:${sb_camundaBpm}"
 		}
 		dependencies {

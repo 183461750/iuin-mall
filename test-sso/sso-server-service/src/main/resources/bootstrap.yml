@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: local
+    include: common-${spring.profiles.active}
+  application:
+    name: sso-server-service
+  main:
+    allow-bean-definition-overriding: true

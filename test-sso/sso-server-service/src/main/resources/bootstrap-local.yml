@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.0.16.16:8848
+        namespace: test-sso
+        group: DEFAULT_GROUP
+      config:
+        server-addr: 10.0.16.16:8848
+        file-extension: yml
+        namespace: test-sso
+        extension-configs:
+          - data-id: sso-server.yml
+            group: DEFAULT_GROUP
+            refresh: true
+        group: DEFAULT_GROUP
+        prefix: ${spring.application.name}
+
