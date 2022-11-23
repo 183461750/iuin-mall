@@ -1,0 +1,17 @@
+
+archivesBaseName='workflow-service'
+// 需要依赖包
+jar.enabled = true
+// 无需启动包
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':common-service')
+    implementation project(':component-service:jpa')
+
+    //工作流引擎Camunda依赖（共3个）
+    implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter'
+    implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest'
+    implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp'
+
+}

@@ -9,10 +9,6 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
-group = 'com.iuin'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -25,9 +21,14 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	set('springCloudVersion', "2021.0.5")
-}
+group = 'com.iuin'
+version = '0.0.1-SNAPSHOT'
+// 指定JDK版本
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+apply from: "config.gradle"
+
 
 // 子项目的通用配置
 subprojects {
@@ -44,6 +45,15 @@ subprojects {
 	// 可以使用api编译
 	apply plugin: 'java-library'
 
+	group = 'com.iuin'
+	version = '0.0.1-SNAPSHOT' /* 项目版本 */
+	// 指定JDK版本
+	sourceCompatibility = JavaVersion.VERSION_11
+	targetCompatibility = JavaVersion.VERSION_11
+
+	/* java编译的时候缺省状态下会因为中文字符而失败 */
+	[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
 	// A project can be configured to build both an executable archive and a normal archive at the same time by enabling the jar or war task:
 	// 可以参考：https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/
 
@@ -58,15 +68,6 @@ subprojects {
 	bootJar {
 		setProperty('archiveClassifier', 'boot')
 	}
-
-	group = 'com.iuin'
-	version = '0.0.1-SNAPSHOT' /* 项目版本 */
-
-	/* 指定jdk版本 */
-	sourceCompatibility = '11'
-
-	/* java编译的时候缺省状态下会因为中文字符而失败 */
-	[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
 	repositories {
 		mavenLocal()
@@ -92,6 +93,15 @@ subprojects {
 		imports {
 			mavenBom(SpringBootPlugin.BOM_COORDINATES)
 			mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+			mavenBom "org.camunda.bpm:camunda-bom:${sb_camundaBpm}"
+		}
+		dependencies {
+
+			//工作流引擎Camunda依赖（共3个）
+//			dependency "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter:${sb_camundaBpm}"
+//			dependency "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest:${sb_camundaBpm}"
+//			dependency "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp:${sb_camundaBpm}"
+
 		}
 	}
 

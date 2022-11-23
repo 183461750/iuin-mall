@@ -62,7 +62,7 @@ spring:
       maximum-pool-size: 10
       auto-commit: true
       idle-timeout: 30000
-      pool-name: SystemServiceHikariPool
+      pool-name: SsoServerServiceHikariPool
       max-lifetime: 1800000
       connection-timeout: 30000
       connection-test-query: SELECT 1

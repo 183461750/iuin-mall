@@ -1,0 +1,7 @@
+ext {
+    version = [
+            set('springCloudVersion', "2021.0.5"),
+            set('sb_camundaBpm', "7.15.0"),
+    ]
+
+}

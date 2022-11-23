@@ -4,6 +4,7 @@ include 'common-service'
 include 'sso-server-service'
 include 'a-service'
 include 'b-service'
+include 'workflow-service'
 
 include 'component-service'
 include 'component-service:jpa'
