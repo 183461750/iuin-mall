@@ -1,0 +1,8 @@
+
+archivesBaseName='component-service'
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+
+}

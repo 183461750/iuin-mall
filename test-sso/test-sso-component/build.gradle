@@ -1,8 +1,0 @@
-
-archivesBaseName='test-sso-component'
-jar.enabled = true
-bootJar.enabled = false
-
-dependencies {
-
-}

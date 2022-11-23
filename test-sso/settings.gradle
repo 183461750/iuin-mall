@@ -1,10 +1,10 @@
 rootProject.name = 'test-sso'
 
-include 'test-sso-common'
-include 'test-sso-server'
-include 'test-sso-client-a'
-include 'test-sso-client-b'
+include 'common-service'
+include 'sso-server-service'
+include 'a-service'
+include 'b-service'
 
-include 'test-sso-component'
-include 'test-sso-component:jpa'
+include 'component-service'
+include 'component-service:jpa'
 
