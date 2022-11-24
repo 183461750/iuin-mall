@@ -1,0 +1,26 @@
+
+archivesBaseName='common-dependencies'
+jar.enabled = false
+bootJar.enabled = false
+
+dependencies {
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Sa-Token 权限认证，在线文档：https://sa-token.cc
+    api 'cn.dev33:sa-token-spring-boot-starter:1.32.0'
+
+    // Sa-Token 插件：整合SSO
+    api 'cn.dev33:sa-token-sso:1.32.0'
+
+    // Sa-Token 整合 Redis (使用 jackson 序列化方式)
+    api 'cn.dev33:sa-token-dao-redis-jackson:1.32.0'
+    api 'org.apache.commons:commons-pool2'
+
+    // nacos
+    api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'
+
+}

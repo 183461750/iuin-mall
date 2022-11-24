@@ -1,5 +1,6 @@
 rootProject.name = 'test-sso'
 
+include 'common-dependencies'
 include 'common-service'
 include 'sso-server-service'
 include 'a-service'

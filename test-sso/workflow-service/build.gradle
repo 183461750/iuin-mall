@@ -6,6 +6,7 @@ jar.enabled = true
 bootJar.enabled = false
 
 dependencies {
+    implementation project(':common-dependencies')
     implementation project(':common-service')
     implementation project(':component-service:jpa')
 

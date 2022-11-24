@@ -1,23 +1,8 @@
 
 dependencies {
+    implementation project(':common-dependencies')
     implementation project(':common-service')
-
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    runtimeOnly 'org.postgresql:postgresql'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-
-    implementation 'cn.hutool:hutool-all:5.8.10'
-
-    // Sa-Token 权限认证，在线文档：https://sa-token.cc
-    implementation 'cn.dev33:sa-token-spring-boot-starter:1.32.0'
-
-    // Sa-Token 插件：整合SSO
-    implementation 'cn.dev33:sa-token-sso:1.32.0'
-
-    // Sa-Token 整合 Redis (使用 jackson 序列化方式)
-    implementation 'cn.dev33:sa-token-dao-redis-jackson:1.32.0'
-    implementation 'org.apache.commons:commons-pool2'
+    implementation project(':component-service:jpa')
 
     // 视图引擎（在前后端不分离模式下提供视图支持）
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
