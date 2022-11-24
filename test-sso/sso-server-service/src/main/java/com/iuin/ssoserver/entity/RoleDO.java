@@ -1,5 +1,6 @@
 package com.iuin.ssoserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Comment;
@@ -31,6 +32,7 @@ public class RoleDO {
     @SequenceGenerator(sequenceName = "ss_role_seq", name = "ss_role_seq", allocationSize = 1)
     private Long id;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "roleDOList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Comment("学生id")
     @ToString.Exclude

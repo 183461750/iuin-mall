@@ -1,5 +1,7 @@
 package com.iuin.ssoserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.iuin.ssoserver.entity.base.BaseEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,7 @@ public class AddressDO extends BaseEntity {
     /**
      * 添加这个配置(mappedBy = "addressDO")表示，当前实体生成的表中，不会有(studentdo_id)的字段生成
      */
+    @JsonManagedReference
     @OneToOne(mappedBy = "addressDO", orphanRemoval = true, fetch = FetchType.LAZY)
     @Comment("学生id")
     @ToString.Exclude

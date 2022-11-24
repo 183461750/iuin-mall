@@ -4,11 +4,17 @@ import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.sso.SaSsoUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
+import com.iuin.ssoserver.entity.StudentDO;
+import com.iuin.ssoserver.entity.StudentDO_;
+import com.iuin.ssoserver.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+import javax.persistence.criteria.Expression;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +27,8 @@ import java.util.List;
 @RequestMapping("/test")
 public class TestController {
 
+    @Resource
+    private StudentRepository studentRepository;
 
     @GetMapping("/demo")
     public HashMap<String, Object> demo(String test) {
@@ -55,6 +63,15 @@ public class TestController {
 
         // 返回
         return SaResult.data(list);
+    }
+
+
+
+    @GetMapping("/getData")
+    public Object getData() {
+        return studentRepository.findAll(
+                (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(StudentDO_.DELETED), false)
+        );
     }
 
 }

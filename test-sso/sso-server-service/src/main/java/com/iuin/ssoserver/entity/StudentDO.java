@@ -1,5 +1,6 @@
 package com.iuin.ssoserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.iuin.ssoserver.entity.base.BaseEntity;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -33,15 +34,18 @@ public class StudentDO extends BaseEntity {
     @SequenceGenerator(sequenceName = "student_seq", name = "student_seq", allocationSize = 1)
     private Long id;
 
+    @JsonBackReference
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     @ToString.Exclude
     private AddressDO addressDO;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "studentDO", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<PetDO> petDOList = new ArrayList<>();
 
+    @JsonBackReference
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name="ss_student_role_relation", joinColumns={ @JoinColumn(name="student_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
     @ToString.Exclude

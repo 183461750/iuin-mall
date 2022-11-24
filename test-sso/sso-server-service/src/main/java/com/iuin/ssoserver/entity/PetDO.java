@@ -1,5 +1,6 @@
 package com.iuin.ssoserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.iuin.ssoserver.entity.base.BaseEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class PetDO extends BaseEntity {
     @SequenceGenerator(name = "ss_pet_seq", sequenceName = "ss_pet_seq", allocationSize = 1)
     private Long id;
 
+    @JsonManagedReference
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     @Comment("学生id")
