@@ -98,11 +98,6 @@ subprojects {
 		}
 		dependencies {
 
-			//工作流引擎Camunda依赖（共3个）
-//			dependency "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter:${sb_camundaBpm}"
-//			dependency "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest:${sb_camundaBpm}"
-//			dependency "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp:${sb_camundaBpm}"
-
 		}
 	}
 

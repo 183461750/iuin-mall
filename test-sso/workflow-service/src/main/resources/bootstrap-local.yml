@@ -10,7 +10,7 @@ spring:
         file-extension: yml
         namespace: test-sso
         extension-configs:
-          - data-id: workflow.yml
+          - data-id: ${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
             group: DEFAULT_GROUP
             refresh: true
         group: DEFAULT_GROUP

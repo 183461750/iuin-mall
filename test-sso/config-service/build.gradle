@@ -1,0 +1,10 @@
+
+archivesBaseName='config-service'
+jar.enabled = false
+bootJar.enabled = true
+
+dependencies {
+    implementation project(':common-service')
+    implementation project(':common-dependencies')
+
+}
