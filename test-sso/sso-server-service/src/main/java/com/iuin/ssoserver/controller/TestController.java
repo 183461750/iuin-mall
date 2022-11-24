@@ -4,17 +4,19 @@ import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.sso.SaSsoUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
+import com.iuin.ssoserver.entity.RoleDO;
+import com.iuin.ssoserver.entity.RoleDO_;
 import com.iuin.ssoserver.entity.StudentDO;
 import com.iuin.ssoserver.entity.StudentDO_;
 import com.iuin.ssoserver.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -48,7 +50,6 @@ public class TestController {
     }
 
 
-
     // 获取指定用户的关注列表
     @RequestMapping("/sso/getFollowList")
     public Object ssoRequest(Long loginId) {
@@ -66,11 +67,16 @@ public class TestController {
     }
 
 
-
     @GetMapping("/getData")
-    public Object getData() {
+    public Object getData(Boolean deleted, String roleName) {
         return studentRepository.findAll(
-                (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(StudentDO_.DELETED), false)
+                (root, query, criteriaBuilder) -> {
+                    Join<StudentDO, RoleDO> roleJoin = root.join(StudentDO_.roleDOList, JoinType.LEFT);
+                    return criteriaBuilder.and(
+                            criteriaBuilder.equal(root.get(StudentDO_.DELETED), deleted),
+                            criteriaBuilder.like(roleJoin.get(RoleDO_.name), "%" + roleName + "%")
+                    );
+                }
         );
     }
 
