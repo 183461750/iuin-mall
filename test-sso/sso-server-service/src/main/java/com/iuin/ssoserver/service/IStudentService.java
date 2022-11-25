@@ -1,5 +1,6 @@
 package com.iuin.ssoserver.service;
 
+import com.iuin.ssoserver.api.model.req.StudentReq;
 import com.iuin.ssoserver.dto.StudentAddRequest;
 import com.iuin.ssoserver.entity.StudentDO;
 
@@ -9,5 +10,10 @@ import com.iuin.ssoserver.entity.StudentDO;
 public interface IStudentService {
 
     StudentDO add(StudentAddRequest studentAddRequest);
+
+    /**
+     * 查询学生信息
+     */
+    StudentDO info(StudentReq studentReq);
 
 }

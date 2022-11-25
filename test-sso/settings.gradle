@@ -6,6 +6,7 @@ include 'common-dependencies'
 include 'common-service'
 
 include 'sso-server-service'
+include 'sso-server-service:sso-server-service-api'
 include 'a-service'
 include 'b-service'
 

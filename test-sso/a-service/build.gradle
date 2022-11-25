@@ -13,6 +13,8 @@ dependencies {
     // 视图引擎（在前后端不分离模式下提供视图支持）
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 
 tasks.named('test') {
