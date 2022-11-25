@@ -13,9 +13,6 @@ dependencies {
     // 视图引擎（在前后端不分离模式下提供视图支持）
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-    // Http请求工具（在模式三的单点注销功能下用到，如不需要可以注释掉）
-    implementation 'com.dtflys.forest:forest-spring-boot-starter:1.5.26'
-
 }
 
 tasks.named('test') {

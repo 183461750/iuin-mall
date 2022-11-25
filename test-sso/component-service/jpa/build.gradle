@@ -10,12 +10,9 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'org.postgresql:postgresql'
 
-    // https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen
-    compileOnly 'org.hibernate:hibernate-jpamodelgen:6.1.4.Final'
-
     // QueryDSL
-    implementation("com.querydsl:querydsl-core:${querydsl}")
-    implementation("com.querydsl:querydsl-jpa:${querydsl}")
-    implementation("com.querydsl:querydsl-sql:${querydsl}")
+    implementation("com.querydsl:querydsl-core")
+    implementation("com.querydsl:querydsl-jpa")
+    implementation("com.querydsl:querydsl-sql")
 
 }

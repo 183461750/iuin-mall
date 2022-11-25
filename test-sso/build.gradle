@@ -98,6 +98,32 @@ subprojects {
 		}
 		dependencies {
 
+			dependency 'com.dtflys.forest:forest-spring-boot-starter:1.5.26'
+
+			// annotationProcessor
+//			dependency "com.querydsl:querydsl-apt:${querydsl}:jpa"
+
+			// common-service
+			dependency 'cn.hutool:hutool-all:5.6.1'
+			// https://mvnrepository.com/artifact/com.google.guava/guava
+			dependency 'com.google.guava:guava:31.1-jre'
+			dependency 'io.github.yoshikawaa.modelmapper.spring.boot:modelmapper-spring-boot-autoconfigure:0.1.0'
+
+			// jpa
+			// QueryDSL
+			dependency("com.querydsl:querydsl-core:${querydsl}")
+			dependency("com.querydsl:querydsl-jpa:${querydsl}")
+			dependency("com.querydsl:querydsl-sql:${querydsl}")
+
+			// Sa-Token
+			// Sa-Token 权限认证，在线文档：https://sa-token.cc
+			dependency 'cn.dev33:sa-token-spring-boot-starter:1.32.0'
+
+			// Sa-Token 插件：整合SSO
+			dependency 'cn.dev33:sa-token-sso:1.32.0'
+
+			// Sa-Token 整合 Redis (使用 jackson 序列化方式)
+			dependency 'cn.dev33:sa-token-dao-redis-jackson:1.32.0'
 		}
 	}
 
