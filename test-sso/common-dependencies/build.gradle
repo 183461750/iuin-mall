@@ -24,9 +24,6 @@ dependencies {
     api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
     api 'com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'
 
-    //spring boot
-    api 'org.springframework.boot:spring-boot-starter-validation'
-
     //spring cloud
 
 }
