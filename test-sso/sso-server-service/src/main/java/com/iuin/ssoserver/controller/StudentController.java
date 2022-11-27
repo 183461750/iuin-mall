@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 /**
+ * 学生-controller
  * @author fa
  */
 @RestController
@@ -23,6 +24,9 @@ public class StudentController {
     @Resource
     private IStudentService studentService;
 
+    /**
+     * 学生信息
+     */
     @PostMapping(value = "/info")
     public SaResult info(@RequestBody @Valid StudentReq studentReq) {
 
