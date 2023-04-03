@@ -1,0 +1,5 @@
+nacos:
+  address: ${IUIN_NACOS_ADDR:10.0.1.148}
+  port: ${IUIN_NACOS_PORT:8848}
+  namespace: ${IUIN_NACOS_NAMESPACE:fa-server-sso}
+  group: ${IUIN_NACOS_GROUP:v1}

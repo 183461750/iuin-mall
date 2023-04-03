@@ -6,3 +6,5 @@ spring:
     name: sso-server-service
   main:
     allow-bean-definition-overriding: true
+  datasource:
+    url:

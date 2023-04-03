@@ -1,0 +1,15 @@
+pgsql:
+  port: 5432
+  address: 10.0.0.16
+  username: dbadmin
+  password: dbadmin
+  dbname: fa-test-sso
+
+hikari:
+  minimum_idle: 2
+  maximum_pool_size: 20
+
+redis:
+  address: 10.0.1.148
+  port: 6379
+  password: jfzx_redis
