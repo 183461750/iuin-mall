@@ -1,0 +1,21 @@
+
+// 需要依赖包
+jar.enabled = true
+// 无需启动包
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':common-dependencies')
+    implementation project(':common-service')
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    // https://mvnrepository.com/artifact/org.apache.tika/tika-core
+    implementation 'org.apache.tika:tika-core:2.8.0'
+
+}
+
+test {
+    useJUnitPlatform()
+}
