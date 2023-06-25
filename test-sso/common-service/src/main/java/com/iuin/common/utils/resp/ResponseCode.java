@@ -37,6 +37,11 @@ public enum ResponseCode {
      * 不支持的Http请求方式
      */
     REQUEST_METHOD_NOT_SUPPORTED(1103, "不支持的Http请求方法"),
+    /**
+     * 不支持的Http Content-Type
+     */
+    REQUEST_CONTENT_TYPE_NOT_SUPPORTED(1104, "不支持的Http Content-Type设置"),
+
 
     /**
      * 前端发送Http Post Json请求时，接口所需的参数没有传递

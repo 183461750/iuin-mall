@@ -13,3 +13,6 @@ redis:
   address: 10.0.1.148
   port: 6379
   password: jfzx_redis
+
+elasticsearch:
+  uris: http://10.0.1.148:9200

@@ -1,0 +1,22 @@
+
+dependencies {
+    implementation project(':common-dependencies')
+    implementation project(':common-service')
+    implementation project(':component-service:es')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.projectlombok:lombok'
+
+    annotationProcessor(
+            "org.projectlombok:lombok",
+    )
+
+    testAnnotationProcessor(
+            "org.projectlombok:lombok",
+    )
+
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -16,4 +16,8 @@ include 'component-service'
 include 'component-service:jpa'
 include 'component-service:test'
 findProject(':component-service:test')?.name = 'test'
+include 'component-service:es'
+
+include 'search-service'
+
 

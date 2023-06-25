@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.address}:${nacos.port}
+        namespace: ${nacos.namespace}
+        group: ${nacos.group}
+      config:
+        server-addr: ${nacos.address}:${nacos.port}
+        file-extension: yml
+        namespace: ${nacos.namespace}
+        extension-configs:
+          - data-id: common.yml
+            group: ${nacos.group}
+            refresh: true
+        group: ${nacos.group}
+        prefix: ${spring.application.name}
