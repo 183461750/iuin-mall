@@ -2,17 +2,16 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 10.0.16.16:8848
-        namespace: test-sso
-        group: DEFAULT_GROUP
+        server-addr: ${nacos.address}:${nacos.port}
+        namespace: ${nacos.namespace}
+        group: ${nacos.group}
       config:
-        server-addr: 10.0.16.16:8848
+        server-addr: ${nacos.address}:${nacos.port}
         file-extension: yml
-        namespace: test-sso
+        namespace: ${nacos.namespace}
         extension-configs:
-          - data-id: common.${spring.cloud.nacos.config.file-extension}
-            group: DEFAULT_GROUP
+          - data-id: common.yml
+            group: ${nacos.group}
             refresh: true
-        group: DEFAULT_GROUP
+        group: ${nacos.group}
         prefix: ${spring.application.name}
-

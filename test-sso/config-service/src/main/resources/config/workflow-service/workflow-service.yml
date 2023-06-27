@@ -1,0 +1,71 @@
+server:
+  port: 8130
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: workflow-service
+  datasource:
+    url: jdbc:postgresql://${pgsql.address}:${pgsql.port}/${pgsql.dbname}?stringtype=unspecified&reWriteBatchedInserts=true
+    username: ${pgsql.username}
+    password: ${pgsql.password}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: ${hikari.minimum_idle}
+      maximum-pool-size: ${hikari.maximum_pool_size}
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: WorkflowServiceHikariPool
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  jpa:
+    open-in-view: true
+    show-sql: true
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        jdbc:
+          batch_size: 50
+          batch_versioned_data: true
+        order_inserts: true
+        order_updates: true
+
+#ribbon:
+#  ReadTimeout: 60000
+#  ConnectTimeout: 60000
+#  MaxAutoRetries: 0
+
+feign:
+  httpclient:
+    connection-timeout: 120000
+    enabled: true
+
+# 监控配置。如果不配置则无法访问/actuator/health,info,beans等接口，Consul注册中心会报错（但仍可注册）
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info
+
+#Camunda相关配置
+camunda:
+  bpm:
+    authorization:
+      enabled: false
+    history-level: none
+    database:
+      schema-update: true
+    auto-deployment-enabled: true
+    process-engine-name: WorkflowService
+    deployment-resource-pattern:
+      -*.bpmn
+
+# 日志文件
+logging:
+  config: classpath:logback.xml
