@@ -1,1 +1,5 @@
-yapi
+yapi:
+  server: https://yapi.test-sso.com
+  token:
+    test-sso.a-service.main: xxx
+    test-sso.b-service.main: xxx
