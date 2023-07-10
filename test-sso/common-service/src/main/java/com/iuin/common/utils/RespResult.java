@@ -58,6 +58,10 @@ public class RespResult<T> {
         return new RespResult<>(ResponseCode.SERVICE_ERROR.getCode(), errorMessage, null, System.currentTimeMillis());
     }
 
+    public static <T> RespResult<T> failFeignService(String errorMessage) {
+        return new RespResult<>(ResponseCode.FEIGN_SERVICE_ERROR.getCode(), errorMessage, null, System.currentTimeMillis());
+    }
+
     public static <T> RespResult<T> fail(String errorMessage) {
         return new RespResult<>(ResponseCode.BUSINESS_ERROR.getCode(), errorMessage, null, System.currentTimeMillis());
     }

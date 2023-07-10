@@ -19,5 +19,6 @@ findProject(':component-service:test')?.name = 'test'
 include 'component-service:es'
 
 include 'search-service'
-
+include 'component-service:test:feign'
+findProject(':component-service:test:feign')?.name = 'feign'
 
