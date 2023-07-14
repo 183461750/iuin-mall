@@ -1,11 +1,13 @@
 package com.iuin.ssoserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
-import org.hibernate.Hibernate;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Comment;
+import org.hibernate.proxy.HibernateProxy;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,10 +20,9 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @Entity
 @Table(schema = "public", name = "ss_role")
-@org.hibernate.annotations.Table(appliesTo = "ss_role", comment = "角色表")
+@Comment("角色表")
 public class RoleDO {
 
     /**
@@ -46,15 +47,19 @@ public class RoleDO {
     private String name;
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
         RoleDO roleDO = (RoleDO) o;
-        return id != null && Objects.equals(id, roleDO.id);
+        return getId() != null && Objects.equals(getId(), roleDO.getId());
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return getClass().hashCode();
     }
+
 }

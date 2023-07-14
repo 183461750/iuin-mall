@@ -15,8 +15,8 @@ public class TestMain2 {
         System.out.println(a.lastIndexOf("_"));
 
         System.out.println(a.substring(0, a.lastIndexOf("_")));
-        System.out.println(a.substring(a.lastIndexOf("_")+1));
-        System.out.println(a.substring(Math.min(a.lastIndexOf("_")+100, a.length())));
+        System.out.println(a.substring(a.lastIndexOf("_") + 1));
+        System.out.println(a.substring(Math.min(a.lastIndexOf("_") + 100, a.length())));
         System.out.println(a.substring(a.length()));
     }
 

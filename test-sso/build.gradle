@@ -1,31 +1,34 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
-	// 引入 api 传递依赖的方法 用来代替compile
-	id 'java-library'
-	// Spring Boot’s dependency management can be used in a project without applying Spring Boot’s plugin to that project.
-	// First, configure the project to depend on the Spring Boot plugin but do not apply it:
-	id 'org.springframework.boot' version '2.7.5' apply false
-	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    // 引入 api 传递依赖的方法 用来代替compile
+    id 'java-library'
+    // Spring Boot’s dependency management can be used in a project without applying Spring Boot’s plugin to that project.
+    // First, configure the project to depend on the Spring Boot plugin but do not apply it:
+    id 'org.springframework.boot' version '3.1.1'
+    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenLocal()
-	maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
-	mavenCentral()
+    mavenLocal()
+    maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
+    mavenCentral()
 }
 
 group = 'com.iuin'
 version = '0.0.1-SNAPSHOT'
-// 指定JDK版本
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+
+java {
+    // 指定JDK版本
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 apply from: "config.gradle"
 
@@ -33,100 +36,88 @@ apply from: "config.gradle"
 // 子项目的通用配置
 subprojects {
 
-	// 在这里使用plugin
-	/* 使用二进制插件 */
-	apply plugin: 'java' /* java是Gradle的核心插件，是内置的，内置插件不需要配置依赖路，径 */
-	apply plugin: 'idea' /* 同上  让Gradle自动生成Intellij的项目文件*/
-	/* 注意gradle插件不再自动应用，所以这里需要指定 */
-	apply plugin: 'org.springframework.boot'
-	/* 依赖管理插件仍然是一个spring-boot-gradle-plugin传递依赖，所以无需在build.gradle配置中明确列出此依赖。 */
-	apply plugin: 'io.spring.dependency-management' /* 依赖管理，用来传递spring的依赖 */
+    // 在这里使用plugin
+    /* 使用二进制插件 */
+    apply plugin: 'java' /* java是Gradle的核心插件，是内置的，内置插件不需要配置依赖路，径 */
+    apply plugin: 'idea' /* 同上  让Gradle自动生成Intellij的项目文件*/
+    /* 注意gradle插件不再自动应用，所以这里需要指定 */
+    apply plugin: 'org.springframework.boot'
+    /* 依赖管理插件仍然是一个spring-boot-gradle-plugin传递依赖，所以无需在build.gradle配置中明确列出此依赖。 */
+    apply plugin: 'io.spring.dependency-management' /* 依赖管理，用来传递spring的依赖 */
 
-	// 可以使用api编译
-	apply plugin: 'java-library'
+    // 可以使用api编译
+    apply plugin: 'java-library'
 
-	group = 'com.iuin'
-	version = '0.0.1-SNAPSHOT' /* 项目版本 */
-	// 指定JDK版本
-	sourceCompatibility = JavaVersion.VERSION_11
-	targetCompatibility = JavaVersion.VERSION_11
+    /* java编译的时候缺省状态下会因为中文字符而失败 */
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
-	/* java编译的时候缺省状态下会因为中文字符而失败 */
-	[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+    // A project can be configured to build both an executable archive and a normal archive at the same time by enabling the jar or war task:
+    // 可以参考：https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/
 
-	// A project can be configured to build both an executable archive and a normal archive at the same time by enabling the jar or war task:
-	// 可以参考：https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/
+    // 默认bootJar和bootWar is true
+    // jar和war 是false
+    // springboot打出的bootJar包  一般是 不能被依赖的
+    // 可以参考：https://www.cnblogs.com/karlMa/p/11304524.html
+    // 打出来的jar包可以子模块间相互依赖，但经过个人测试后发现不可以被执行
+    // 如果不开启的话，后续是会出现模块间找不到依赖的问题！
+    jar.enabled = true
 
-	// 默认bootJar和bootWar is true
-	// jar和war 是false
-	// springboot打出的bootJar包  一般是 不能被依赖的
-	// 可以参考：https://www.cnblogs.com/karlMa/p/11304524.html
-	// 打出来的jar包可以子模块间相互依赖，但经过个人测试后发现不可以被执行
-	// 如果不开启的话，后续是会出现模块间找不到依赖的问题！
-	jar.enabled = true
+    bootJar {
+        setProperty('archiveClassifier', 'boot')
+    }
 
-	bootJar {
-		setProperty('archiveClassifier', 'boot')
-	}
+    repositories {
+        mavenLocal()
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
+        mavenCentral()
+    }
 
-	repositories {
-		mavenLocal()
-		maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
-		mavenCentral()
-	}
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
 
-	configurations {
-		compileOnly {
-			extendsFrom annotationProcessor
-		}
-	}
+    // 所有工程都使用lombok打印日志
+    dependencies {
 
-	// 所有工程都使用lombok打印日志
-	dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
 
-		compileOnly 'org.projectlombok:lombok'
-		annotationProcessor 'org.projectlombok:lombok'
-		testAnnotationProcessor 'org.projectlombok:lombok'
-		testCompileOnly 'org.projectlombok:lombok'
+    }
 
-	}
+    dependencyManagement {
+        imports {
+            mavenBom(SpringBootPlugin.BOM_COORDINATES)
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
+            mavenBom "org.camunda.bpm:camunda-bom:${sb_camundaBpm}"
+        }
+        dependencies {
 
-	dependencyManagement {
-		imports {
-			mavenBom(SpringBootPlugin.BOM_COORDINATES)
-			mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-			mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
-			mavenBom "org.camunda.bpm:camunda-bom:${sb_camundaBpm}"
-		}
-		dependencies {
+            dependency 'com.dtflys.forest:forest-spring-boot-starter:1.5.26'
 
-			dependency 'com.dtflys.forest:forest-spring-boot-starter:1.5.26'
-
-			// annotationProcessor
+            // annotationProcessor
 //			dependency "com.querydsl:querydsl-apt:${querydsl}:jpa"
 
-			// common-service
-			dependency 'cn.hutool:hutool-all:5.8.0'
-			// https://mvnrepository.com/artifact/com.google.guava/guava
-			dependency 'com.google.guava:guava:31.1-jre'
-			dependency 'io.github.yoshikawaa.modelmapper.spring.boot:modelmapper-spring-boot-autoconfigure:0.1.0'
+            // common-service
+            dependency 'cn.hutool:hutool-all:5.8.0'
+            // https://mvnrepository.com/artifact/com.google.guava/guava
+            dependency 'com.google.guava:guava:31.1-jre'
+            dependency 'io.github.yoshikawaa.modelmapper.spring.boot:modelmapper-spring-boot-autoconfigure:0.1.0'
 
-			// jpa
-			// QueryDSL
-			dependency("com.querydsl:querydsl-core:${querydsl}")
-			dependency("com.querydsl:querydsl-jpa:${querydsl}")
-			dependency("com.querydsl:querydsl-sql:${querydsl}")
+            // Sa-Token
+            // Sa-Token 权限认证，在线文档：https://sa-token.cc
+            dependency 'cn.dev33:sa-token-spring-boot-starter:1.32.0'
 
-			// Sa-Token
-			// Sa-Token 权限认证，在线文档：https://sa-token.cc
-			dependency 'cn.dev33:sa-token-spring-boot-starter:1.32.0'
+            // Sa-Token 插件：整合SSO
+            dependency 'cn.dev33:sa-token-sso:1.32.0'
 
-			// Sa-Token 插件：整合SSO
-			dependency 'cn.dev33:sa-token-sso:1.32.0'
-
-			// Sa-Token 整合 Redis (使用 jackson 序列化方式)
-			dependency 'cn.dev33:sa-token-dao-redis-jackson:1.32.0'
-		}
-	}
+            // Sa-Token 整合 Redis (使用 jackson 序列化方式)
+            dependency 'cn.dev33:sa-token-dao-redis-jackson:1.32.0'
+        }
+    }
 
 }

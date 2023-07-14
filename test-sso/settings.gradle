@@ -10,6 +10,8 @@ include 'sso-server-service:sso-server-service-api'
 include 'a-service'
 include 'b-service'
 
+include 'jpa-service'
+
 include 'workflow-service'
 
 include 'component-service'

@@ -1,4 +1,3 @@
-
 archivesBaseName = 'a-service'
 
 bootJar {

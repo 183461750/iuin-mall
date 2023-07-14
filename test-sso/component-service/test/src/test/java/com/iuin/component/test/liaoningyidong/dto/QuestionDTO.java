@@ -23,13 +23,13 @@ public class QuestionDTO {
     //答案的列表
     /**
      * 结构：
-     *  {
-     *      value:"xxx",
-     *      image:"xxxx"
-     *  }
-     *
-     *  这里需要测试 : JSON str   --->  JSON obj
-     *  JSONObject.parseObject(str, QuestionDTO.class)  这里测试是成功的
+     * {
+     * value:"xxx",
+     * image:"xxxx"
+     * }
+     * <p>
+     * 这里需要测试 : JSON str   --->  JSON obj
+     * JSONObject.parseObject(str, QuestionDTO.class)  这里测试是成功的
      */
     private List<QResult> answers;
 

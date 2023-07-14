@@ -3,12 +3,12 @@ package com.iuin.search.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.iuin.component.es.constants.EsIndexConstant;
 import com.iuin.search.domain.CommodityEsDM;
+import com.iuin.search.entity.es.CommodityEs;
 import com.iuin.search.model.TestAddReq;
 import com.iuin.search.model.TestGetReq;
-import com.iuin.search.entity.es.CommodityEs;
 import com.iuin.search.repository.es.CommodityEsRepository;
 import com.iuin.search.service.TestService;
-import lombok.RequiredArgsConstructor;
+import jakarta.annotation.Resource;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -19,7 +19,6 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 
 /**

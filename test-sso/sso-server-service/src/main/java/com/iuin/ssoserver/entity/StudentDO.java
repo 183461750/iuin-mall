@@ -2,10 +2,13 @@ package com.iuin.ssoserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.iuin.ssoserver.entity.base.BaseEntity;
-import lombok.*;
-import org.hibernate.Hibernate;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.Comment;
+import org.hibernate.proxy.HibernateProxy;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,19 +23,10 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @Entity
 @Table(schema = "public", name = "ss_student", indexes = {@Index(name = "ss_student_address_id_idx", columnList = "address_id")})
-@org.hibernate.annotations.Table(appliesTo = "ss_student", comment = "地址表")
+@Comment("地址表")
 public class StudentDO extends BaseEntity {
-
-    /**
-     * id
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
-    @SequenceGenerator(sequenceName = "student_seq", name = "student_seq", allocationSize = 1)
-    private Long id;
 
     @JsonBackReference
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -47,7 +41,7 @@ public class StudentDO extends BaseEntity {
 
     @JsonBackReference
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name="ss_student_role_relation", joinColumns={ @JoinColumn(name="student_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
+    @JoinTable(name = "ss_student_role_relation", joinColumns = {@JoinColumn(name = "student_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     @ToString.Exclude
     private List<RoleDO> roleDOList = new ArrayList<>();
 
@@ -70,15 +64,19 @@ public class StudentDO extends BaseEntity {
     private String name;
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
         StudentDO studentDO = (StudentDO) o;
-        return id != null && Objects.equals(id, studentDO.id);
+        return getId() != null && Objects.equals(getId(), studentDO.getId());
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return getClass().hashCode();
     }
+
 }

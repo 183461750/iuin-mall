@@ -26,44 +26,12 @@ public class FileUtils {
     public static final String CSV_FILE_EXT = ".csv";
     public static final String XLSX_FILE_EXT = ".xlsx";
 
-    private final static String PREFIX_VIDEO="video/";
-
-
-    /**
-     * 多媒体文件有格式和大小限制，如下：
-     * 图片（image）: 2M，支持bmp/png/jpeg/jpg/gif格式
-     * 语音（voice）：5M，播放长度不超过60s，支持AMR\MP3格式
-     * 视频（video）：10MB，支持MP4格式
-     * 缩略图（thumb）：64KB，支持JPG格式
-     */
-    public static class FileType {
-        //文件类型 ： 图片类型
-        public static final String IMG_PNG = "png";
-        public static final String IMG_JPG = "jpg";
-        public static final String IMG_JPEG = "jpeg";
-        public static final String IMG_DMG = "bmp";
-        public static final String IMG_GIF = "gif";
-
-        public static final String VOICE_ARM = "AMR";
-        public static final String VOICE_MP3 = "MP3";
-
-        public static final String VIDEO_MP4 = "MP4";
-
-        public static final String VOICE = "audio";
-        public static final String VIDEO = "video";
-        public static final String CSV = "csv";
-        public static final String IMGE = "image";
-        public static final String EXCEL = "xlsx";
-        public static final String EXCEL_XLS = "xls";
-
-        public static final String PKCS = "pkcs";
-        public static final String PKCS_P12 = "p12";
-    }
-
+    private final static String PREFIX_VIDEO = "video/";
     private static final List<String> FILE_EXT_LIST = Arrays.stream(ReflectUtil.getFieldsValue(FileType.class)).map(Objects::toString).collect(Collectors.toList());
 
     /**
      * 判断文件是否有后缀名称文件
+     *
      * @param file
      * @return
      */
@@ -77,7 +45,6 @@ public class FileUtils {
         }
         return Boolean.TRUE;
     }
-
 
     /**
      * 根据文件名称 + 类型名称 是否符合
@@ -120,10 +87,9 @@ public class FileUtils {
         return flag;
     }
 
-
-
     /**
      * 判断文件是否为空
+     *
      * @param file
      * @return
      */
@@ -131,12 +97,7 @@ public class FileUtils {
         return Objects.isNull(file);
     }
 
-
-
-
-
     /**
-     *
      * Description: 生成CSV文件
      *
      * @param: head
@@ -146,12 +107,12 @@ public class FileUtils {
      * @auther: HJD
      * @date: 2018/8/3 9:45
      */
-    public static boolean generateCSVFile(Object[] head,List<List<Object>> dataList,String fileName,String filePath){
+    public static boolean generateCSVFile(Object[] head, List<List<Object>> dataList, String fileName, String filePath) {
         List<Object> headList = Arrays.asList(head);
         File csvFile = null;
         BufferedWriter csvWtriter = null;
         try {
-            csvFile = new File(filePath +"/"+ fileName);
+            csvFile = new File(filePath + "/" + fileName);
             File parent = csvFile.getParentFile();
             if (parent != null && !parent.exists()) {
                 parent.mkdirs();
@@ -199,7 +160,8 @@ public class FileUtils {
 
     /**
      * Description：写一行csv数据
-     * @param row 数据列表
+     *
+     * @param row       数据列表
      * @param csvWriter
      * @auther: HJD
      */
@@ -313,6 +275,37 @@ public class FileUtils {
      */
     public static Boolean validUploadFile(InputStream inputStream, String fileName) {
         return FILE_EXT_LIST.contains(FileUtil.extName(fileName)) && validMineTypeAndFileExt(inputStream, fileName);
+    }
+
+    /**
+     * 多媒体文件有格式和大小限制，如下：
+     * 图片（image）: 2M，支持bmp/png/jpeg/jpg/gif格式
+     * 语音（voice）：5M，播放长度不超过60s，支持AMR\MP3格式
+     * 视频（video）：10MB，支持MP4格式
+     * 缩略图（thumb）：64KB，支持JPG格式
+     */
+    public static class FileType {
+        //文件类型 ： 图片类型
+        public static final String IMG_PNG = "png";
+        public static final String IMG_JPG = "jpg";
+        public static final String IMG_JPEG = "jpeg";
+        public static final String IMG_DMG = "bmp";
+        public static final String IMG_GIF = "gif";
+
+        public static final String VOICE_ARM = "AMR";
+        public static final String VOICE_MP3 = "MP3";
+
+        public static final String VIDEO_MP4 = "MP4";
+
+        public static final String VOICE = "audio";
+        public static final String VIDEO = "video";
+        public static final String CSV = "csv";
+        public static final String IMGE = "image";
+        public static final String EXCEL = "xlsx";
+        public static final String EXCEL_XLS = "xls";
+
+        public static final String PKCS = "pkcs";
+        public static final String PKCS_P12 = "p12";
     }
 
 }

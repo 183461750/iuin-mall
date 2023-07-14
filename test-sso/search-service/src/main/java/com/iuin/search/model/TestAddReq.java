@@ -1,14 +1,11 @@
 package com.iuin.search.model;
 
-import com.iuin.common.model.CommonPage;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
- *
  * @author fa
  */
 @Data

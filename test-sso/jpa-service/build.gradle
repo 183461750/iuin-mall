@@ -1,0 +1,25 @@
+archivesBaseName = 'jpa-service'
+
+bootJar {
+    setProperty('archiveClassifier', 'boot')
+}
+
+dependencies {
+    implementation project(':common-dependencies')
+    implementation project(':common-service')
+    implementation project(':component-service:jpa')
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    compileOnly 'org.projectlombok:lombok'
+
+    runtimeOnly 'org.postgresql:postgresql'
+
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

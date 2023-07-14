@@ -13,7 +13,7 @@ import java.util.List;
 public class StpInterfaceImpl implements StpInterface {
 
     /**
-     * 返回一个账号所拥有的权限码集合 
+     * 返回一个账号所拥有的权限码集合
      */
     @Override
     public List<String> getPermissionList(Object loginId, String loginType) {

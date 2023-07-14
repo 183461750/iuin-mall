@@ -1,5 +1,4 @@
-
-archivesBaseName='common-dependencies'
+archivesBaseName = 'common-dependencies'
 jar.enabled = false
 bootJar.enabled = false
 

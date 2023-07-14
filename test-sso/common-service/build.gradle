@@ -1,5 +1,4 @@
-
-archivesBaseName='common-service'
+archivesBaseName = 'common-service'
 // 需要依赖包
 jar.enabled = true
 // 无需启动包

@@ -1,10 +1,9 @@
 package com.iuin.search.domain;
 
-import com.iuin.search.model.TestAddReq;
 import com.iuin.search.entity.es.CommodityEs;
+import com.iuin.search.model.TestAddReq;
 
 /**
- *
  * @author fa
  */
 public class CommodityEsDM {

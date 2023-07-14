@@ -5,16 +5,16 @@ import com.iuin.ssoserver.api.model.req.StudentReq;
 import com.iuin.ssoserver.dto.StudentAddRequest;
 import com.iuin.ssoserver.entity.StudentDO;
 import com.iuin.ssoserver.service.IStudentService;
+import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.validation.Valid;
-
 /**
  * 学生-controller
+ *
  * @author fa
  */
 @RestController

@@ -1,13 +1,15 @@
 package com.iuin.ssoserver.maintest.test2;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
+
 import java.io.Serializable;
 
 /**
  * 退货商品保存VO
+ *
  * @author 伍将
- * @date 2020/9/9
  * @version 2.0.0
+ * @date 2020/9/9
  */
 public class ReturnGoodsDetailSaveVO implements Serializable {
     private static final long serialVersionUID = -4141252824248649112L;
@@ -103,7 +105,7 @@ public class ReturnGoodsDetailSaveVO implements Serializable {
     /**
      * 退货原因
      */
-/*819版    @NotBlank(message = "退货原因不能为空")*/
+    /*819版    @NotBlank(message = "退货原因不能为空")*/
     @Size(max = 100, message = "退货原因不能超过100个字符")
     private String returnReason;
 
@@ -204,6 +206,7 @@ public class ReturnGoodsDetailSaveVO implements Serializable {
 
     /**
      * 是否为整单退款: false为部分退款，true位整单退款
+     *
      * @apiNote 用于判断用户是否选择整单退款
      */
     private Boolean entireOrderRefundBool;

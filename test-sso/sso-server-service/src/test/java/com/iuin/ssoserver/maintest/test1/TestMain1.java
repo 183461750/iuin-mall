@@ -8,7 +8,6 @@ import com.iuin.ssoserver.maintest.annotations.OperateLogParamList;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -24,15 +23,15 @@ public class TestMain1 {
 
     private static Long getBillId(Object param) {
         if (param instanceof Long) {
-            return  (Long) param;
+            return (Long) param;
         }
         Long res = 0L;
         Field[] fields = ReflectUtil.getFields(param.getClass());
         Field field = Stream.of(fields).filter(f -> f.isAnnotationPresent(OperateLogParamBillId.class)).findFirst().orElse(null);
         //  case 1: 直接结束 检测对象字段值没有使用OperateLogParamBillId，
 
-        try{
-            Object value =  ReflectUtil.getFieldValue(param, field);
+        try {
+            Object value = ReflectUtil.getFieldValue(param, field);
             if (Objects.nonNull(value) && value instanceof Long) {
                 res = (Long) value;
             }
@@ -40,7 +39,7 @@ public class TestMain1 {
             // 批量操作的处理
             if (Objects.isNull(field)) {
                 Field listField = Stream.of(fields).filter(f -> f.isAnnotationPresent(OperateLogParamList.class)).findFirst().orElse(null);
-                Object listValue =  ReflectUtil.getFieldValue(param, listField);
+                Object listValue = ReflectUtil.getFieldValue(param, listField);
                 if (Objects.nonNull(listValue) && listValue instanceof List) {
                     List<?> list = (List<?>) listValue;
                     if (CollUtil.isNotEmpty(list)) {

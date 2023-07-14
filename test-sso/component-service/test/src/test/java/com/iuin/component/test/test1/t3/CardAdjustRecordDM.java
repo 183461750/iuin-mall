@@ -47,6 +47,7 @@ public class CardAdjustRecordDM {
 
     /**
      * 调账类型：1=单个调账；2=批量调账
+     *
      * @author fa
      */
     @Getter
@@ -61,6 +62,7 @@ public class CardAdjustRecordDM {
 
     /**
      * 类型：1=消费；2=退款；3=调账
+     *
      * @author fa
      */
     @Getter

@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: local
+    include: common-${spring.profiles.active}
+  application:
+    name: jpa-service
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        order_by:
+          default_null_ordering: last
+        event:
+          merge.entity_copy_observer: allow

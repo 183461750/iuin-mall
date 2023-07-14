@@ -1,6 +1,5 @@
 package com.iuin.ssoserver.maintest.test1;
 
-import com.iuin.ssoserver.maintest.annotations.OperateLogParamBillId;
 import com.iuin.ssoserver.maintest.annotations.OperateLogParamList;
 
 import java.util.List;

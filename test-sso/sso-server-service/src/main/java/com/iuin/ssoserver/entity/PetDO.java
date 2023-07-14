@@ -2,14 +2,13 @@ package com.iuin.ssoserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.iuin.ssoserver.entity.base.BaseEntity;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.Comment;
+import org.hibernate.proxy.HibernateProxy;
 
-import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -18,20 +17,14 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @Table(schema = "public", name = "ss_pet")
-@org.hibernate.annotations.Table(appliesTo = "ss_pet", comment = "宠物表")
+@Comment("宠物表")
 @Entity
 public class PetDO extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ss_pet_seq")
-    @SequenceGenerator(name = "ss_pet_seq", sequenceName = "ss_pet_seq", allocationSize = 1)
-    private Long id;
-
     @JsonManagedReference
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    @JoinColumn(name = "student_id", referencedColumnName = "id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     @Comment("学生id")
     @ToString.Exclude
     private StudentDO studentDO;
@@ -55,15 +48,19 @@ public class PetDO extends BaseEntity {
     private String name;
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
         PetDO petDO = (PetDO) o;
-        return id != null && Objects.equals(id, petDO.id);
+        return getId() != null && Objects.equals(getId(), petDO.getId());
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return getClass().hashCode();
     }
+
 }

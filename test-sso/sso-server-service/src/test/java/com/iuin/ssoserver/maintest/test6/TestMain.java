@@ -33,33 +33,6 @@ public class TestMain {
         return inventoryStsReceivedQtyMap.keySet().stream().filter(inventorySts -> Optional.ofNullable(inventoryStsReceivedQtyMap.get(inventorySts)).orElse(0) > 0).sorted(Comparator.comparing(inventorySts -> InventoryStsEnum.getEnum(inventorySts).ordinal())).map(inventorySts -> InventoryStsEnum.getName(inventorySts) + ": " + inventoryStsReceivedQtyMap.getOrDefault(inventorySts, 0)).reduce((s, s1) -> StrUtil.join(", ", s, s1)).orElse("");
     }
 
-    /**
-     * oms商品发货详情
-     * @author fa
-     */
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Accessors(chain = true)
-    public static class OmsDeliveryGoodsDetailBO {
-
-        /**
-         * SKU 编码
-         */
-        private String skuCode;
-
-        /**
-         * 库存状态
-         */
-        private String inventorySts;
-
-        /**
-         * 入库数量
-         */
-        private Integer receivedQty;
-
-    }
-
     @Getter
     public enum InventoryStsEnum {
 
@@ -103,6 +76,34 @@ public class TestMain {
         public static InventoryStsEnum getEnum(String code) {
             return Arrays.stream(InventoryStsEnum.values()).filter(o -> o.getCode().equals(code)).findFirst().orElse(UNKNOWN);
         }
+
+    }
+
+    /**
+     * oms商品发货详情
+     *
+     * @author fa
+     */
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Accessors(chain = true)
+    public static class OmsDeliveryGoodsDetailBO {
+
+        /**
+         * SKU 编码
+         */
+        private String skuCode;
+
+        /**
+         * 库存状态
+         */
+        private String inventorySts;
+
+        /**
+         * 入库数量
+         */
+        private Integer receivedQty;
 
     }
 

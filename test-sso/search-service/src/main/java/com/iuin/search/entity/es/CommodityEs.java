@@ -7,7 +7,6 @@ import org.springframework.data.elasticsearch.annotations.*;
 import java.math.BigDecimal;
 
 /**
- *
  * @author fa
  */
 @Data

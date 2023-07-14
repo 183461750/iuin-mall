@@ -1,16 +1,14 @@
 package com.iuin.ssoserver.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.iuin.ssoserver.entity.base.BaseEntity;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.Comment;
+import org.hibernate.proxy.HibernateProxy;
 
-import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -19,16 +17,10 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @Table(schema = "public", name = "ss_address")
-@org.hibernate.annotations.Table(appliesTo = "ss_address", comment = "地址表")
+@Comment("地址表")
 @Entity
 public class AddressDO extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ss_address_seq")
-    @SequenceGenerator(name = "ss_address_seq", sequenceName = "ss_address_seq", allocationSize = 1)
-    private Long id;
 
     /**
      * 添加这个配置(mappedBy = "addressDO")表示，当前实体生成的表中，不会有(studentdo_id)的字段生成
@@ -52,15 +44,19 @@ public class AddressDO extends BaseEntity {
     private String area;
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
         AddressDO addressDO = (AddressDO) o;
-        return id != null && Objects.equals(id, addressDO.id);
+        return getId() != null && Objects.equals(getId(), addressDO.getId());
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return getClass().hashCode();
     }
+
 }

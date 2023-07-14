@@ -5,14 +5,12 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONUtil;
 import com.iuin.component.test.mapstruct.model.TestDO;
 import com.iuin.component.test.mapstruct.model.TestVO;
-import lombok.RequiredArgsConstructor;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestConstructor;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
 
 @SpringBootTest

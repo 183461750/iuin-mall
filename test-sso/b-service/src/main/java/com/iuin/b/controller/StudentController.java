@@ -4,11 +4,10 @@ import cn.dev33.satoken.util.SaResult;
 import com.iuin.common.utils.RespResult;
 import com.iuin.ssoserver.api.feign.StudentFeign;
 import com.iuin.ssoserver.api.model.req.StudentReq;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * @author fa

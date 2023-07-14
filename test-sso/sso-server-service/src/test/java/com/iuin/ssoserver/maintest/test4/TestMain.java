@@ -1,12 +1,10 @@
 package com.iuin.ssoserver.maintest.test4;
 
 import cn.hutool.core.annotation.AnnotationUtil;
-import com.iuin.common.EnableCommonService;
 import com.iuin.ssoserver.SsoServerServiceApplication;
 import lombok.Data;
 import org.springframework.context.annotation.Import;
 
-import javax.validation.constraints.NotBlank;
 import java.util.Arrays;
 
 /**

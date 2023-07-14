@@ -2,14 +2,11 @@ package com.iuin.common.utils.resp;
 
 import cn.hutool.core.util.StrUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 统一返回编码枚举
+ *
  * @author fa
  */
 public enum ResponseCode {
@@ -101,21 +98,12 @@ public enum ResponseCode {
     ;
 
 
-
     private final int code;
     private final String message;
 
     ResponseCode(int code, String message) {
         this.code = code;
         this.message = message;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
     }
 
     public static String getMessage(int code) {
@@ -139,6 +127,14 @@ public enum ResponseCode {
 
     public static ResponseCode getByCode(int code) {
         return Arrays.stream(ResponseCode.values()).filter(r -> r.getCode() == code).findFirst().orElse(BUSINESS_ERROR);
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
 }

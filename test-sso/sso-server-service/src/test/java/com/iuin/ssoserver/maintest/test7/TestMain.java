@@ -39,27 +39,6 @@ public class TestMain {
         return Optional.ofNullable(detailBOList).orElseGet(ArrayList::new).stream().filter(Objects::nonNull).collect(Collectors.toMap(detailBO -> InventoryStsEnum.getName(detailBO.getInventorySts()), OmsDeliveryGoodsDetailBO::getReceivedQty, CalcUtil::add));
     }
 
-    @Data
-    @Accessors(chain = true)
-    public static class OmsDeliveryGoodsDetailBO {
-
-        /**
-         * SKU 编码
-         */
-        private String skuCode;
-
-        /**
-         * 库存状态
-         */
-        private String inventorySts;
-
-        /**
-         * 入库数量
-         */
-        private Integer receivedQty;
-
-    }
-
     @Getter
     public enum InventoryStsEnum {
 
@@ -103,6 +82,27 @@ public class TestMain {
         public static InventoryStsEnum getEnum(String code) {
             return Arrays.stream(InventoryStsEnum.values()).filter(o -> o.getCode().equals(code)).findFirst().orElse(UNKNOWN);
         }
+
+    }
+
+    @Data
+    @Accessors(chain = true)
+    public static class OmsDeliveryGoodsDetailBO {
+
+        /**
+         * SKU 编码
+         */
+        private String skuCode;
+
+        /**
+         * 库存状态
+         */
+        private String inventorySts;
+
+        /**
+         * 入库数量
+         */
+        private Integer receivedQty;
 
     }
 

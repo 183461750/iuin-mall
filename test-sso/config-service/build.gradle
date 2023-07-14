@@ -1,5 +1,4 @@
-
-archivesBaseName='config-service'
+archivesBaseName = 'config-service'
 jar.enabled = false
 bootJar.enabled = true
 
