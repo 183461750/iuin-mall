@@ -13,6 +13,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.PrintStream;
+import java.util.Arrays;
+
 /**
  * @author fa
  */
@@ -49,16 +52,26 @@ public class ExceptionHandle {
         return RespResult.fail(ResponseCode.REQUEST_PARAM_CHECK_FAILED, errMsg);
     }
 
+//    @ExceptionHandler(Exception.class)
+//    public Object exception(Exception exception) {
+//        StackTraceElement[] stackTraceElements = exception.getStackTrace();
+//        for (int i = 0; i < stackTraceElements.length; i++) {
+//            StackTraceElement stackTraceElement = stackTraceElements[i];
+//            if (!StrUtil.contains(stackTraceElement.getClassName(), "example")) {
+//                stackTraceElements[i] = null;
+//            }
+//        }
+//        log.error(exception.getLocalizedMessage(), exception);
+//        return RespResult.fail(exception.getMessage());
+//    }
+
+    private static final PrintStream PRINT_STREAM = new PrintStream(System.err);
+
     @ExceptionHandler(Exception.class)
     public Object exception(Exception exception) {
-        StackTraceElement[] stackTraceElements = exception.getStackTrace();
-        for (int i = 0; i < stackTraceElements.length; i++) {
-            StackTraceElement stackTraceElement = stackTraceElements[i];
-            if (!StrUtil.contains(stackTraceElement.getClassName(), "example")) {
-                stackTraceElements[i] = null;
-            }
-        }
-        log.error(exception.getLocalizedMessage(), exception);
+        // 打印包名中包含 iuin 的堆栈即可
+        Arrays.stream(exception.getStackTrace()).filter(o -> o.getClassName().contains("iuin")).forEach(o -> PRINT_STREAM.println("\tat " + o));
+
         return RespResult.fail(exception.getMessage());
     }
 
