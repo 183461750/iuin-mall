@@ -1,0 +1,20 @@
+archivesBaseName = 'commodity-service'
+
+bootJar {
+    setProperty('archiveClassifier', 'boot')
+}
+
+dependencies {
+    implementation project(':common-dependencies')
+    implementation project(':common-service')
+    implementation project(':component-service:mybatis-plus')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

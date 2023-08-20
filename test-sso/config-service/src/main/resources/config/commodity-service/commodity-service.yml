@@ -1,0 +1,33 @@
+server:
+  port: 9001
+  tomcat:
+    uri-encoding: UTF-8
+  max-http-header-size: 50KB
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${pgsql.address}:${pgsql.port}/${pgsql.dbname}?stringtype=unspecified
+    username: ${pgsql.username}
+    password: ${pgsql.password}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: ${hikari.minimum_idle}
+      maximum-pool-size: ${hikari.maximum_pool_size}
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: ${spring.application.name}-HikariPool
+      max-lifetime: 1800000
+      connection-timeout: 30000
+    sql:
+      init:
+        schema-locations: classpath:db/schema-pgsql.sql
+        data-locations: classpath:db/data-pgsql.sql
+  redis:
+    host: ${redis.address}
+    port: ${redis.port}
+    password: ${redis.password}
+
+feign:
+  httpclient:
+    connection-timeout: 120000
+    enabled: true
