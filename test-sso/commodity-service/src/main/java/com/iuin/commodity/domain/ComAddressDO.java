@@ -4,18 +4,20 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.FieldNameConstants;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 
- * @TableName com_address
+ * @author fa
  */
-@TableName(value ="com_address")
+@TableName(value = "com_address")
 @Data
+@FieldNameConstants
 public class ComAddressDO implements Serializable {
     /**
-     * 
+     *
      */
     @TableId
     private Long id;
@@ -35,6 +37,7 @@ public class ComAddressDO implements Serializable {
      */
     private String address;
 
+    @Serial
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

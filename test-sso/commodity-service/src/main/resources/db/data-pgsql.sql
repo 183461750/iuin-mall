@@ -4,12 +4,12 @@ begin;
 
 truncate table com_user;
 
-INSERT INTO com_user (id, name, age, email)
-VALUES (1, 'Jone', 18, 'test1@baomidou.com'),
-       (2, 'Jack', 20, 'test2@baomidou.com'),
-       (3, 'Tom', 28, 'test3@baomidou.com'),
-       (4, 'Sandy', 21, 'test4@baomidou.com'),
-       (5, 'Billie', 24, 'test5@baomidou.com');
+INSERT INTO com_user (id, pid, name, age, sex, email)
+VALUES (1, 0, 'Jone', 18, 0, 'test1@baomidou.com'),
+       (2, 1, 'Jack', 20, 1, 'test2@baomidou.com'),
+       (3, 2, 'Tom', 28, 1, 'test3@baomidou.com'),
+       (4, 2, 'Sandy', 21, 0, 'test4@baomidou.com'),
+       (5, 3, 'Billie', 24, 1, 'test5@baomidou.com');
 
 truncate table com_address;
 

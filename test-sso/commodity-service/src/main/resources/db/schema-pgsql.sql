@@ -7,14 +7,18 @@ DROP TABLE IF EXISTS com_user;
 CREATE TABLE com_user
 (
     id    int8 NOT NULL,
+    pid    int8 NOT NULL,
     name  VARCHAR(30) NULL DEFAULT NULL,
     age   int4 NULL DEFAULT NULL,
+    sex   int4 NULL DEFAULT NULL,
     email VARCHAR(50) NULL DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
+COMMENT ON COLUMN com_user.pid IS '父id';
 COMMENT ON COLUMN com_user.name IS '姓名';
 COMMENT ON COLUMN com_user.age IS '年龄';
+COMMENT ON COLUMN com_user.sex IS '性别: 0女 1男';
 COMMENT ON COLUMN com_user.email IS '邮箱';
 
 DROP TABLE IF EXISTS com_address;

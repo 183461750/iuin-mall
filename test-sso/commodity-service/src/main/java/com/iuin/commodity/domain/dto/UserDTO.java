@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * 自定义resultType
+ * @author fa
  */
 @Data
 public class UserDTO {

@@ -6,7 +6,7 @@ import com.iuin.commodity.domain.ComUserDO;
 /**
  * @author fa
  */
-public interface ComUserMapper extends MPJBaseMapper<ComUserDO> {
+public interface ComUserDeepMapper extends MPJBaseMapper<ComUserDO.ComUserDeepDO> {
 
 }
 
