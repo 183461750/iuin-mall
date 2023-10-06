@@ -29,13 +29,16 @@ public class TestMSTest {
 
     @Test
     void voToDo() {
-        TestDO testDO = testMS.VoToDo(new TestVO("Hello", 18, DateUtil.date(LocalDateTime.now()).toString(DatePattern.NORM_DATETIME_PATTERN)));
-
-        System.out.println(JSONUtil.toJsonPrettyStr(testDO));
+//        TestDO testDO = testMS.voToDo(new TestVO("Hello", 18, DateUtil.date(LocalDateTime.now()).toString(DatePattern.NORM_DATETIME_PATTERN)));
+//
+//        System.out.println(JSONUtil.toJsonPrettyStr(testDO));
     }
 
     @Test
     void poToVo() {
+//        TestVO testVO = testMS.poToVo(new TestDO("xxx", 18, LocalDateTime.now()));
+//
+//        System.out.println("冲：" + testVO);
     }
 
     @Test

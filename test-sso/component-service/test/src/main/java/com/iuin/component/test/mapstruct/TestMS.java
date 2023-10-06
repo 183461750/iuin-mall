@@ -16,17 +16,17 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface TestMS {
 
-    @Mappings({
-            @Mapping(target = "age", source = "userAge"),
-    })
-    TestDO VoToDo(TestVO dto);
-
-    @Mappings({
-            @Mapping(target = "userAge", source = "age"),
-            @Mapping(target = "userCreateTime", source = "createTime", dateFormat = DatePattern.NORM_DATETIME_PATTERN),
-    })
-    TestVO poToVo(TestDO po);
-
-    List<TestVO> poListToVoList(List<TestDO> po);
+//    @Mappings({
+//            @Mapping(target = "age", source = "userAge"),
+//    })
+//    TestDO VoToDo(TestVO dto);
+//
+//    @Mappings({
+//            @Mapping(target = "userAge", source = "age"),
+//            @Mapping(target = "userCreateTime", source = "createTime", dateFormat = DatePattern.NORM_DATETIME_PATTERN),
+//    })
+//    TestVO poToVo(TestDO po);
+//
+//    List<TestVO> poListToVoList(List<TestDO> po);
 
 }

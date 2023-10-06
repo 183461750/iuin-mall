@@ -3,6 +3,7 @@ package com.iuin.component.test.mapstruct.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 
 /**
  * @author fa
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldNameConstants
 public class TestVO {
 
     private String name;
@@ -17,5 +19,7 @@ public class TestVO {
     private Integer userAge;
 
     private String userCreateTime;
+
+    private Integer isDefault;
 
 }
