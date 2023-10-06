@@ -1,10 +1,10 @@
 package com.iuin.commodity.controller;
 
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
-import com.iuin.commodity.domain.ComAddressDO;
-import com.iuin.commodity.domain.ComUserDO;
+import com.iuin.commodity.repostory.entity.ComAddressDO;
+import com.iuin.commodity.repostory.entity.ComUserDO;
 import com.iuin.commodity.domain.dto.UserDTO;
-import com.iuin.commodity.mapper.ComUserMapper;
+import com.iuin.commodity.repostory.mapper.ComUserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

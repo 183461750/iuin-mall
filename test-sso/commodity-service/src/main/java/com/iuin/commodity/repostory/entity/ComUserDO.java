@@ -1,4 +1,4 @@
-package com.iuin.commodity.domain;
+package com.iuin.commodity.repostory.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;

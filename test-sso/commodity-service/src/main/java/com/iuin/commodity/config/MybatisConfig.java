@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 //@MapperScan("com.baomidou.mybatisplus.samples.quickstart.mapper")
-@MapperScan("com.iuin.commodity.mapper")
+@MapperScan("com.iuin.commodity.**.mapper")
 public class MybatisConfig {
 
 }

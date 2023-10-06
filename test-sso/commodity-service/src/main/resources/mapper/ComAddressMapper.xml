@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.iuin.commodity.mapper.ComAddressMapper">
+<mapper namespace="com.iuin.commodity.repostory.mapper.ComAddressMapper">
 
-    <resultMap id="BaseResultMap" type="com.iuin.commodity.domain.ComAddressDO">
+    <resultMap id="BaseResultMap" type="com.iuin.commodity.repostory.entity.ComAddressDO">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="city" column="city" jdbcType="VARCHAR"/>

@@ -1,6 +1,6 @@
 package com.iuin.component.test.liaoningyidong.utils;
 
-import com.alibaba.fastjson.JSON;
+import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @SuppressWarnings("ALL")
@@ -8,8 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 public class Tools {
 
     public static <T> T objectToJson(Object object, Class<T> cls) {
-        String jsonStr = JSON.toJSONString(object);
-        return JSON.parseObject(jsonStr, cls);
+        String jsonStr = JSONUtil.toJsonStr(object);
+        return JSONUtil.toBean(jsonStr, cls);
     }
 
 

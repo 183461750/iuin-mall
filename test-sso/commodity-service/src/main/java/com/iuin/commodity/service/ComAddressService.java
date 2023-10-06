@@ -1,11 +1,11 @@
 package com.iuin.commodity.service;
 
 import com.github.yulichang.base.MPJBaseService;
-import com.iuin.commodity.domain.ComAddressDO;
+import com.iuin.commodity.repostory.entity.ComAddressDO;
 
 /**
  * @author fa
  */
-public interface ComAddressService extends MPJBaseService<ComAddressDO> {
+public interface ComAddressService {
 
 }

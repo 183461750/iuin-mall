@@ -21,7 +21,7 @@ public interface Test2MS {
 
 
     @Mappings({
-            @Mapping(target = TestDO.Fields.age, source = TestVO.Fields.userAge),
+            @Mapping(target = "age", source = "userAge"),
             @Mapping(target = "isDefault", expression = "java(cn.hutool.core.convert.Convert.toBool(dto.getIsDefault()))")
     })
     TestDO voToDo(TestVO dto);

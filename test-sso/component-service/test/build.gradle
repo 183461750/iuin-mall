@@ -4,7 +4,7 @@ jar.enabled = true
 bootJar.enabled = false
 
 dependencies {
-    implementation project(':common-dependencies')
+//    implementation project(':common-dependencies')
     implementation project(':common-service')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
