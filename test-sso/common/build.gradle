@@ -1,0 +1,14 @@
+archivesBaseName = 'common'
+// 需要依赖包
+jar.enabled = true
+// 无需启动包
+bootJar.enabled = false
+
+dependencies {
+
+    api 'cn.hutool:hutool-all'
+
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    api 'com.google.guava:guava'
+
+}

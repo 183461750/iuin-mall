@@ -102,7 +102,7 @@ subprojects {
             // annotationProcessor
 //			dependency "com.querydsl:querydsl-apt:${querydsl}:jpa"
 
-            // common-service
+            // common
             dependency 'cn.hutool:hutool-all:5.8.0'
             // https://mvnrepository.com/artifact/com.google.guava/guava
             dependency 'com.google.guava:guava:31.1-jre'

@@ -1,7 +1,0 @@
-archivesBaseName = 'component-service'
-jar.enabled = false
-bootJar.enabled = false
-
-dependencies {
-
-}

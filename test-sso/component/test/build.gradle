@@ -1,0 +1,23 @@
+// 需要依赖包
+jar.enabled = true
+// 无需启动包
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':common')
+//    implementation project(':common-dependencies')
+    implementation project(':component:base-spring-boot-starter')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // https://mvnrepository.com/artifact/org.apache.tika/tika-core
+    implementation 'org.apache.tika:tika-core:2.8.0'
+
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.5.Final"
+
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,7 @@
+archivesBaseName = 'component'
+jar.enabled = false
+bootJar.enabled = false
+
+dependencies {
+
+}

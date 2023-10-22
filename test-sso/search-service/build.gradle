@@ -1,7 +1,8 @@
 dependencies {
     implementation project(':common-dependencies')
-    implementation project(':common-service')
-    implementation project(':component-service:es')
+    implementation project(':common')
+    implementation project(':component:base-spring-boot-starter')
+    implementation project(':component:es-spring-boot-starter')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.projectlombok:lombok'

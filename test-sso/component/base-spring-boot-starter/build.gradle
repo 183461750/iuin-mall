@@ -1,0 +1,20 @@
+archivesBaseName = 'base-spring-boot-starter'
+// 需要依赖包
+jar.enabled = true
+// 无需启动包
+bootJar.enabled = false
+
+dependencies {
+
+    implementation project(':common')
+    api 'io.github.yoshikawaa.modelmapper.spring.boot:modelmapper-spring-boot-autoconfigure'
+
+    //spring boot
+    api 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -6,8 +6,9 @@ bootJar {
 
 dependencies {
     implementation project(':common-dependencies')
-    implementation project(':common-service')
-    implementation project(':component-service:jpa')
+    implementation project(':common')
+    implementation project(':component:base-spring-boot-starter')
+    implementation project(':component:jpa-spring-boot-starter')
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 

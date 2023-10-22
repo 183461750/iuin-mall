@@ -6,8 +6,9 @@ bootJar.enabled = false
 
 dependencies {
     implementation project(':common-dependencies')
-    implementation project(':common-service')
-    implementation project(':component-service:jpa')
+    implementation project(':common')
+    implementation project(':component:base-spring-boot-starter')
+    implementation project(':component:jpa-spring-boot-starter')
 
     //工作流引擎Camunda依赖（共3个）
     implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter'

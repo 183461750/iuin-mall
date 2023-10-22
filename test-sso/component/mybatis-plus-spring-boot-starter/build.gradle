@@ -1,0 +1,14 @@
+archivesBaseName = 'mybatis-plus-spring-boot-starter'
+// 需要依赖包
+jar.enabled = true
+// 无需启动包
+bootJar.enabled = false
+
+dependencies {
+
+    runtimeOnly 'org.postgresql:postgresql'
+
+    api 'com.baomidou:mybatis-plus-boot-starter:3.5.3.1'
+    api 'com.github.yulichang:mybatis-plus-join-boot-starter:1.4.6'
+
+}

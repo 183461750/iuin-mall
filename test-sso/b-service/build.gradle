@@ -1,7 +1,8 @@
 dependencies {
     implementation project(':common-dependencies')
-    implementation project(':common-service')
-    implementation project(':component-service:jpa')
+    implementation project(':common')
+    implementation project(':component:base-spring-boot-starter')
+    implementation project(':component:jpa-spring-boot-starter')
     implementation project(':sso-server-service:sso-server-service-api')
 
     // 视图引擎（在前后端不分离模式下提供视图支持）

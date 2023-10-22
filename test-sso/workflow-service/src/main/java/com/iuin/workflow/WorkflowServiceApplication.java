@@ -1,13 +1,13 @@
 package com.iuin.workflow;
 
-import com.iuin.common.EnableCommonService;
+import com.iuin.component.base.EnableBaseComponent;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author fa
  */
-@EnableCommonService
+@EnableBaseComponent
 @SpringBootApplication
 //@EnableProcessApplication("workflow-service")
 public class WorkflowServiceApplication {

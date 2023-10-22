@@ -1,5 +1,6 @@
 dependencies {
-    implementation project(":common-service")
+    implementation project(':common')
+    implementation project(':component:base-spring-boot-starter')
 
     api group: 'jakarta.validation', name: 'jakarta.validation-api'
 

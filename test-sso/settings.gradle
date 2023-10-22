@@ -1,32 +1,27 @@
 rootProject.name = 'test-sso'
 
-include 'config-service'
-
 include 'common-dependencies'
-include 'common-service'
 
+include 'config-service'
 include 'sso-server-service'
 include 'sso-server-service:sso-server-service-api'
 include 'a-service'
 include 'b-service'
-
 include 'jpa-service'
-
 include 'workflow-service'
-
-include 'component-service'
-include 'component-service:jpa'
-include 'component-service:mybatis-plus'
-
-include 'component-service:test'
-findProject(':component-service:test')?.name = 'test'
-
-include 'component-service:es'
-
 include 'search-service'
-
-include 'component-service:test:feign'
-findProject(':component-service:test:feign')?.name = 'feign'
-
 include 'commodity-service'
+
+include 'common'
+
+include 'component'
+include 'component:base-spring-boot-starter'
+include 'component:es-spring-boot-starter'
+include 'component:jpa-spring-boot-starter'
+include 'component:mybatis-plus-spring-boot-starter'
+include 'component:test'
+findProject(':component:test')?.name = 'test'
+include 'component:test:feign'
+findProject(':component:test:feign')?.name = 'feign'
+
 
