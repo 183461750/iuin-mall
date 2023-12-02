@@ -6,7 +6,7 @@ bootJar.enabled = false
 
 dependencies {
 
-    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.26'
 
     api 'com.baomidou:mybatis-plus-boot-starter:3.5.3.1'
     api 'com.github.yulichang:mybatis-plus-join-boot-starter:1.4.6'
