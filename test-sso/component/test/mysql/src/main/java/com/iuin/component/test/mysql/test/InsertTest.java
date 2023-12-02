@@ -8,8 +8,8 @@ import java.util.Date;
 public class InsertTest {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        final String url = "jdbc:mysql://localhost:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        final String name = "com.mysql.jdbc.Driver";
+        final String url = "jdbc:mysql:replication://localhost:3306,localhost:3307/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        final String name = "com.mysql.cj.jdbc.Driver";
         final String user = "root";
         final String password = "root";
         Connection conn = null;
