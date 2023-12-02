@@ -23,5 +23,6 @@ include 'component:test'
 findProject(':component:test')?.name = 'test'
 include 'component:test:feign'
 findProject(':component:test:feign')?.name = 'feign'
+include 'component:test:mysql'
 
 
