@@ -1,0 +1,20 @@
+archivesBaseName = 'shardingsphere-service'
+
+bootJar {
+    setProperty('archiveClassifier', 'boot')
+}
+
+dependencies {
+    implementation project(':common-dependencies')
+    implementation project(':common')
+    implementation project(':component:base-spring-boot-starter')
+//    implementation project(':component:mybatis-plus-spring-boot-starter')
+    implementation project(':component:shardingsphere-spring-boot-starter')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

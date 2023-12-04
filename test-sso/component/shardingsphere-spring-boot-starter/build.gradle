@@ -1,0 +1,14 @@
+archivesBaseName = 'shardingsphere-spring-boot-starter'
+// 需要依赖包
+jar.enabled = true
+// 无需启动包
+bootJar.enabled = false
+
+dependencies {
+
+    runtimeOnly 'org.postgresql:postgresql'
+
+    api 'io.shardingsphere:sharding-jdbc-spring-boot-starter:3.1.0'
+    api 'io.shardingsphere:sharding-jdbc-spring-namespace:3.1.0'
+
+}
