@@ -1,4 +1,4 @@
-package com.iuin.search.handle;
+package com.iuin.search.handle.exception;
 
 import com.iuin.common.utils.RespResult;
 import com.iuin.common.utils.resp.ResponseCode;

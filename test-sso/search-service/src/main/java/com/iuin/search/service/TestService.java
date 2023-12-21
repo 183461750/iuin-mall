@@ -9,8 +9,6 @@ import com.iuin.search.model.TestGetReq;
  */
 public interface TestService {
 
-    String get(TestGetReq testGetReq);
-
     CommodityEs add(TestAddReq req);
 
 }

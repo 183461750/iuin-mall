@@ -10,8 +10,8 @@ dependencies {
 //    api 'org.elasticsearch.client:elasticsearch-rest-high-level-client'
 //    api 'co.elastic.clients:elasticsearch-java:8.8.2'
 //    api 'org.elasticsearch.client:elasticsearch-rest-client:8.8.2'
-    api 'co.elastic.clients:elasticsearch-java:8.8.2'
-    api 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.4'
+//    api 'co.elastic.clients:elasticsearch-java:8.8.2'
+//    api 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.4'
 //    api 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
 
 }

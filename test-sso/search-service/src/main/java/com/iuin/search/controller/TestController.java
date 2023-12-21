@@ -27,9 +27,4 @@ public class TestController {
         return RespResult.success(testService.add(req));
     }
 
-    @GetMapping("/get")
-    public RespResult<String> get(@Valid TestGetReq testGetReq) {
-        return RespResult.success(testService.get(testGetReq));
-    }
-
 }

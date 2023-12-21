@@ -1,5 +1,5 @@
 nacos:
-  address: 10.0.1.148
+  address: 10.0.1.92
   port: 8848
-  namespace: fa-local-sso
+  namespace: fa-dev
   group: v1
