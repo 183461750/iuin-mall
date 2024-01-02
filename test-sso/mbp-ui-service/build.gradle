@@ -1,4 +1,4 @@
-archivesBaseName = 'mp-ui-service'
+archivesBaseName = 'mbp-ui-service'
 
 bootJar {
     setProperty('archiveClassifier', 'boot')

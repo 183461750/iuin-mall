@@ -1,4 +1,4 @@
-package com.iuin.mp_ui.gen;
+package com.iuin.mbp_ui.gen;
 
 import com.github.davidfantasy.mybatisplus.generatorui.GeneratorConfig;
 import com.github.davidfantasy.mybatisplus.generatorui.MybatisPlusToolsApplication;
@@ -30,11 +30,11 @@ public class GeberatorUIServer {
                      */
                     @Override
                     public String controllerNameConvert(String entityName) {
-                        return entityName + "Action";
+                        return entityName + "Controller";
                     }
                 })
                 //所有生成的java文件的父包名，后续也可单独在界面上设置
-                .basePackage("com.iuin.mp_ui.mybatisplustools.example")
+                .basePackage("com.iuin.mbp_ui.gen_code")
                 .port(8068)
                 .build();
         MybatisPlusToolsApplication.run(config);

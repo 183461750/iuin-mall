@@ -1,10 +1,10 @@
-package com.iuin.mp_ui;
+package com.iuin.mbp_ui;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MpUiServiceApplicationTests {
+class MbpUiServiceApplicationTests {
 
     @Test
     void contextLoads() {

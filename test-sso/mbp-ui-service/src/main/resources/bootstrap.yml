@@ -3,6 +3,6 @@ spring:
     active: local
     include: common-${spring.profiles.active}
   application:
-    name: mp-ui-service
+    name: mbp-ui-service
   main:
     allow-bean-definition-overriding: true
