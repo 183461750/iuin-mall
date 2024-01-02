@@ -1,0 +1,21 @@
+archivesBaseName = 'mp-ui-service'
+
+bootJar {
+    setProperty('archiveClassifier', 'boot')
+}
+
+dependencies {
+    implementation project(':common-dependencies')
+    implementation project(':common')
+    implementation project(':component:base-spring-boot-starter')
+    implementation project(':component:mybatis-plus-spring-boot-starter')
+
+    testImplementation 'com.github.davidfantasy:mybatis-plus-generator-ui:2.0.5'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

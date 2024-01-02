@@ -11,6 +11,7 @@ include 'jpa-service'
 include 'workflow-service'
 include 'search-service'
 include 'commodity-service'
+include 'mp-ui-service'
 include 'shardingsphere-service'
 
 include 'common'
