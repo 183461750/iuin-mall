@@ -7,7 +7,7 @@ import com.github.davidfantasy.mybatisplus.generatorui.mbp.NameConverter;
 public class GeberatorUIServer {
 
     public static void main(String[] args) {
-        GeneratorConfig config = GeneratorConfig.builder().jdbcUrl("jdbc:postgresql://a.intranet.company:5432/aaa")
+        GeneratorConfig config = GeneratorConfig.builder().jdbcUrl("jdbc:postgresql://a.intranet.company:5432/iuin")
                 .userName("aaa")
                 .password("aaa")
                 .driverClassName("org.postgresql.Driver")
@@ -35,6 +35,7 @@ public class GeberatorUIServer {
                 })
                 //所有生成的java文件的父包名，后续也可单独在界面上设置
                 .basePackage("com.iuin.mp_ui.mybatisplustools.example")
+                .port(8068)
                 .build();
         MybatisPlusToolsApplication.run(config);
     }
