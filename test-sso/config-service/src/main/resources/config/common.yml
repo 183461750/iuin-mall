@@ -3,7 +3,7 @@ pgsql:
   address: 10.0.0.16
   username: dbadmin
   password: dbadmin
-  dbname: fa-test-sso
+  dbname: iuin-mall-db
 
 hikari:
   minimum_idle: 2

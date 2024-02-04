@@ -1,4 +1,4 @@
-rootProject.name = 'test-sso'
+rootProject.name = 'iuin-mall'
 
 include 'common-dependencies'
 

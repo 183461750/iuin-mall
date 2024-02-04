@@ -3,12 +3,12 @@ spring:
     nacos:
       discovery:
         server-addr: 10.0.16.16:8848
-        namespace: test-sso
+        namespace: iuin-mall
         group: DEFAULT_GROUP
       config:
         server-addr: 10.0.16.16:8848
         file-extension: yml
-        namespace: test-sso
+        namespace: iuin-mall
         extension-configs:
           - data-id: common.${spring.cloud.nacos.config.file-extension}
             group: DEFAULT_GROUP
