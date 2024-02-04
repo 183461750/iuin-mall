@@ -11,7 +11,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // https://mvnrepository.com/artifact/org.apache.tika/tika-core
-    implementation 'org.apache.tika:tika-core:2.8.0'
+//    implementation 'org.apache.tika:tika-core:2.8.0'
 
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.5.Final"

@@ -20,13 +20,11 @@ public interface Test2MS {
     Test2MS INSTANCE = Mappers.getMapper(Test2MS.class);
 
 
-    @Mappings({
-            @Mapping(target = "age", source = "userAge"),
-            @Mapping(target = "isDefault", expression = "java(cn.hutool.core.convert.Convert.toBool(dto.getIsDefault()))")
-    })
+    @Mapping(target =TestDO.Fields.age, source = TestVO.Fields.userAge)
+    @Mapping(target = "isDefault", expression = "java(cn.hutool.core.convert.Convert.toBool(dto.getIsDefault()))")
     TestDO voToDo(TestVO dto);
 
-    @Mapping(target = "userAge", source = "age")
+    @Mapping(target = TestVO.Fields.userAge, source = TestDO.Fields.age)
     @Mapping(target = "userCreateTime", source = "createTime", dateFormat = DatePattern.NORM_DATETIME_PATTERN)
     @Mapping(target = "isDefault", expression = "java(cn.hutool.core.convert.Convert.toInt(po.getIsDefault()))")
     TestVO poToVo(TestDO po);
