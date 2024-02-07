@@ -13,9 +13,14 @@ import org.springframework.validation.beanvalidation.MethodValidationPostProcess
  *
  * @author fa
  */
-public record ValidationConfig(Validator validator) {
+public class ValidationConfig {
 
-    @Override
+    private final Validator validator;
+
+    public ValidationConfig() {
+        this.validator = validator();
+    }
+
     @Bean
     public Validator validator() {
         //failFast的意思只要出现校验失败的情况，就立即结束校验，不再进行后续的校验。

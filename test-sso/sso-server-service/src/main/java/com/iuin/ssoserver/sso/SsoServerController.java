@@ -35,9 +35,7 @@ public class SsoServerController {
     private void configSso(SaSsoConfig sso) {
 
         // 配置：未登录时返回的View
-        sso.setNotLoginView(() -> {
-            return new ModelAndView("sa-login.html");
-        });
+        sso.setNotLoginView(() -> new ModelAndView("sa-login.html"));
 
         // 配置：登录处理函数
         sso.setDoLoginHandle((name, pwd) -> {

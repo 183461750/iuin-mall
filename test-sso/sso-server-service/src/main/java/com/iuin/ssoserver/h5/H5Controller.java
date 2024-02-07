@@ -22,9 +22,9 @@ public class H5Controller {
      * 获取 redirectUrl
      */
     @RequestMapping("/sso/getRedirectUrl")
-    private Object getRedirectUrl(String redirect, String mode) {
+    private Object getRedirectUrl(String redirect, String mode, String client) {
         // 未登录情况下，返回 code=401
-        if (StpUtil.isLogin() == false) {
+        if (!StpUtil.isLogin()) {
             return SaResult.code(401);
         }
         // 已登录情况下，构建 redirectUrl
@@ -34,7 +34,7 @@ public class H5Controller {
             return SaResult.data(redirect);
         } else {
             // 模式二或模式三
-            String redirectUrl = SaSsoUtil.buildRedirectUrl(StpUtil.getLoginId(), redirect);
+            String redirectUrl = SaSsoUtil.buildRedirectUrl(StpUtil.getLoginId(), client, redirect);
             return SaResult.data(redirectUrl);
         }
     }

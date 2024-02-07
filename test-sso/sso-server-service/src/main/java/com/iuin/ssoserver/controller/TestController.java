@@ -1,6 +1,7 @@
 package com.iuin.ssoserver.controller;
 
 import cn.dev33.satoken.context.SaHolder;
+import cn.dev33.satoken.sign.SaSignUtil;
 import cn.dev33.satoken.sso.SaSsoUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
@@ -59,7 +60,7 @@ public class TestController {
         StpUtil.checkLogin();
 
         // 校验签名，签名不通过直接抛出异常
-        SaSsoUtil.checkSign(SaHolder.getRequest());
+        SaSignUtil.checkRequest(SaHolder.getRequest());
 
         // 查询数据 (此处仅做模拟)
         List<Integer> list = Arrays.asList(10041, 10042, 10043, 10044);

@@ -110,13 +110,13 @@ subprojects {
 
             // Sa-Token
             // Sa-Token 权限认证，在线文档：https://sa-token.cc
-            dependency 'cn.dev33:sa-token-spring-boot-starter:1.32.0'
+            dependency 'cn.dev33:sa-token-spring-boot-starter:1.37.0'
 
             // Sa-Token 插件：整合SSO
-            dependency 'cn.dev33:sa-token-sso:1.32.0'
+            dependency 'cn.dev33:sa-token-sso:1.37.0'
 
             // Sa-Token 整合 Redis (使用 jackson 序列化方式)
-            dependency 'cn.dev33:sa-token-dao-redis-jackson:1.32.0'
+            dependency 'cn.dev33:sa-token-redis-jackson:1.37.0'
         }
     }
 

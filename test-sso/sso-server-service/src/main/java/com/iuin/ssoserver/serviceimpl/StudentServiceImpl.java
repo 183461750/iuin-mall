@@ -22,8 +22,8 @@ public class StudentServiceImpl implements IStudentService {
 
     @Resource
     private StudentRepository studentRepository;
-    @Resource
-    private JPAQueryFactory jpaQueryFactory;
+//    @Resource
+//    private JPAQueryFactory jpaQueryFactory;
 
     @Override
     public StudentDO add(StudentAddRequest studentAddRequest) {

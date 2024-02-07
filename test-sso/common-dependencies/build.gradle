@@ -13,7 +13,7 @@ dependencies {
     api 'cn.dev33:sa-token-sso'
 
     // Sa-Token 整合 Redis (使用 jackson 序列化方式)
-    api 'cn.dev33:sa-token-dao-redis-jackson'
+    api 'cn.dev33:sa-token-redis-jackson'
     api 'org.apache.commons:commons-pool2'
 
     // Http请求工具（在模式三的单点注销功能下用到，如不需要可以注释掉）
