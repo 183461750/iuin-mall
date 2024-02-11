@@ -28,5 +28,8 @@ findProject(':component:test')?.name = 'test'
 include 'component:test:feign'
 findProject(':component:test:feign')?.name = 'feign'
 include 'component:test:mysql'
-
+include 'component:pluggable-annotation'
+findProject(':component:pluggable-annotation')?.name = 'pluggable-annotation'
+include 'component:pluggable-annotation:version-pluggable'
+findProject(':component:pluggable-annotation:version-pluggable')?.name = 'version-pluggable'
 
