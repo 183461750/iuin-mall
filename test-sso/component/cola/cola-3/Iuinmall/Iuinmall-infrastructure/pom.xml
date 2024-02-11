@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.iuin.mall</groupId>
+        <artifactId>Iuinmall</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>Iuinmall-infrastructure</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!--Project modules-->
+        <dependency>
+            <groupId>com.iuin.mall</groupId>
+            <artifactId>Iuinmall-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iuin.mall</groupId>
+            <artifactId>Iuinmall-client</artifactId>
+        </dependency>
+        <!--Project modules End -->
+
+        <!-- wd-common dependency start -->
+        <dependency>
+            <groupId>com.wakedata.common</groupId>
+            <artifactId>wd-common-mybatis</artifactId>
+        </dependency>
+        <!-- wd-common dependency end -->
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+        </dependency>
+        <!-- JPA 自动建表-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+    </dependencies>
+</project>

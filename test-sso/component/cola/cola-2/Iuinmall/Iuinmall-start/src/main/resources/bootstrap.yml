@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: iuinmall
+  redis:
+    host: ${redis.host}
+    password: ${redis.password}
+    port: ${redis.port}
+  cloud:
+    nacos:
+      server-addr: ${NACOS_CONFIG_SERVER:wdcloud-dev-nacos.wakedata-inc.com:80}
+      username: wdcloud-test
+      password: wdcloud-test
+      discovery:
+        namespace: ${NACOS_CONFIG_NAMESPACE:wdcloud-base-public-dev}
+      config:
+        namespace: ${NACOS_CONFIG_NAMESPACE:wdcloud-base-dev}
+        file-extension: yml
+        shared-configs:
+          - data-id: common.yml
+          - data-id: common-mysql.yml
+          - data-id: common-mq.yml
+          - data-id: common-mq-topic.yml
+          - data-id: common-event-code.yml
+          - data-id: common-redis.yml
+          - data-id: common-tracelog.yml
+          - data-id: common-openfeign.yml
+          - data-id: common-services.yml
+          - data-id: common-storage-tencent.yml
+          - data-id: common-storage-aws.yml
+          - data-id: common-storage-aliyun.yml
+          - data-id: common-storage-huawei.yml
+          - data-id: common-weixin.yml
+          - data-id: common-sms-tencent.yml
+          - data-id: common-seata.yml
+          - data-id: xxl-job.yml
+          - data-id: wd-event-source.yml
+          # - data-id: wd_mtool_mq.yml
+
+logging:
+  config: classpath:logback-spring.xml

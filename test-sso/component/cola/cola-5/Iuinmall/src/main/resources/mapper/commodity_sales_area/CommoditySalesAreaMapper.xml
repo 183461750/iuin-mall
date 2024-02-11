@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iuin.mall.commodity_sales_area.infrastructure.repository.mapper.CommoditySalesAreaMapper">
+
+    <select id="findxxx" parameterType="com.iuin.mall.commodity_sales_area.client.query.Findxxx"
+            resultType="com.iuin.mall.commodity_sales_area.infrastructure.repository.model.CommoditySalesAreaDO">
+        SELECT *
+        FROM commodity_sales_area t1
+        <where>
+            <if test="name != null and name != ''">
+                AND t1.name LIKE CONCAT('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

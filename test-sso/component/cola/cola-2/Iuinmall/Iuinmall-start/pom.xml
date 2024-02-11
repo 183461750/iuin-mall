@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.iuin.mall</groupId>
+        <artifactId>Iuinmall</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>Iuinmall-start</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- Project modules Start -->
+        <dependency>
+            <groupId>com.iuin.mall</groupId>
+            <artifactId>Iuinmall-adapter</artifactId>
+        </dependency>
+        <!-- Project modules End -->
+
+        <!-- wd-common dependency start -->
+        <dependency>
+            <groupId>com.wakedata.common</groupId>
+            <artifactId>wd-common-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wakedata.common</groupId>
+            <artifactId>wd-common-userinfo</artifactId>
+        </dependency>
+        <!-- wd-common dependency End -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 引入Knife4j的官方start包,Swagger2基于Springfox2.10.5项目 -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>2.0.9</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- 打包SpringBoot项目 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.4.13</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+                                                                                                                                                                                                                        
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.31.0</version>
+                <configuration>
+                    <dockerHost>tcp://127.0.0.1:2375</dockerHost>
+                    <images>
+                        <image>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <name>172.26.59.200/wk-dss/origin/${git.branch}/wd-mtool:${project.version}</name>
+                            <alias>dockerfile</alias>
+                            <build>
+                                <contextDir>${project.basedir}/src/main/docker</contextDir>
+                                <assembly>
+                                    <descriptorRef>artifact</descriptorRef>
+                                </assembly>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>8090:8090</port>
+                                </ports>
+                            </run>
+                        </image>
+                        <!--            <image>-->
+                        <!--              <name>ccr.ccs.tencentyun.com/wk-dss/${project.name}:${project.version}</name>-->
+                        <!--              <build>-->
+                        <!--                <contextDir>${project.basedir}/src/main/docker</contextDir>-->
+                        <!--                <assembly>-->
+                        <!--                  <descriptorRef>artifact</descriptorRef>-->
+                        <!--                </assembly>-->
+                        <!--              </build>-->
+                        <!--            </image>-->
+                    </images>
+                    <authConfig>
+                        <username>100012941374</username>
+                        <password>z8dFKIEz6QWqWCfD</password>
+                    </authConfig>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

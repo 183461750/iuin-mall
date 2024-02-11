@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.wakedata</groupId>
+    <artifactId>wd-parent</artifactId>
+    <version>1.1.0-VD001</version>
+  </parent>
+
+  <groupId>com.iuin.mall</groupId>
+  <artifactId>Iuinmall</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <wd-common-core.version>1.2.3-DDD37</wd-common-core.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- wd-common dependency start-->
+      <dependency>
+        <groupId>com.wakedata.common</groupId>
+        <artifactId>wd-common-spring</artifactId>
+        <version>${wd-common-core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.wakedata.common</groupId>
+        <artifactId>wd-common-core</artifactId>
+        <version>${wd-common-core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.wakedata.common</groupId>
+        <artifactId>wd-common-userinfo</artifactId>
+        <version>${wd-common-core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.wakedata.common</groupId>
+        <artifactId>wd-common-mybatis</artifactId>
+        <version>${wd-common-core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.wakedata.common</groupId>
+        <artifactId>wd-common-mq</artifactId>
+        <version>${wd-common-core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.wakedata.common</groupId>
+        <artifactId>wd-common-domainevent</artifactId>
+        <version>${wd-common-core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.wakedata.common</groupId>
+        <artifactId>wd-common-redis</artifactId>
+        <version>${wd-common-core.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>com.wakedata</groupId>
+          <artifactId>spring-boot-xxl-job-starter</artifactId>
+          <version>2.2.0-WK</version>
+      </dependency>
+      <dependency>
+        <groupId>com.wakedata.common</groupId>
+        <artifactId>wd-common-feign</artifactId>
+        <version>${wd-common-core.version}</version>
+      </dependency>
+      <!-- wd-common dependency end-->
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+    </dependency>
+
+    <!-- wd-common dependency start-->
+    <dependency>
+      <groupId>com.wakedata.common</groupId>
+      <artifactId>wd-common-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.wakedata.common</groupId>
+      <artifactId>wd-common-feign</artifactId>
+    </dependency>
+    <!-- wd-common dependency start-->
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <!-- wd-common dependency start -->
+    <dependency>
+      <groupId>com.wakedata.common</groupId>
+      <artifactId>wd-common-domainevent</artifactId>
+    </dependency>
+    <!-- wd-common dependency end -->
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- wd-common dependency start -->
+    <dependency>
+      <groupId>com.wakedata.common</groupId>
+      <artifactId>wd-common-mybatis</artifactId>
+    </dependency>
+    <!-- wd-common dependency end -->
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+    </dependency>
+    <!-- JPA 自动建表-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <!-- wd-common dependency start -->
+    <dependency>
+      <groupId>com.wakedata.common</groupId>
+      <artifactId>wd-common-spring</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.wakedata.common</groupId>
+      <artifactId>wd-common-userinfo</artifactId>
+    </dependency>
+    <!-- wd-common dependency End -->
+
+    <!-- 引入Knife4j的官方start包,Swagger2基于Springfox2.10.5项目 -->
+    <dependency>
+      <groupId>com.github.xiaoymin</groupId>
+      <artifactId>knife4j-spring-boot-starter</artifactId>
+      <version>2.0.9</version>
+    </dependency>
+  </dependencies>
+
+  <!-- 使用父模块编译配置 -->
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+      </plugin>
+
+      <!-- 打包SpringBoot项目 -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.4.13</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+                                                                                                            
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>0.31.0</version>
+        <configuration>
+          <dockerHost>tcp://127.0.0.1:2375</dockerHost>
+          <images>
+            <image>
+              <!--suppress UnresolvedMavenProperty -->
+              <name>172.26.59.200/wk-dss/origin/${git.branch}/wd-mtool:${project.version}</name>
+              <alias>dockerfile</alias>
+              <build>
+                <contextDir>${project.basedir}/src/main/docker</contextDir>
+                <assembly>
+                  <descriptorRef>artifact</descriptorRef>
+                </assembly>
+              </build>
+              <run>
+                <ports>
+                  <port>8090:8090</port>
+                </ports>
+              </run>
+            </image>
+            <!--            <image>-->
+            <!--              <name>ccr.ccs.tencentyun.com/wk-dss/${project.name}:${project.version}</name>-->
+            <!--              <build>-->
+            <!--                <contextDir>${project.basedir}/src/main/docker</contextDir>-->
+            <!--                <assembly>-->
+            <!--                  <descriptorRef>artifact</descriptorRef>-->
+            <!--                </assembly>-->
+            <!--              </build>-->
+            <!--            </image>-->
+          </images>
+          <authConfig>
+            <username>100012941374</username>
+            <password>z8dFKIEz6QWqWCfD</password>
+          </authConfig>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <distributionManagement>
+    <!-- 配置release版本发布的仓库-->
+    <repository>
+      <id>central</id>
+      <name>libs-release-local</name>
+      <url>http://172.26.59.85:8081/artifactory/libs-release-local</url>
+    </repository>
+    <!-- 配置快照版本发布的仓库-->
+    <snapshotRepository>
+      <id>snapshots</id>
+      <name>libs-snapshot-local</name>
+      <url>http://172.26.59.85:8081/artifactory/libs-snapshot-local/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+</project>
