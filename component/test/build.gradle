@@ -3,10 +3,25 @@ jar.enabled = true
 // 无需启动包
 bootJar.enabled = false
 
+tasks.withType(JavaCompile).configureEach {
+    options.fork = true
+//    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.*=ALL-UNNAMED'
+    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED'
+    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED'
+    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED'
+    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED'
+    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED'
+    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED'
+    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED'
+}
+
 dependencies {
     implementation project(':common')
 //    implementation project(':common-dependencies')
     implementation project(':component:base-spring-boot-starter')
+
+    implementation project(':component:pluggable-annotation:annotation_processor')
+    annotationProcessor project(':component:pluggable-annotation:annotation_processor')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
