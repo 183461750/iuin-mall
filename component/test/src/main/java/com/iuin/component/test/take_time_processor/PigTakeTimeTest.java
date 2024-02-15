@@ -7,7 +7,7 @@ import lombok.ToString;
 /**
  * @author fa
  */
-@ToString
+@ToString(callSuper = true)
 public class PigTakeTimeTest extends Pig {
 
     private Integer age;

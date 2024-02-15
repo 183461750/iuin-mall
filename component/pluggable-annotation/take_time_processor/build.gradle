@@ -4,47 +4,103 @@ jar.enabled = true
 bootJar.enabled = false
 
 dependencies {
-//    这个依赖的是项目Libs目录下的tool.jar,这个jar包是从${JAVA_HOME}处复制过来的,我使用的JDK版本为1.8
-    implementation fileTree(dir: 'src/main/resources/libs', include: ['*.jar'])
+
 //    声明注解处理器的注解,用于代替手动编辑resources/META-INF/services的文件
     implementation 'com.google.auto.service:auto-service:1.0-rc6'
 //    这行配置也需要添加,gradle升级到5之后,不加此配置,不会生成META-INF/services/javax.annotation.processing.Processor文件
     annotationProcessor 'com.google.auto.service:auto-service:1.0-rc6'
 //    使用Square公司的开源类库JavaPoet可以生成Java文件，JavaWrite现在已经被JavaPoet取代了
     implementation 'com.squareup:javapoet:1.13.0'
+    implementation 'org.ow2.asm:asm:9.5'
 
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.fork = true
-//    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.*=ALL-UNNAMED'
-    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED'
-    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED'
-    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED'
-    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED'
-    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED'
-    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED'
-    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED'
-}
+// 注册Java Agent
+//java.withSourcesJar() {
+//    from {
+//        java.sourceSets.main.java.srcDirs
+//    }
+//    into "$buildDir/generated/sources/javaagent"
+//}
+//
+//jar {
+//    manifest {
+//        attributes 'Main-Class': 'com.iuin.component.pluggable_annotation.take_time.agent.TimeTrackingAgentLoader'
+//    }
+//    from {
+//        configurations.runtimeClasspath.map { it.isDirectory() ? it : zipTree(it) }
+//    }
+//    with(tasks.jar)
+//}
 
-// 配置注解处理器
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src/main/java', 'src/main/generated']
-        }
+
+// 注册Java Agent
+//tasks.withType(JavaCompile).configureEach {
+//    options.compilerArgs += '-javaagent:' + java.sourceSets.main.java.srcDirs + '/agent.jar'
+//}
+
+// 创建源代码JAR
+jar {
+    from('src/main/java') {
+        // 排除某些文件或目录
+        exclude('com/iuin/component/pluggable_annotation/take_time/agent')
     }
-}
-// 注解处理器的任务
-task generateTimestamps(type: JavaCompile, dependsOn: classes) {
-    source = sourceSets.main.java
-    classpath = configurations.implementation + sourceSets.main.output
-    options.annotationProcessorPath = configurations.implementation
-    options.compilerArgs = [
-            '-proc:only',
-            '-processor', 'TakeTimeProcessor'
-    ]
+//    manifest {
+//        attributes(
+//                'Main-Class': 'com.iuin.component.pluggable_annotation.take_time.agent.Main',
+//                'Agent-Class': "com.iuin.component.pluggable_annotation.take_time.agent.Agent",
+//                'Premain-Class': 'com.iuin.component.pluggable_annotation.take_time.agent.Agent',
+//                'Can-Redefine-Classes': 'true',
+//                'Can-Retransform-Classes': 'true'
+//        )
+////                'Can-Redefine-Classes': 'false',
+////                'Can-Retransform-Classes': 'true'
+//    }
+//    doLast {
+//        // 将源代码 JAR 添加到 JAR 文件中
+//        archiveFile.asFileTree.dirs.each { file ->
+//            // 确保源代码 JAR 包含在主 JAR 中
+//            copy {
+//                from tasks.sourcesJar.archiveFile
+//                into "$archiveName/BOOT-INF/classes"
+//            }
+//        }
+//    }
+//    from('build/generated/sources/compileAgent') // 使用编译后的目录
+//    into('build/generated/sources/compileAgent') // 指定 JAR 文件中的目录
+
 }
 
-// 将生成代码的任务添加到构建生命周期
-build.dependsOn generateTimestamps
+tasks.register('compileAgent', JavaCompile) {
+
+//    sourceCompatibility = JavaVersion.VERSION_1_6
+//    targetCompatibility = JavaVersion.VERSION_1_6
+    options.fork = true
+//    options.forkOptions.executable = 'ecj' // 指定 ecj 可执行文件的路径
+
+    // 指定编译器类路径，包括 JDK 的 rt.jar 和其他依赖项
+    classpath = configurations.runtimeClasspath
+
+//    bootClasspath = files("${jdk6 - rt.loc}")
+    source = fileTree(dir: 'src/main/java/com/iuin/component/pluggable_annotation/take_time/agent', include: ['**/*.java'])
+    destinationDirectory = file('build/generated/sources/compileAgent')
+}
+
+tasks.register('createAgentJar', Jar) {
+    dependsOn(compileAgent) // 确保 compileAgent 任务已完成
+
+    manifest {
+        attributes(
+                'Main-Class': 'com.iuin.component.pluggable_annotation.take_time.agent.Main',
+                'Agent-Class': "com.iuin.component.pluggable_annotation.take_time.agent.Agent",
+                'Premain-Class': 'com.iuin.component.pluggable_annotation.take_time.agent.Agent',
+                'Can-Redefine-Classes': 'true',
+                'Can-Retransform-Classes': 'true'
+        )
+    }
+    from(tasks.compileAgent.destinationDirectory) // 使用 asFile 确保它是一个 File 对象
+    into('build/libs')
+}
+
+// 假设你有一个 setupBuild 任务，你可以通过 dependsOn 属性来设置依赖关系
+classes.dependsOn(createAgentJar)
