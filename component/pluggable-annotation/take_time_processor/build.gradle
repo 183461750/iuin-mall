@@ -3,6 +3,18 @@ jar.enabled = true
 // 无需启动包
 bootJar.enabled = false
 
+dependencies {
+//    这个依赖的是项目Libs目录下的tool.jar,这个jar包是从${JAVA_HOME}处复制过来的,我使用的JDK版本为1.8
+    implementation fileTree(dir: 'src/main/resources/libs', include: ['*.jar'])
+//    声明注解处理器的注解,用于代替手动编辑resources/META-INF/services的文件
+    implementation 'com.google.auto.service:auto-service:1.0-rc6'
+//    这行配置也需要添加,gradle升级到5之后,不加此配置,不会生成META-INF/services/javax.annotation.processing.Processor文件
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc6'
+//    使用Square公司的开源类库JavaPoet可以生成Java文件，JavaWrite现在已经被JavaPoet取代了
+    implementation 'com.squareup:javapoet:1.13.0'
+
+}
+
 tasks.withType(JavaCompile).configureEach {
     options.fork = true
 //    options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.*=ALL-UNNAMED'
@@ -15,16 +27,24 @@ tasks.withType(JavaCompile).configureEach {
     options.forkOptions.jvmArgs += '--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED'
 }
 
-dependencies {
-//    这个依赖的是项目Libs目录下的tool.jar,这个jar包是从${JAVA_HOME}处复制过来的,我使用的JDK版本为1.8
-    implementation fileTree(dir: 'src/main/resources/libs', include: ['*.jar'])
-//    声明注解处理器的注解,用于代替手动编辑resources/META-INF/services的文件
-    implementation group: 'com.google.auto.service', name: 'auto-service', version: '1.0-rc6'
-//    这行配置也需要添加,gradle升级到5之后,不加此配置,不会生成META-INF/services/javax.annotation.processing.Processor文件
-    annotationProcessor group: 'com.google.auto.service', name: 'auto-service', version: '1.0-rc6'
-//    使用Square公司的开源类库JavaPoet可以生成Java文件，JavaWrite现在已经被JavaPoet取代了
-    implementation group: 'com.squareup', name: 'javapoet', version: '1.11.1'
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
-
+// 配置注解处理器
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', 'src/main/generated']
+        }
+    }
 }
+// 注解处理器的任务
+task generateTimestamps(type: JavaCompile, dependsOn: classes) {
+    source = sourceSets.main.java
+    classpath = configurations.implementation + sourceSets.main.output
+    options.annotationProcessorPath = configurations.implementation
+    options.compilerArgs = [
+            '-proc:only',
+            '-processor', 'TakeTimeProcessor'
+    ]
+}
+
+// 将生成代码的任务添加到构建生命周期
+build.dependsOn generateTimestamps
