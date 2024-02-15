@@ -1,4 +1,4 @@
-package cn.kanyun.annotation_processor.taketime;
+package com.iuin.component.pluggable_annotation.take_time;
 
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
@@ -37,7 +37,7 @@ import java.util.Set;
  * 所有处理注解的代码放在process方法里面
  */
 @SupportedSourceVersion(value = SourceVersion.RELEASE_17)
-@SupportedAnnotationTypes(value = {"cn.kanyun.annotation_processor.taketime.TakeTime"})
+@SupportedAnnotationTypes(value = {"com.iuin.component.pluggable_annotation.take_time.TakeTime"})
 @AutoService(Processor.class)
 public class TakeTimeProcessor extends AbstractProcessor {
 

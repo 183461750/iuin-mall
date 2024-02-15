@@ -33,6 +33,6 @@ include 'component:pluggable-annotation'
 findProject(':component:pluggable-annotation')?.name = 'pluggable-annotation'
 include 'component:pluggable-annotation:version-pluggable'
 findProject(':component:pluggable-annotation:version-pluggable')?.name = 'version-pluggable'
-include 'component:pluggable-annotation:annotation_processor'
-findProject(':component:pluggable-annotation:annotation_processor')?.name = 'annotation_processor'
+include 'component:pluggable-annotation:take_time_processor'
+findProject(':component:pluggable-annotation:take_time_processor')?.name = 'take_time_processor'
 

@@ -1,6 +1,6 @@
-package com.iuin.component.test.annotation_processor;
+package com.iuin.component.test.take_time_processor;
 
-import cn.kanyun.annotation_processor.taketime.Pig;
+import com.iuin.component.pluggable_annotation.take_time.model.Pig;
 
 /**
  * @author fa

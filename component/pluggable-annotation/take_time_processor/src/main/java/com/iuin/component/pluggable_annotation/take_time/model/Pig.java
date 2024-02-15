@@ -1,5 +1,6 @@
-package cn.kanyun.annotation_processor.taketime;
+package com.iuin.component.pluggable_annotation.take_time.model;
 
+import com.iuin.component.pluggable_annotation.take_time.TakeTime;
 import lombok.ToString;
 
 /**

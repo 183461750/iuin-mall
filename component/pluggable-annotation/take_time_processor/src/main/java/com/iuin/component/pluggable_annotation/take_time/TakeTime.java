@@ -1,4 +1,4 @@
-package cn.kanyun.annotation_processor.taketime;
+package com.iuin.component.pluggable_annotation.take_time;
 
 import java.lang.annotation.*;
 
@@ -11,7 +11,7 @@ import java.lang.annotation.*;
  * 处理该注解的,如果你对这个处理还有其他处理,那么就需要考虑对应生命周期,比如还想再运行期
  * 对标注的该注解的元素进行操作,那么对应的生存周期就需要设置为RUNTIME
  * @author Kanyun
- * @see cn.kanyun.annotation_processor.taketime.TakeTimeProcessor
+ * @see TakeTimeProcessor
  *
  */
 @Target({ElementType.METHOD})
