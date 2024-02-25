@@ -94,6 +94,8 @@ public enum ResponseCode {
      * 获取锁超时
      */
     SERVICE_LOCK_TIME_OUT(2023, "系统繁忙，请稍后再试"),
+    MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR(49152, "请求Yapi服务失败"),
+    MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR2(49153, "文件流输出异常"),
 
     ;
 
