@@ -11,4 +11,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.google.guava/guava
     api 'com.google.guava:guava'
 
+    api 'org.springframework.boot:spring-boot-starter-actuator'
+
 }
