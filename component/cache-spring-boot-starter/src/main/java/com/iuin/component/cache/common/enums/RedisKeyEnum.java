@@ -3,8 +3,10 @@ package com.iuin.component.cache.common.enums;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.CharPool;
 import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.text.StrPool;
+import com.iuin.common.constants.ProjectConstant;
+import com.iuin.component.base.holders.EnvHolder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 缓存key
@@ -12,7 +14,6 @@ import lombok.RequiredArgsConstructor;
  * @author fa
  */
 @Getter
-@RequiredArgsConstructor
 public enum RedisKeyEnum {
 
     /**
@@ -41,10 +42,18 @@ public enum RedisKeyEnum {
 
     private final String keyPrefix;
 
+    RedisKeyEnum(String keyPrefix) {
+        this.keyPrefix = keyPrefixOf(keyPrefix);
+    }
+
     public abstract String keyOf(Object... variables);
 
     private static String keyOf(RedisKeyEnum redisKeyEnum, Object... variables) {
         return CharSequenceUtil.join(String.valueOf(CharPool.COLON), CollUtil.toList(redisKeyEnum.keyPrefix, variables));
+    }
+
+    private static String keyPrefixOf(String bizKeyPrefix) {
+        return CharSequenceUtil.join(StrPool.COLON, ProjectConstant.PROJECT_NAME, EnvHolder.getAppName(), bizKeyPrefix);
     }
 
 }

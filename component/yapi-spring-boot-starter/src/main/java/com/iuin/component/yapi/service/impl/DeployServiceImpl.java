@@ -1,5 +1,7 @@
 package com.iuin.component.yapi.service.impl;
 
+import cn.hutool.core.text.StrPool;
+import com.iuin.common.constants.ProjectConstant;
 import com.iuin.common.enums.ModuleEnum;
 import com.iuin.common.utils.resp.ResponseCode;
 import com.iuin.component.base.exceptions.BusinessException;
@@ -44,19 +46,9 @@ public class DeployServiceImpl implements IDeployService {
     private final HttpServletResponse httpServletResponse;
 
     /**
-     * 根模块名称
-     */
-    private static final String rootModuleName = "ssy-lx";
-
-    /**
-     * 分隔符
-     */
-    private static final String SPLIT_STR = ".";
-
-    /**
      * 主模块名称
      */
-    private static final String MainName = "main";
+    private static final String MAIN_NAME = "main";
 
     @Override
     public List<YapiTokenListResp> listOfYapiToken() {
@@ -172,7 +164,7 @@ public class DeployServiceImpl implements IDeployService {
 
         // 构造tokenMap
         Map<String, String> tokenMap = Arrays.stream(ModuleEnum.values())
-                .map(deployModuleEnum -> new TupleResp<>(rootModuleName + SPLIT_STR + deployModuleEnum.getName() + SPLIT_STR + MainName, projectTokenMap.get(deployModuleEnum.getCnName())))
+                .map(deployModuleEnum -> new TupleResp<>(ProjectConstant.PROJECT_NAME + StrPool.C_DOT + deployModuleEnum.getName() + StrPool.C_DOT + MAIN_NAME, projectTokenMap.get(deployModuleEnum.getCnName())))
                 .collect(Collectors.toMap(TupleResp::getT1, TupleResp::getT2));
 
         // 按tokenMap中的key进行排序（避免每次下载文件内容顺序不一致)

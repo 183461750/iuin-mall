@@ -1,0 +1,17 @@
+archivesBaseName = 'jpa-service'
+
+bootJar {
+    setProperty('archiveClassifier', 'boot')
+}
+
+dependencies {
+
+    implementation project(':common-dependencies')
+    implementation project(':component:yapi-spring-boot-starter')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

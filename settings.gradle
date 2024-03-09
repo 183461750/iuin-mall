@@ -13,6 +13,7 @@ include 'search-service'
 include 'commodity-service'
 include 'mbp-ui-service'
 include 'shardingsphere-service'
+include 'yapi-service'
 
 include 'common'
 

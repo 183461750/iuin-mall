@@ -23,7 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DeployController {
 
-    private IDeployService deployService;
+    private final IDeployService deployService;
 
     /**
      * Yapi-查询项目相关的token列表

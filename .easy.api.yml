@@ -1,5 +1,6 @@
 yapi:
-  server: https://yapi.iuin-mall.com
+  server: https://yapi.shushangyun.com
   token:
     iuin-mall.a-service.main: xxx
     iuin-mall.b-service.main: xxx
+    iuin-mall.sso-server-service.main: 787a289cf24da52ada3e5239d577eed8e6283e2b62401a89bb4b68718f75b381
