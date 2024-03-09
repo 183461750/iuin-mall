@@ -15,3 +15,10 @@ spring:
             refresh: true
         group: ${nacos.group}
         prefix: ${spring.application.name}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
