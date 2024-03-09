@@ -6,5 +6,20 @@ spring:
     name: sso-server-service
   main:
     allow-bean-definition-overriding: true
-  datasource:
-    url:
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
+
+#arthas:
+#  agent-id: hsehdfsfghhwertyfad
+##  tunnel-server: ws://47.75.156.201:7777/ws
+#  tunnel-server: ws://localhost:7777/ws
+
+#线上问题排查工具
+arthas:
+  # 通过命令行 telnet 进行连接
+  telnetPort: 1${server.port}

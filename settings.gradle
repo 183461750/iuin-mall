@@ -17,6 +17,7 @@ include 'shardingsphere-service'
 include 'common'
 
 include 'component'
+include 'component:arthas-spring-boot-starter'
 include 'component:base-spring-boot-starter'
 include 'component:es-spring-boot-starter'
 include 'component:jpa-spring-boot-starter'
