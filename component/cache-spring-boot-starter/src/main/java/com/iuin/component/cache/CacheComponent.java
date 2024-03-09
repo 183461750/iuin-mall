@@ -1,6 +1,7 @@
 package com.iuin.component.cache;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.data.redis.core.ReactiveStringRedisTemplate;
 
 import java.time.Duration;
@@ -8,6 +9,7 @@ import java.time.Duration;
 /**
  * @author fa
  */
+@AutoConfiguration
 @RequiredArgsConstructor
 public class CacheComponent {
 

@@ -7,8 +7,7 @@ dependencies {
 
     implementation project(':common')
 
-    implementation 'org.springframework.data:spring-data-redis'
-    implementation 'io.lettuce:lettuce-core'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'com.fasterxml.jackson.core:jackson-databind'
