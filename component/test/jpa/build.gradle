@@ -1,0 +1,13 @@
+dependencies {
+    implementation project(':common-dependencies')
+    implementation project(':common')
+    implementation project(':component:base-spring-boot-starter')
+    implementation project(':component:jpa-spring-boot-starter')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+test {
+    useJUnitPlatform()
+}
