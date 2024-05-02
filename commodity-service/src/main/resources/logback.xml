@@ -1,126 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
-    <!--日志文件的配置参数，在bootstrap-common-XXX配置文件中-->
-    <springProperty scope="context" name="PATH" source="logback.path"  />
-    <springProperty scope="context" name="MAX_HISTORY" source="logback.maxHistory"/>
-    <springProperty scope="context" name="MAX_FILE_SIZE" source="logback.maxFileSize"/>
-    <springProperty scope="context" name="TOTAL_SIZE_CAP" source="logback.totalSizeCap"/>
-    <springProperty scope="context" name="SERVICE_NAME" source="logback.serviceName"/>
 
-    <property name="log.pattern" value="%d{HH:mm:ss.SSS} %-5level [%thread] %logger:%L - %msg%n" />
-    <property name="log.pattern.stdout" value="%d{HH:mm:ss.SSS} %highlight(%-5level) %green([%thread]) %logger:%L - %msg%n" />
+    <property name="log.pattern" value="${APP_NAME}:${ServerIP}:${ServerPort} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{sw_ctx}] [%thread] %logger:%L - %msg%n" />
+    <property name="log.pattern.stdout" value="%d{HH:mm:ss.SSS} %highlight(%-5level) [%X{sw_ctx}] %green([%thread]) %logger:%L - %msg%n" />
 
-    <!-- 日志记录器，日期滚动记录 -->
-    <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!-- 正在记录的日志文件的路径及文件名 -->
-        <file>${PATH}/${SERVICE_NAME}/error.log</file>
-        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 归档的日志文件的路径，例如今天是2013-12-21日志，当前写的日志文件路径为file节点指定，可以将此文件与file指定文件路径设置为不同路径，从而将当前日志文件或归档日志文件置不同的目录。
-            而2013-12-21的日志文件在由fileNamePattern指定。%d{yyyy-MM-dd}指定日期格式，%i指定索引 -->
-            <fileNamePattern>${PATH}/${SERVICE_NAME}/error/error-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
-            <!-- 除按日志记录之外，还配置了日志文件不能超过2M，若超过2M，日志文件会以索引0开始，
-            命名日志文件，例如log-error-2013-12-21.0.log -->
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <!--最多保存的天数-->
-            <maxHistory>${MAX_HISTORY}</maxHistory>
-            <!-- 总日志大小 -->
-            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
-        </rollingPolicy>
-        <!-- 追加方式记录日志 -->
-        <append>true</append>
-        <!-- 日志文件的格式 -->
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>${log.pattern}</pattern>
-            <charset class="java.nio.charset.Charset">utf-8</charset>
-        </encoder>
-        <!-- 此日志文件只记录info级别的 -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-    </appender>
+    <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
+        <!-- add TID(traceId) field -->
+        <provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider">
+        </provider>
+        <!-- add SW_CTX(SkyWalking context) field -->
+        <provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.SkyWalkingContextJsonProvider">
+        </provider>
+    </encoder>
 
-    <!-- 日志记录器，日期滚动记录 -->
-    <appender name="FILE_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!-- 正在记录的日志文件的路径及文件名 -->
-        <file>${PATH}/${SERVICE_NAME}/warn.log</file>
-        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 归档的日志文件的路径，例如今天是2013-12-21日志，当前写的日志文件路径为file节点指定，可以将此文件与file指定文件路径设置为不同路径，从而将当前日志文件或归档日志文件置不同的目录。
-            而2013-12-21的日志文件在由fileNamePattern指定。%d{yyyy-MM-dd}指定日期格式，%i指定索引 -->
-            <fileNamePattern>${PATH}/${SERVICE_NAME}/warn/warn-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
-            <!-- 除按日志记录之外，还配置了日志文件不能超过2M，若超过2M，日志文件会以索引0开始，
-            命名日志文件，例如log-error-2013-12-21.0.log -->
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <!--最多保存的天数-->
-            <maxHistory>${MAX_HISTORY}</maxHistory>
-            <!-- 总日志大小 -->
-            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
-        </rollingPolicy>
-        <!-- 追加方式记录日志 -->
-        <append>true</append>
-        <!-- 日志文件的格式 -->
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>${log.pattern}</pattern>
-            <charset class="java.nio.charset.Charset">utf-8</charset>
-        </encoder>
-        <!-- 此日志文件只记录info级别的 -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>WARN</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-    </appender>
+    <!-- add converter for %tid -->
+    <conversionRule conversionWord="tid" converterClass="org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackPatternConverter"/>
+    <!-- add converter for %sw_ctx -->
+    <conversionRule conversionWord="sw_ctx" converterClass="org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackSkyWalkingContextPatternConverter"/>
 
-    <!-- 日志记录器，日期滚动记录 -->
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!-- 正在记录的日志文件的路径及文件名 -->
-        <file>${PATH}/${SERVICE_NAME}.log</file>
-        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 归档的日志文件的路径，例如今天是2013-12-21日志，当前写的日志文件路径为file节点指定，可以将此文件与file指定文件路径设置为不同路径，从而将当前日志文件或归档日志文件置不同的目录。
-            而2013-12-21的日志文件在由fileNamePattern指定。%d{yyyy-MM-dd}指定日期格式，%i指定索引 -->
-            <fileNamePattern>${PATH}/${SERVICE_NAME}/all/all-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
-            <!-- 除按日志记录之外，还配置了日志文件不能超过2M，若超过2M，日志文件会以索引0开始，
-            命名日志文件，例如log-error-2013-12-21.0.log -->
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <!--最多保存的天数-->
-            <maxHistory>${MAX_HISTORY}</maxHistory>
-            <!-- 总日志大小 -->
-            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
-        </rollingPolicy>
-        <!-- 追加方式记录日志 -->
-        <append>true</append>
-        <!-- 日志文件的格式 -->
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>${log.pattern}</pattern>
-            <charset class="java.nio.charset.Charset">utf-8</charset>
-        </encoder>
-    </appender>
-
-    <!-- 控制台输出 -->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <withJansi>false</withJansi>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <!--%green,%red是日志显示的颜色，要用小括号-->
-            <pattern>${log.pattern.stdout}</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+        <providers>
+            <timestamp>
+                <timeZone>UTC</timeZone>
+            </timestamp>
+            <pattern>
+                <pattern>
+                    {
+                    "level": "%level",
+                    "tid": "%tid",
+                    "skyWalkingContext": "%sw_ctx",
+                    "thread": "%thread",
+                    "class": "%logger{1.}:%L",
+                    "message": "%message",
+                    "stackTrace": "%exception{10}"
+                    }
+                </pattern>
+            </pattern>
+        </providers>
+    </encoder>
 
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
+                <pattern>${log.pattern.stdout}</pattern>
             </layout>
         </encoder>
     </appender>
@@ -128,18 +50,13 @@
     <appender name="grpc-log" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
+                <pattern>${log.pattern}</pattern>
             </layout>
         </encoder>
     </appender>
 
-    <!-- 日志输出级别 -->
     <root level="INFO">
-        <appender-ref ref="STDOUT"/>
-        <appender-ref ref="FILE"/>
-        <appender-ref ref="FILE_WARN"/>
-        <appender-ref ref="FILE_ERROR"/>
-
+        <appender-ref ref="stdout"/>
         <appender-ref ref="grpc-log"/>
     </root>
 

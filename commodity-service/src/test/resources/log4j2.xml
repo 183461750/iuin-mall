@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN">
+
+    <property name="log.pattern"
+              value="${APP_NAME}:${ServerIP}:${ServerPort} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{tid}] [%thread] %logger:%L - %msg%n"/>
+    <property name="log.pattern.stdout"
+              value="%d{HH:mm:ss.SSS} %highlight(%-5level) [%X{tid}] %green([%thread]) %logger:%L - %msg%n"/>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d [%sw_ctx] %-5p %c{1}:%L - %m%n"/>
+        </Console>
+
+        <!-- Async Loggers will auto-flush in batches, so switch off immediateFlush. -->
+        <RandomAccessFile name="RandomAccessFile" fileName="asyncWithLocation.log"
+                          immediateFlush="false" append="false">
+            <PatternLayout>
+                <Pattern>%d %p %class{1.} [%t] [%traceId] %location %m %ex%n</Pattern>
+            </PatternLayout>
+        </RandomAccessFile>
+        <GRPCLogClientAppender name="grpc-log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </GRPCLogClientAppender>
+    </Appenders>
+
+    <Loggers>
+        <AsyncRoot level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="grpc-log"/>
+        </AsyncRoot>
+    </Loggers>
+
+</configuration>
