@@ -1,0 +1,6 @@
+<container-descriptor>
+    <prefer-web-inf-classes>true</prefer-web-inf-classes>
+    <prefer-application-packages>
+        <package-name>org.slf4j.*</package-name>
+    </prefer-application-packages>
+</container-descriptor>
