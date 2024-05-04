@@ -1,6 +1,6 @@
 ext {
     version = [
-            set('springCloudVersion', "2021.0.4"),
+            set('springCloudVersion', "2023.0.1"),
             set('springCloudAlibabaVersion', "2023.0.1.0"),
             set('sb_camundaBpm', "7.20.0"),
     ]
