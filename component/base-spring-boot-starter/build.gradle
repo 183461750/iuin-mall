@@ -9,11 +9,18 @@ dependencies {
     api project(':common')
 
     //spring boot
+    api('org.springframework.boot:spring-boot-starter')
+    api('org.springframework.boot:spring-boot-starter-actuator')
     api('org.springframework.boot:spring-boot-starter-validation')
     api('org.springframework.boot:spring-boot-starter-web') {
-        exclude(group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat')
+//        exclude(group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat')
     }
-    api('org.springframework.boot:spring-boot-starter-undertow')
+//    api('org.springframework.boot:spring-boot-starter-undertow')
+
+    // spring cloud
+//    api 'org.springframework.cloud:spring-cloud-context'
+//    api 'org.springframework.cloud:spring-cloud-starter-config'
+    api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
 
 }
 

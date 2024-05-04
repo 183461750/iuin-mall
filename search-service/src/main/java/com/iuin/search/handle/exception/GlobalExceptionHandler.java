@@ -1,7 +1,7 @@
 package com.iuin.search.handle.exception;
 
 import com.iuin.common.utils.RespResult;
-import com.iuin.common.utils.resp.ResponseCode;
+import com.iuin.common.enums.ResponseCodeEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     public RespResult<Void> validationBodyException(HttpServletRequest request, Exception exception) {
         //请求路径 + 错误信息
         log.error(request.getRequestURI().concat(" : ").concat(Optional.ofNullable(exception.getMessage()).orElseGet(() -> exception.getClass().getName())), exception);
-        return RespResult.fail(ResponseCode.BUSINESS_ERROR);
+        return RespResult.fail(ResponseCodeEnum.BUSINESS_ERROR);
     }
 
 }

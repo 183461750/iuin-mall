@@ -48,9 +48,24 @@ public class ModuleConstant implements Serializable {
     public static final String COMMODITY = "commodity";
 
     /**
-     * 单点登录服务
+     * 搜索
+     */
+    public static final String SEARCH = "search";
+
+    /**
+     * 单点登录服务名
      */
     public static final String SSO_SERVER_SERVICE = SSO_SERVER + CharPool.DASHED + SERVICE;
+
+    /**
+     * 商品服务名
+     */
+    public static final String COMMODITY_SERVICE = COMMODITY + CharPool.DASHED + SERVICE;
+
+    /**
+     * 搜索服务名
+     */
+    public static final String SEARCH_SERVICE = SEARCH + CharPool.DASHED + SERVICE;
 
     /**
      * 单点登录服务接口路径前缀
@@ -61,5 +76,15 @@ public class ModuleConstant implements Serializable {
      * 单点登录服务内部接口路径前缀
      */
     public static final String SSO_SERVER_FEIGN_PATH_PREFIX = CharPool.SLASH + SSO_SERVER + CharPool.SLASH + FEIGN;
+
+    /**
+     * 商品服务接口路径前缀
+     */
+    public static final String COMMODITY_PATH_PREFIX = CharPool.SLASH + COMMODITY;
+
+    /**
+     * 搜索服务接口路径前缀
+     */
+    public static final String SEARCH_PATH_PREFIX = CharPool.SLASH + SEARCH;
 
 }

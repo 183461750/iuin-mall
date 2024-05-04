@@ -1,7 +1,7 @@
 package com.iuin.ssoserver.api.fallback;
 
 import com.iuin.common.utils.RespResult;
-import com.iuin.common.utils.resp.ResponseCode;
+import com.iuin.common.enums.ResponseCodeEnum;
 import com.iuin.ssoserver.api.feign.StudentFeign;
 import com.iuin.ssoserver.api.model.req.StudentReq;
 import com.iuin.ssoserver.api.model.resp.StudentResp;
@@ -17,7 +17,7 @@ public class StudentFeignFallback implements StudentFeign {
 
     @Override
     public RespResult<StudentResp> studentInfo(StudentReq studentReq) {
-        return RespResult.fail(ResponseCode.SERVICE_SSO_SERVER_ERROR);
+        return RespResult.fail(ResponseCodeEnum.SERVICE_SSO_SERVER_ERROR);
     }
 
 }

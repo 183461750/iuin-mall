@@ -1,5 +1,7 @@
 package com.iuin.component.cache.common.enums;
 
+import com.iuin.component.cache.enums.RedisKeyEnum;
+
 /**
  * @author fa
  */

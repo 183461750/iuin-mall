@@ -1,6 +1,6 @@
 package com.iuin.common.utils;
 
-import com.iuin.common.utils.resp.ResponseCode;
+import com.iuin.common.enums.ResponseCodeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,33 +37,37 @@ public class RespResult<T> {
     private Long time;
 
     public static <T> RespResult<T> success() {
-        ResponseCode responseCode = ResponseCode.SUCCESS;
-        return new RespResult<>(responseCode.getCode(), responseCode.getMessage(), null, System.currentTimeMillis());
+        ResponseCodeEnum responseCodeEnum = ResponseCodeEnum.SUCCESS;
+        return new RespResult<>(responseCodeEnum.getCode(), responseCodeEnum.getMessage(), null, System.currentTimeMillis());
     }
 
     public static <T> RespResult<T> success(T data) {
-        ResponseCode responseCode = ResponseCode.SUCCESS;
-        return new RespResult<>(responseCode.getCode(), responseCode.getMessage(), data, System.currentTimeMillis());
+        ResponseCodeEnum responseCodeEnum = ResponseCodeEnum.SUCCESS;
+        return new RespResult<>(responseCodeEnum.getCode(), responseCodeEnum.getMessage(), data, System.currentTimeMillis());
     }
 
-    public static <T> RespResult<T> fail(ResponseCode responseCode) {
-        return new RespResult<>(responseCode.getCode(), responseCode.getMessage(), null, System.currentTimeMillis());
+    public static <T> RespResult<T> fail(ResponseCodeEnum responseCodeEnum) {
+        return new RespResult<>(responseCodeEnum.getCode(), responseCodeEnum.getMessage(), null, System.currentTimeMillis());
     }
 
     public static <T> RespResult<T> failService(String errorMessage) {
-        return new RespResult<>(ResponseCode.SERVICE_ERROR.getCode(), errorMessage, null, System.currentTimeMillis());
+        return new RespResult<>(ResponseCodeEnum.SERVICE_ERROR.getCode(), errorMessage, null, System.currentTimeMillis());
     }
 
     public static <T> RespResult<T> failFeignService(String errorMessage) {
-        return new RespResult<>(ResponseCode.FEIGN_SERVICE_ERROR.getCode(), errorMessage, null, System.currentTimeMillis());
+        return new RespResult<>(ResponseCodeEnum.FEIGN_SERVICE_ERROR.getCode(), errorMessage, null, System.currentTimeMillis());
     }
 
     public static <T> RespResult<T> fail(String errorMessage) {
-        return new RespResult<>(ResponseCode.BUSINESS_ERROR.getCode(), errorMessage, null, System.currentTimeMillis());
+        return new RespResult<>(ResponseCodeEnum.BUSINESS_ERROR.getCode(), errorMessage, null, System.currentTimeMillis());
     }
 
-    public static <T> RespResult<T> fail(ResponseCode responseCode, String errorMessage) {
-        return new RespResult<>(responseCode.getCode(), errorMessage, null, System.currentTimeMillis());
+    public static <T> RespResult<T> fail(ResponseCodeEnum responseCodeEnum, String errorMessage) {
+        return new RespResult<>(responseCodeEnum.getCode(), errorMessage, null, System.currentTimeMillis());
+    }
+
+    public static <T> RespResult<T> fail(int responseCode, String errorMessage) {
+        return new RespResult<>(responseCode, errorMessage, null, System.currentTimeMillis());
     }
 
 }

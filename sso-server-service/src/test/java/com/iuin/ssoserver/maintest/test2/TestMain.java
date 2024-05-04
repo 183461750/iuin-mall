@@ -19,7 +19,7 @@ public class TestMain {
 
     public static void main(String[] args) {
 
-        String jsonStr = "[{\"isHasTax\":0,\"taxRate\":0,\"returnCount\":1,\"purchaseSinglePoint\":30,\"spotPriceType\":2,\"returnReason\":\"卖家发错货\",\"returnReasonCode\":1,\"orderId\":1999,\"orderRecordId\":2376,\"orderNo\":\"DKFWRN5SW\",\"productId\":\"381\",\"productName\":\"常用的纯积分商品/容量1:50ml\",\"category\":\"佰草集\",\"brand\":\"GCC-品牌\",\"unit\":\"个\",\"purchasePrice\":0,\"purchaseCount\":1,\"skuPic\":\"https://shushangyun01.oss-cn-shenzhen.aliyuncs.com/100629235dcf232e845cd97c8b7548e94e0c5.jpg\",\"contractId\":0,\"contractNo\":\"\",\"associated\":\"\",\"associatedProductId\":\"\",\"associatedProductName\":\"\",\"associatedType\":\"\",\"associatedCategory\":\"\",\"associatedBrand\":\"\",\"associatedUnit\":\"个\",\"skuId\":381,\"productWelfareList\":null,\"quantity\":\"1\"}]";
+        String jsonStr = "[{\"isHasTax\":0,\"taxRate\":0,\"returnCount\":1,\"purchaseSinglePoint\":30,\"spotPriceType\":2,\"returnReason\":\"卖家发错货\",\"returnReasonCode\":1,\"orderId\":1999,\"orderRecordId\":2376,\"orderNo\":\"DKFWRN5SW\",\"productId\":\"381\",\"productName\":\"常用的纯积分商品/容量1:50ml\",\"category\":\"佰草集\",\"brand\":\"GCC-品牌\",\"unit\":\"个\",\"purchasePrice\":0,\"purchaseCount\":1,\"skuPic\":\"https://iuin01.oss-cn-shenzhen.aliyuncs.com/100629235dcf232e845cd97c8b7548e94e0c5.jpg\",\"contractId\":0,\"contractNo\":\"\",\"associated\":\"\",\"associatedProductId\":\"\",\"associatedProductName\":\"\",\"associatedType\":\"\",\"associatedCategory\":\"\",\"associatedBrand\":\"\",\"associatedUnit\":\"个\",\"skuId\":381,\"productWelfareList\":null,\"quantity\":\"1\"}]";
 
         List<ReturnGoodsDetailSaveVO> goodsList = JSONUtil.toBean(jsonStr, new TypeReference<>() {
         }, true);

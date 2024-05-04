@@ -5,8 +5,8 @@ plugins {
     id 'java-library'
     // Spring Boot’s dependency management can be used in a project without applying Spring Boot’s plugin to that project.
     // First, configure the project to depend on the Spring Boot plugin but do not apply it:
-    id 'org.springframework.boot' version '3.1.1'
-    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.5'
 }
 
 configurations {
@@ -126,6 +126,10 @@ subprojects {
 
             //arthas
             dependency 'com.taobao.arthas:arthas-spring-boot-starter:3.7.2'
+
+            // skywalking
+            dependency 'net.logstash.logback:logstash-logback-encoder:7.4'
+            dependency 'org.apache.skywalking:apm-toolkit-logback-1.x:9.2.0'
 
         }
     }

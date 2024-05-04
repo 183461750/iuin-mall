@@ -1,4 +1,4 @@
-package com.iuin.component.cache.common.enums;
+package com.iuin.component.cache.enums;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.CharPool;

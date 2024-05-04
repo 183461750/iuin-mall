@@ -1,6 +1,7 @@
-package com.iuin.common.utils.resp;
+package com.iuin.common.enums;
 
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.text.CharSequenceUtil;
+import lombok.Getter;
 
 import java.util.Arrays;
 
@@ -9,7 +10,8 @@ import java.util.Arrays;
  *
  * @author fa
  */
-public enum ResponseCode {
+@Getter
+public enum ResponseCodeEnum {
 
     //****************************************
     //****** 通用 状态码************
@@ -21,9 +23,9 @@ public enum ResponseCode {
     SUCCESS(1000, "操作成功"),
 
     /**
-     * 在Redis中没有Token（已经过期、用户没登录），请先登录
+     * Token（已经过期、用户没登录），请先登录
      */
-    TOKEN_DOES_NOT_EXIST_IN_CACHE(1101, "登录已过期，请重新登录"),
+    TOKEN_EXPIRE(1101, "登录已过期，请重新登录"),
 
     /**
      * 参数格式错误
@@ -61,6 +63,16 @@ public enum ResponseCode {
     UNAUTHORIZED_REQUEST(1210, "无访问权限"),
 
     /**
+     * 流量异常，你已经被加入黑名单
+     */
+    BLACK_LIST(1211, "流量异常，你已经被加入黑名单"),
+
+    /**
+     * ip获取异常，无法获取客户端ip
+     */
+    IP_ACQUISITION_EXCEPTION(1212, "ip获取异常，无法获取客户端ip"),
+
+    /**
      * 服务内部错误（未处理的异常默认返回）
      */
     BUSINESS_ERROR(9999, "服务内部错误"),
@@ -79,6 +91,26 @@ public enum ResponseCode {
      * 无此数据权限
      */
     DATA_AUTH_NOT_ALLOWED(9995, "无此数据权限"),
+
+    /**
+     * 数据解析异常
+     */
+    AES_DECRYPT_ERROR(9994, "数据解析异常"),
+
+    /**
+     * 参数未配置
+     */
+    PARAM_NOT_EXIST(9993, "参数未配置"),
+
+    /**
+     * 服务暂时不可用
+     */
+    SERVER_UNAVAILABLE(9992, "服务暂时不可用"),
+
+    /**
+     * 请求的资源不存在
+     */
+    NOT_FOUND(9991, "请求的资源不存在"),
 
     /**
      * 请求参数校验异常
@@ -103,40 +135,32 @@ public enum ResponseCode {
     private final int code;
     private final String message;
 
-    ResponseCode(int code, String message) {
+    ResponseCodeEnum(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
     public static String getMessage(int code) {
-        ResponseCode responseCode = Arrays.stream(ResponseCode.values()).filter(r -> r.getCode() == code).findFirst().orElse(null);
-        if (responseCode != null) {
-            return responseCode.getMessage();
+        ResponseCodeEnum responseCodeEnum = Arrays.stream(ResponseCodeEnum.values()).filter(r -> r.getCode() == code).findFirst().orElse(null);
+        if (responseCodeEnum != null) {
+            return responseCodeEnum.getMessage();
         }
         return null;
     }
 
     public static String getMessage(int code, String msg) {
-        ResponseCode responseCode = Arrays.stream(ResponseCode.values()).filter(r -> r.getCode() == code).findFirst().orElse(null);
-        if (responseCode != null) {
-            if (responseCode.getMessage().contains("%s") && !responseCode.getMessage().equals(msg)) {
-                return String.format(responseCode.getMessage(), msg);
+        ResponseCodeEnum responseCodeEnum = Arrays.stream(ResponseCodeEnum.values()).filter(r -> r.getCode() == code).findFirst().orElse(null);
+        if (responseCodeEnum != null) {
+            if (responseCodeEnum.getMessage().contains("%s") && !responseCodeEnum.getMessage().equals(msg)) {
+                return String.format(responseCodeEnum.getMessage(), msg);
             }
-            return StrUtil.isNotBlank(msg) ? msg : responseCode.getMessage();
+            return CharSequenceUtil.isNotBlank(msg) ? msg : responseCodeEnum.getMessage();
         }
         return null;
     }
 
-    public static ResponseCode getByCode(int code) {
-        return Arrays.stream(ResponseCode.values()).filter(r -> r.getCode() == code).findFirst().orElse(BUSINESS_ERROR);
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
+    public static ResponseCodeEnum getByCode(int code) {
+        return Arrays.stream(ResponseCodeEnum.values()).filter(r -> r.getCode() == code).findFirst().orElse(BUSINESS_ERROR);
     }
 
 }

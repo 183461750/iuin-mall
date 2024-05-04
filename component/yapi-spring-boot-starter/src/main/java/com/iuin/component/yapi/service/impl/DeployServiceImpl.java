@@ -3,7 +3,7 @@ package com.iuin.component.yapi.service.impl;
 import cn.hutool.core.text.StrPool;
 import com.iuin.common.constants.ProjectConstant;
 import com.iuin.common.enums.ModuleEnum;
-import com.iuin.common.utils.resp.ResponseCode;
+import com.iuin.common.enums.ResponseCodeEnum;
 import com.iuin.component.base.exceptions.BusinessException;
 import com.iuin.component.yapi.model.ListGroupResp;
 import com.iuin.component.yapi.model.ListProjectResp;
@@ -185,7 +185,7 @@ public class DeployServiceImpl implements IDeployService {
             httpServletResponse.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(".easy.api.yml", "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             log.error("yapi项目初始化,io输出异常:{},输出文本:{}", e.getMessage(), resText);
-            throw new BusinessException(ResponseCode.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR2);
+            throw new BusinessException(ResponseCodeEnum.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR2);
         }
 
         try (ServletOutputStream outputStream = httpServletResponse.getOutputStream();
@@ -194,7 +194,7 @@ public class DeployServiceImpl implements IDeployService {
             buffer.flush();
         } catch (IOException e) {
             log.error("yapi项目初始化,io输出异常:{},输出文本:{}", e.getMessage(), resText);
-            throw new BusinessException(ResponseCode.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR2);
+            throw new BusinessException(ResponseCodeEnum.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR2);
         }
 
         return groupId;

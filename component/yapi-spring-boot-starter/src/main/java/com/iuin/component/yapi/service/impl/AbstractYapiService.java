@@ -7,10 +7,10 @@ import cn.hutool.http.HttpStatus;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.iuin.common.utils.resp.ResponseCode;
+import com.iuin.common.enums.ResponseCodeEnum;
 import com.iuin.component.base.exceptions.BusinessException;
-import com.iuin.component.cache.CacheComponent;
-import com.iuin.component.cache.common.enums.RedisKeyEnum;
+import com.iuin.component.cache.component.CacheComponent;
+import com.iuin.component.cache.enums.RedisKeyEnum;
 import com.iuin.component.yapi.common.enums.YapiDeployUriEnum;
 import com.iuin.component.yapi.config.YapiDeployConfig;
 import com.iuin.component.yapi.model.YapiBaseResp;
@@ -58,7 +58,7 @@ public abstract class AbstractYapiService implements IYapiService {
                 .execute();
 
         // 如果状态码不是200则报错
-        BusinessAssertUtil.isTrue(HttpStatus.HTTP_OK == loginHttpResponse.getStatus(), ResponseCode.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR);
+        BusinessAssertUtil.isTrue(HttpStatus.HTTP_OK == loginHttpResponse.getStatus(), ResponseCodeEnum.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR);
 
         // 如果请求成功，提取Response请求的请求体
         YapiBaseResp<String> yapiBaseResponse = JSONUtil.toBean(loginHttpResponse.body(), new TypeReference<>() {

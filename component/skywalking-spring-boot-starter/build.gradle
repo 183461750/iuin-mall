@@ -1,0 +1,17 @@
+// 需要依赖包
+jar.enabled = true
+// 无需启动包
+bootJar.enabled = false
+
+dependencies {
+
+    api(
+            'net.logstash.logback:logstash-logback-encoder',
+            'org.apache.skywalking:apm-toolkit-logback-1.x'
+    )
+
+}
+
+test {
+    useJUnitPlatform()
+}

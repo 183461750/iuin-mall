@@ -1,0 +1,23 @@
+
+dependencies {
+    implementation project(':common-dependencies')
+    implementation project(':component:base-spring-boot-starter')
+    implementation project(':component:cache-spring-boot-starter')
+    implementation project(':component:skywalking-spring-boot-starter')
+
+    // spring boot
+//    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    //spring-cloud
+    implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+//    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.cloud:spring-cloud-loadbalancer'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+
+}
+
+test {
+    useJUnitPlatform()
+}

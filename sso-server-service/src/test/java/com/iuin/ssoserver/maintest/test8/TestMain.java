@@ -17,7 +17,7 @@ public class TestMain {
 
     public static void main(String[] args) {
         final Calendar calendar = Calendar.getInstance();
-        String localFilePath = "/data/wwwroot/shushangyun/uploads";
+        String localFilePath = "/data/wwwroot/iuin/uploads";
         String uploadFilePath = "upload/csv//";
         Path path = Paths.get("/", "http://baidu.com", localFilePath, uploadFilePath, String.valueOf(calendar.get(Calendar.YEAR)), String.valueOf(calendar.get(Calendar.MONTH) + 1), String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
 

@@ -1,7 +1,7 @@
 package com.iuin.search.handle.exception;
 
 import com.iuin.common.utils.RespResult;
-import com.iuin.common.utils.resp.ResponseCode;
+import com.iuin.common.enums.ResponseCodeEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.HttpMessageConversionException;
@@ -36,7 +36,7 @@ public class ParamCheckExceptionHandler {
 
         String message = result.getAllErrors().get(0).getDefaultMessage();
 
-        return RespResult.fail(ResponseCode.REQUEST_PARAM_CHECK_FAILED, message);
+        return RespResult.fail(ResponseCodeEnum.REQUEST_PARAM_CHECK_FAILED, message);
     }
 
     /**
@@ -47,7 +47,7 @@ public class ParamCheckExceptionHandler {
      */
     @ExceptionHandler(HttpMessageConversionException.class)
     public RespResult<?> parameterTypeException(HttpMessageConversionException exception) {
-        return RespResult.fail(ResponseCode.REQUEST_PARAM_CHECK_FAILED, exception.getMessage());
+        return RespResult.fail(ResponseCodeEnum.REQUEST_PARAM_CHECK_FAILED, exception.getMessage());
     }
 
 
@@ -60,7 +60,7 @@ public class ParamCheckExceptionHandler {
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public RespResult<?> requestMethodsException(HttpRequestMethodNotSupportedException exception) {
-        return RespResult.fail(ResponseCode.REQUEST_METHOD_NOT_SUPPORTED, ResponseCode.REQUEST_METHOD_NOT_SUPPORTED.getMessage());
+        return RespResult.fail(ResponseCodeEnum.REQUEST_METHOD_NOT_SUPPORTED, ResponseCodeEnum.REQUEST_METHOD_NOT_SUPPORTED.getMessage());
     }
 
     /**
@@ -71,7 +71,7 @@ public class ParamCheckExceptionHandler {
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public RespResult<?> httpMessageNotReadableException(HttpMessageNotReadableException exception) {
-        return RespResult.fail(ResponseCode.REQUEST_BODY_IS_MISSING, ResponseCode.REQUEST_BODY_IS_MISSING.getMessage());
+        return RespResult.fail(ResponseCodeEnum.REQUEST_BODY_IS_MISSING, ResponseCodeEnum.REQUEST_BODY_IS_MISSING.getMessage());
     }
 
     /**
@@ -82,7 +82,7 @@ public class ParamCheckExceptionHandler {
      */
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public RespResult<?> httpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException exception) {
-        return RespResult.fail(ResponseCode.REQUEST_CONTENT_TYPE_NOT_SUPPORTED, ResponseCode.REQUEST_CONTENT_TYPE_NOT_SUPPORTED.getMessage());
+        return RespResult.fail(ResponseCodeEnum.REQUEST_CONTENT_TYPE_NOT_SUPPORTED, ResponseCodeEnum.REQUEST_CONTENT_TYPE_NOT_SUPPORTED.getMessage());
     }
 
     /**
@@ -94,6 +94,6 @@ public class ParamCheckExceptionHandler {
     @ExceptionHandler(BindException.class)
     public RespResult<?> validationBindException(BindException exception) {
         String errMsg = !CollectionUtils.isEmpty(exception.getAllErrors()) ? exception.getAllErrors().get(0).getDefaultMessage() : exception.getMessage();
-        return RespResult.fail(ResponseCode.REQUEST_PARAM_CHECK_FAILED, errMsg);
+        return RespResult.fail(ResponseCodeEnum.REQUEST_PARAM_CHECK_FAILED, errMsg);
     }
 }

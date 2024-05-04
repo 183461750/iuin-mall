@@ -1,8 +1,7 @@
 package com.iuin.component.base.handle;
 
-import cn.hutool.core.util.StrUtil;
 import com.iuin.common.utils.RespResult;
-import com.iuin.common.utils.resp.ResponseCode;
+import com.iuin.common.enums.ResponseCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -34,7 +33,7 @@ public class ExceptionHandle {
     public RespResult<?> validationBindException(BindException exception) {
         String errMsg = !CollectionUtils.isEmpty(exception.getAllErrors()) ? exception.getAllErrors().get(0).getDefaultMessage() : exception.getMessage();
         log.warn(errMsg);
-        return RespResult.fail(ResponseCode.REQUEST_PARAM_CHECK_FAILED, errMsg);
+        return RespResult.fail(ResponseCodeEnum.REQUEST_PARAM_CHECK_FAILED, errMsg);
     }
 
     /**
@@ -49,7 +48,7 @@ public class ExceptionHandle {
         //返回第一个错误
         String errMsg = result.getAllErrors().get(0).getDefaultMessage();
         log.warn(errMsg);
-        return RespResult.fail(ResponseCode.REQUEST_PARAM_CHECK_FAILED, errMsg);
+        return RespResult.fail(ResponseCodeEnum.REQUEST_PARAM_CHECK_FAILED, errMsg);
     }
 
 //    @ExceptionHandler(Exception.class)

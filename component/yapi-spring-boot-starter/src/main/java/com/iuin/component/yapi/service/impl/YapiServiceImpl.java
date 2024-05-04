@@ -6,15 +6,14 @@ import cn.hutool.http.HttpStatus;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.iuin.common.utils.resp.ResponseCode;
+import com.iuin.common.enums.ResponseCodeEnum;
 import com.iuin.component.base.exceptions.BusinessException;
-import com.iuin.component.cache.CacheComponent;
+import com.iuin.component.cache.component.CacheComponent;
 import com.iuin.component.yapi.common.enums.YapiDeployUriEnum;
 import com.iuin.component.yapi.config.YapiDeployConfig;
 import com.iuin.component.yapi.model.*;
 import com.iuin.component.yapi.service.IYapiService;
 import com.iuin.component.yapi.utils.BusinessAssertUtil;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -65,7 +64,7 @@ public class YapiServiceImpl extends AbstractYapiService implements IYapiService
                 .execute();
 
         // 如果状态码不是200则报错
-        BusinessAssertUtil.isTrue(HttpStatus.HTTP_OK == listGroupHttpResponse.getStatus(), ResponseCode.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR);
+        BusinessAssertUtil.isTrue(HttpStatus.HTTP_OK == listGroupHttpResponse.getStatus(), ResponseCodeEnum.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR);
 
         // 如果请求成功，提取Response请求的请求体
         YapiBaseResp<String> yapiBaseResponse = JSONUtil.toBean(listGroupHttpResponse.body(), new TypeReference<YapiBaseResp<String>>() {
@@ -96,7 +95,7 @@ public class YapiServiceImpl extends AbstractYapiService implements IYapiService
                 .execute();
 
         // 如果状态码不是200则报错
-        BusinessAssertUtil.isTrue(HttpStatus.HTTP_OK == listProjectHttpResponse.getStatus(), ResponseCode.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR);
+        BusinessAssertUtil.isTrue(HttpStatus.HTTP_OK == listProjectHttpResponse.getStatus(), ResponseCodeEnum.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR);
 
         // 如果请求成功，提取Response请求的请求体
         YapiBaseResp<String> yapiBaseResponse = JSONUtil.toBean(listProjectHttpResponse.body(), new TypeReference<YapiBaseResp<String>>() {
@@ -127,7 +126,7 @@ public class YapiServiceImpl extends AbstractYapiService implements IYapiService
                 .execute();
 
         // 如果状态码不是200则报错
-        BusinessAssertUtil.isTrue(HttpStatus.HTTP_OK == listProjectTokensHttpResponse.getStatus(), ResponseCode.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR);
+        BusinessAssertUtil.isTrue(HttpStatus.HTTP_OK == listProjectTokensHttpResponse.getStatus(), ResponseCodeEnum.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR);
 
         // 如果请求成功，提取Response请求的请求体
         YapiBaseResp<String> yapiBaseResponse = JSONUtil.toBean(listProjectTokensHttpResponse.body(), new TypeReference<YapiBaseResp<String>>() {
@@ -165,7 +164,7 @@ public class YapiServiceImpl extends AbstractYapiService implements IYapiService
                 .execute();
 
         // 如果状态码不是200则报错
-        BusinessAssertUtil.isTrue(HttpStatus.HTTP_OK == addGroupHttpResponse.getStatus(), ResponseCode.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR);
+        BusinessAssertUtil.isTrue(HttpStatus.HTTP_OK == addGroupHttpResponse.getStatus(), ResponseCodeEnum.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR);
 
         // 如果请求成功，提取Response请求的请求体
         YapiBaseResp<String> yapiBaseResponse = JSONUtil.toBean(addGroupHttpResponse.body(), new TypeReference<YapiBaseResp<String>>() {
@@ -206,7 +205,7 @@ public class YapiServiceImpl extends AbstractYapiService implements IYapiService
                 .execute();
 
         // 如果状态码不是200则报错
-        BusinessAssertUtil.isTrue(HttpStatus.HTTP_OK == addProjectHttpResponse.getStatus(), ResponseCode.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR);
+        BusinessAssertUtil.isTrue(HttpStatus.HTTP_OK == addProjectHttpResponse.getStatus(), ResponseCodeEnum.MAN_SERVICE_PLATFORM_DEPLOY_YAPI_REQUEST_ERROR);
 
         // 如果请求成功，提取Response请求的请求体
         YapiBaseResp<String> yapiBaseResponse = JSONUtil.toBean(addProjectHttpResponse.body(), new TypeReference<YapiBaseResp<String>>() {
