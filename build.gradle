@@ -123,6 +123,10 @@ subprojects {
 
             // Sa-Token 整合 Redis (使用 jackson 序列化方式)
             dependency 'cn.dev33:sa-token-redis-jackson:1.37.0'
+
+            //arthas
+            dependency 'com.taobao.arthas:arthas-spring-boot-starter:3.7.2'
+
         }
     }
 

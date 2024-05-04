@@ -5,12 +5,16 @@ spring:
         server-addr: ${nacos.address}:${nacos.port}
         namespace: ${nacos.namespace}
         group: ${nacos.group}
+        register-enabled: ${nacos.register-enabled:true}
       config:
         server-addr: ${nacos.address}:${nacos.port}
         file-extension: yml
         namespace: ${nacos.namespace}
         extension-configs:
           - data-id: common.${spring.cloud.nacos.config.file-extension}
+            group: ${nacos.group}
+            refresh: true
+          - data-id: common-logback.xml
             group: ${nacos.group}
             refresh: true
         group: ${nacos.group}

@@ -1,5 +1,6 @@
 nacos:
-  address: 10.0.1.90
+  address: nacos-headless.middleware
   port: 8848
-  namespace: fa-dev
+  namespace: iuin-mall
   group: v1
+  register-enabled: true

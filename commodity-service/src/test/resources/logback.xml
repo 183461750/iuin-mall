@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
 
-    <property name="log.pattern" value="${APP_NAME}:${ServerIP}:${ServerPort} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{sw_ctx}] [%thread] %logger:%L - %msg%n" />
+<!--    SW_CTX: [$serviceName,$instanceName,$traceId,$traceSegmentId,$spanId]-->
+    <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{sw_ctx}] [%thread] %logger:%L - %msg%n" />
     <property name="log.pattern.stdout" value="%d{HH:mm:ss.SSS} %highlight(%-5level) [%X{sw_ctx}] %green([%thread]) %logger:%L - %msg%n" />
 
     <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
@@ -39,7 +40,7 @@
         </providers>
     </encoder>
 
-    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="sw-stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
                 <pattern>${log.pattern.stdout}</pattern>
@@ -47,11 +48,20 @@
         </encoder>
     </appender>
 
-    <appender name="grpc-log" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender">
+    <appender name="sw-grpc" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
                 <pattern>${log.pattern}</pattern>
             </layout>
+        </encoder>
+    </appender>
+
+    <appender name="ls-tcp" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>localhost:5044</destination>
+        <!-- encoder必须配置,有多种可选 -->
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" >
+            <provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider" />
+            <customFields>{"appname":"tom_pro"}</customFields>
         </encoder>
     </appender>
 

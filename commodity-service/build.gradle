@@ -9,19 +9,9 @@ dependencies {
     implementation project(':component:base-spring-boot-starter')
     implementation project(':component:mybatis-plus-spring-boot-starter')
 
-    implementation('org.springframework.boot:spring-boot-starter') {
-//        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-//        exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
-    }
+    implementation('org.springframework.boot:spring-boot-starter')
 
-    implementation('org.springframework.boot:spring-boot-starter-web') {
-//        exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
-    }
-
-//    implementation('org.springframework.boot:spring-boot-starter-log4j2')
-//    implementation('com.lmax:disruptor:3.3.6')
-
-//    implementation 'org.apache.skywalking:apm-toolkit-log4j-2.x:9.2.0'
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.4'
     implementation 'org.apache.skywalking:apm-toolkit-logback-1.x:9.2.0'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

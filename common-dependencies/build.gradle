@@ -4,7 +4,7 @@ bootJar.enabled = false
 
 dependencies {
 
-    implementation fileTree(dir: 'src/main/resources/libs', includes: ['*.jar'], excludes: ['instrumented-restful-fast-request-pro-2023.2.2.4.exclude.jar'])
+    implementation fileTree(dir: 'src/main/resources/libs', includes: ['*.jar'], excludes: ['*.exclude.jar'])
 
     // Sa-Token 权限认证，在线文档：https://sa-token.cc
     api 'cn.dev33:sa-token-spring-boot-starter'
@@ -28,6 +28,6 @@ dependencies {
     //spring cloud
 
     //arthas
-    api 'com.taobao.arthas:arthas-spring-boot-starter:3.7.2'
+    api 'com.taobao.arthas:arthas-spring-boot-starter'
 
 }
