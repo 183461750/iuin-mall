@@ -2,12 +2,12 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: ${nacos.address}:${nacos.port}
+        server-addr: ${nacos.server-addr}
         namespace: ${nacos.namespace}
         group: ${nacos.group}
         register-enabled: ${nacos.register-enabled:true}
       config:
-        server-addr: ${nacos.address}:${nacos.port}
+        server-addr: ${nacos.server-addr}
         file-extension: yml
         namespace: ${nacos.namespace}
         extension-configs:
