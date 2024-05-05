@@ -1,7 +1,7 @@
 
 dependencies {
     implementation project(':common-dependencies')
-    implementation project(':component:base-spring-boot-starter')
+    implementation(project(':component:base-spring-boot-starter'))
     implementation project(':component:cache-spring-boot-starter')
     implementation project(':component:skywalking-spring-boot-starter')
 
@@ -16,6 +16,18 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
 
+//    runtimeOnly() {
+//        exclude(group: 'org.springframework.boot', module: 'spring-boot-starter-web')
+//    }
+
+}
+
+//configurations.configureEach {
+//    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
+//}
+
+configurations {
+    runtime.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
 }
 
 test {

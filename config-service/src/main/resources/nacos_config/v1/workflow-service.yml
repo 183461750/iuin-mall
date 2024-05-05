@@ -34,6 +34,11 @@ spring:
           batch_versioned_data: true
         order_inserts: true
         order_updates: true
+  data:
+    redis:
+      host: ${redis.address}
+      port: ${redis.port}
+      password: ${redis.password}
 
 #ribbon:
 #  ReadTimeout: 60000
@@ -56,16 +61,34 @@ management:
 #Camunda相关配置
 camunda:
   bpm:
+    admin-user:
+      id: demo
+      password: demo
     authorization:
       enabled: false
     history-level: none
     database:
       schema-update: true
     auto-deployment-enabled: true
-    process-engine-name: WorkflowService
+    process-engine-name: ${spring.application.name}
     deployment-resource-pattern:
       -*.bpmn
 
 # 日志文件
 logging:
   config: classpath:logback.xml
+
+# 应用配置
+app:
+  process:
+    config:
+      processDefList:
+        popupPlanAudit:
+          defId: obj_a6d92d9d7b4d4bafb52fdd0333bf5356
+          callBackUrl: popupPlanUpdateStatusCallbacksit2
+        startUpAudit:
+          defId: obj_6943a8d42c634041bb726846fe467eba
+          callBackUrl: mallStartUpPagePlanBpmCallBacksit2
+        mallTemplateAudit:
+          defId: obj_b097d2518ece4543bcdbdbc9080ffb02
+          callBackUrl: mallTemplateCallBacksit2

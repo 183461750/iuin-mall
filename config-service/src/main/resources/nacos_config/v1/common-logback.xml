@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="10 seconds">
+
+<!--
+logging:
+    config: classpath:logback-springProperty.xml
+  -->
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProperty name="spring.application.name" scope="context" source="spring.application.name"/>
+    <springProperty name="spring.application.instance-id" scope="context" source="spring.application.instance-id"/>
+    <springProperty name="logging.logstash" scope="context" source="logging.logstash"/>
+    <springProperty name="logging.pattern.console" scope="context" source="logging.pattern.console"/>
+    <springProperty name="logging.file.path" scope="context" source="logging.file.path"/>
+    <springProperty name="logging.level" scope="context" source="logging.level"/>
+
+    <!--    SW_CTX: [$serviceName,$instanceName,$traceId,$traceSegmentId,$spanId]-->
+    <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{sw_ctx}] [%thread] %logger:%L - %msg%n" />
+    <property name="log.pattern.stdout" value="%d{HH:mm:ss.SSS} %highlight(%-5level) [%X{sw_ctx}] %green([%thread]) %logger:%L - %msg%n" />
+
+    <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
+        <!-- add TID(traceId) field -->
+        <provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider">
+        </provider>
+        <!-- add SW_CTX(SkyWalking context) field -->
+        <provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.SkyWalkingContextJsonProvider">
+        </provider>
+    </encoder>
+
+    <!-- add converter for %tid -->
+    <conversionRule conversionWord="tid" converterClass="org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackPatternConverter"/>
+    <!-- add converter for %sw_ctx -->
+    <conversionRule conversionWord="sw_ctx" converterClass="org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackSkyWalkingContextPatternConverter"/>
+
+    <appender name="sw-stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
+                <pattern>${log.pattern.stdout}</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="sw-grpc" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
+                <pattern>${log.pattern}</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="ls-tcp" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+<!--        <destination>10.0.1.93:5046</destination>-->
+        <destination>${logging.logstash}</destination>
+        <!-- encoder必须配置,有多种可选 -->
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" >
+            <provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider" />
+            <customFields>{"level":"%level"}</customFields>
+        </encoder>
+    </appender>
+
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+        <providers>
+            <mdc/>
+            <timestamp>
+                <timeZone>UTC</timeZone>
+            </timestamp>
+            <pattern>
+                <pattern>
+                    {
+                    "level": "%level",
+                    "tid": "%tid",
+                    "skyWalkingContext": "%sw_ctx",
+                    "thread": "%thread",
+                    "class": "%logger{1.}:%L",
+                    "message": "%message",
+                    "stackTrace": "%exception{10}"
+                    }
+                </pattern>
+            </pattern>
+        </providers>
+    </encoder>
+
+    <root level="INFO">
+        <appender-ref ref="sw-stdout"/>
+        <appender-ref ref="sw-grpc"/>
+        <appender-ref ref="ls-tcp"/>
+    </root>
+
+    <springProfile name="test | dev | prod">
+        <logger name="com.cloud.iot.*" level="debug"/>
+        <logger name="org.apache.kafka.clients.*" level="error"/>
+        <logger name="org.springframework.scheduling.support.*" level="off" addtivity="false">
+            <appender-ref ref="console"/>
+        </logger>
+        <logger name="org.springfromework.*" level="info"/>
+    </springProfile>
+
+</configuration>

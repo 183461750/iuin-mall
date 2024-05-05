@@ -25,11 +25,11 @@ spring:
     database: postgresql
     hibernate:
       ddl-auto: update
-    database-platform: com.iuin.component.jpa.config.PostgreSQL95DialectWithoutForeignKeys
-  redis:
-    host: ${redis.address}
-    port: ${redis.port}
-    password: ${redis.password}
+  data:
+    redis:
+      host: ${redis.address}
+      port: ${redis.port}
+      password: ${redis.password}
 
 feign:
   httpclient:

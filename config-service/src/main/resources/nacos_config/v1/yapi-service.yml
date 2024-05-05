@@ -1,0 +1,29 @@
+server:
+  port: 9101
+  tomcat:
+    uri-encoding: UTF-8
+  max-http-header-size: 50KB
+  compression:
+    enabled: true
+    min-response-size: 2048   #默认是2048B 大于2048B的就会压缩
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+spring:
+  data:
+    redis:
+      host: ${redis.address}
+      port: ${redis.port}
+      password: ${redis.password}
+
+feign:
+  circuitbreaker:
+    enabled: true
+  httpclient:
+    connection-timeout: 120000
+    enabled: true  
+
+yapi:
+  serverUrl: https://yapi.shushangyun.com
+  email: fa@iuin.com
+  password: iuin
+  groupId: 1814

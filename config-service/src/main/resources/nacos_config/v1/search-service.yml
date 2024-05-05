@@ -11,7 +11,7 @@ spring:
     hibernate:
       ddl-auto: update
   elasticsearch:
-    rest:
-      uris: ${elasticsearch.uris}
-      username:
-      password:
+    uris: 
+      - ${elasticsearch.uris}
+    username: ${elasticsearch.username}
+    password: ${elasticsearch.password}

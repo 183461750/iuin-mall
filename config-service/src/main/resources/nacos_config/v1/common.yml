@@ -1,0 +1,37 @@
+pgsql:
+  port: 5432
+  address: 10.0.0.11
+  username: dbadmin
+  password: dbadmin
+  dbname: iuin
+
+hikari:
+  minimum_idle: 2
+  maximum_pool_size: 20
+
+redis:
+  address: 10.0.1.90
+  port: 6379
+  password: jfzx_redis
+
+elasticsearch:
+  uris: http://a.intranet.company:9200
+  username: elastic
+  password: changeme
+
+
+#线上问题排查工具
+arthas:
+  appName: ${spring.application.name}
+  # telnetPort、httpPort为-1 ，则不提供监听端口，为0 ，则提供随机端口（~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志）
+  # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
+  # 通过命令行 telnet 进行连接
+  telnetPort: 1${server.port}
+  httpPort: 2${server.port}
+  # tunnel-server地址
+  tunnel-server: ws://arthas:7777/ws
+
+logging:
+  # config: classpath:common-logback.xml,logback-springProperty.xml
+  config: classpath*:logback-springProperty.xml,http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=${spring.cloud.nacos.config.group}&tenant=${spring.cloud.nacos.config.namespace}&dataId=common-logback.xml
+  logstash: '10.0.1.93:9600'

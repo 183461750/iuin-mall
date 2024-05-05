@@ -1,7 +1,7 @@
 server:
   port: 9001
-  tomcat:
-    uri-encoding: UTF-8
+  # tomcat:
+  #   uri-encoding: UTF-8
   max-http-header-size: 50KB
 
 spring:
@@ -18,10 +18,15 @@ spring:
       pool-name: ${spring.application.name}-HikariPool
       max-lifetime: 1800000
       connection-timeout: 30000
-  redis:
-    host: ${redis.address}
-    port: ${redis.port}
-    password: ${redis.password}
+    sql:
+      init:
+        schema-locations: classpath:db/schema-pgsql.sql
+        data-locations: classpath:db/data-pgsql.sql
+  data:
+    redis:
+      host: ${redis.address}
+      port: ${redis.port}
+      password: ${redis.password}
 
 feign:
   httpclient:

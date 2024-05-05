@@ -3,6 +3,6 @@ spring:
     active: local
     include: common-${spring.profiles.active}
   application:
-    name: workflow-service
+    name: config-service
   main:
     allow-bean-definition-overriding: true
