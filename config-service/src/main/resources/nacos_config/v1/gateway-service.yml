@@ -35,7 +35,8 @@ spring:
     mode: LEGACYHTML5
     servlet:
       content-type: text/html
-  redis:
-    host: ${redis.address}
-    port: ${redis.port}
-    password: ${redis.password}
+  data:
+    redis:
+      host: ${redis.address}
+      port: ${redis.port}
+      password: ${redis.password}
