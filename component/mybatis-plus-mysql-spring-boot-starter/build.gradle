@@ -6,9 +6,9 @@ bootJar.enabled = false
 
 dependencies {
 
-    runtimeOnly 'mysql:mysql-connector-java:8.0.26'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.28'
 
-    api 'com.baomidou:mybatis-plus-boot-starter:3.5.3.1'
-    api 'com.github.yulichang:mybatis-plus-join-boot-starter:1.4.6'
+    api 'com.baomidou:mybatis-plus-spring-boot3-starter'
+    api 'com.github.yulichang:mybatis-plus-join-boot-starter'
 
 }

@@ -131,6 +131,9 @@ subprojects {
             dependency 'net.logstash.logback:logstash-logback-encoder:7.4'
             dependency 'org.apache.skywalking:apm-toolkit-logback-1.x:9.2.0'
 
+            // mybatis plus
+            dependency 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.6'
+
         }
     }
 

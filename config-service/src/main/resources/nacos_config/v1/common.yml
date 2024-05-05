@@ -33,5 +33,6 @@ arthas:
 
 logging:
   # config: classpath:common-logback.xml,logback-springProperty.xml
-  config: classpath*:logback-springProperty.xml,http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=${spring.cloud.nacos.config.group}&tenant=${spring.cloud.nacos.config.namespace}&dataId=common-logback.xml
+#  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=COMMON&tenant=${spring.cloud.nacos.config.namespace}&username=${spring.cloud.nacos.username}&password=${spring.cloud.nacos.password}&dataId=logback-spring.xml
+  config: classpath*:logback-springProperty.xml
   logstash: '10.0.1.93:9600'

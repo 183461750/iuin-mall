@@ -1,4 +1,4 @@
-package com.iuin.shardingsphere.service;
+package com.iuin.commodity.service;
 
 /**
  * @author fa

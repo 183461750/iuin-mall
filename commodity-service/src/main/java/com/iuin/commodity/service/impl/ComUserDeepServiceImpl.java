@@ -1,6 +1,6 @@
-package com.iuin.shardingsphere.service.impl;
+package com.iuin.commodity.service.impl;
 
-import com.iuin.shardingsphere.service.ComUserDeepService;
+import com.iuin.commodity.service.ComUserDeepService;
 import org.springframework.stereotype.Service;
 
 /**

@@ -1,4 +1,4 @@
-package com.iuin.shardingsphere.dto;
+package com.iuin.commodity.dto;
 
 import lombok.Data;
 
