@@ -3,3 +3,5 @@
 logging:
   level:
     com.iuin.commodity: debug
+  config: classpath:logback-springProperty.xml
+  logstash: '10.0.1.93:9600'
