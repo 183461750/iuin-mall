@@ -32,7 +32,7 @@ arthas:
   tunnel-server: ws://arthas:7777/ws
 
 logging:
-  # config: classpath:common-logback.xml,logback-springProperty.xml
-#  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=COMMON&tenant=${spring.cloud.nacos.config.namespace}&username=${spring.cloud.nacos.username}&password=${spring.cloud.nacos.password}&dataId=logback-spring.xml
-  config: classpath*:logback-springProperty.xml
-  logstash: '10.0.1.93:9600'
+  level:
+    com.iuin.commodity: debug
+  config: classpath:logback-skywalking.xml
+  logstash: '10.0.1.93:5044'
