@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 /**
  * @author fa
  */
@@ -21,6 +23,16 @@ public class TestController {
 
     private final ComUserService comUserService;
 
+
+    @PostMapping("/while")
+    public RespResult<Void> while1(Boolean bool) {
+        ArrayList<Object> objects = new ArrayList<>();
+        while (Boolean.TRUE.equals(bool)) {
+            System.out.println(Boolean.TRUE);
+            objects.add(new Object());
+        }
+        return RespResult.success();
+    }
 
     @PostMapping("/save")
     public RespResult<Void> save() {
