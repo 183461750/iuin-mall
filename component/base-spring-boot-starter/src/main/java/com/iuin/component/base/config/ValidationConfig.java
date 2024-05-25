@@ -3,7 +3,9 @@ package com.iuin.component.base.config;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.HibernateValidator;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
@@ -13,15 +15,13 @@ import org.springframework.validation.beanvalidation.MethodValidationPostProcess
  *
  * @author fa
  */
+@RequiredArgsConstructor
 public class ValidationConfig {
 
     private final Validator validator;
 
-    public ValidationConfig() {
-        this.validator = validator();
-    }
-
     @Bean
+    @ConditionalOnMissingBean(Validator.class)
     public Validator validator() {
         //failFast的意思只要出现校验失败的情况，就立即结束校验，不再进行后续的校验。
         try (ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory()) {
@@ -30,6 +30,7 @@ public class ValidationConfig {
     }
 
     @Bean
+    @ConditionalOnMissingBean(MethodValidationPostProcessor.class)
     public MethodValidationPostProcessor methodValidationPostProcessor() {
         MethodValidationPostProcessor methodValidationPostProcessor = new MethodValidationPostProcessor();
         methodValidationPostProcessor.setValidator(validator);

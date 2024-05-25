@@ -15,9 +15,9 @@ redis:
   password: jfzx_redis
 
 elasticsearch:
-  uris: http://a.intranet.company:9200
+  uris: http://23.intranet.company:9200
   username: elastic
-  password: changeme
+  password: kibana
 
 
 #线上问题排查工具
@@ -35,8 +35,14 @@ arthas:
 
 logging:
   level:
-    com.iuin.commodity: debug
+    com.iuin: debug
   config: classpath:logback-skywalking.xml
+logback:
+  path: ${LINGXI_LOGBACK_PATH:../logs}
+  maxHistory: ${LINGXI_LOGBACK_MAXHISTORY:7}
+  maxFileSize: ${LINGXI_LOGBACK_MAXFILESIZE:100MB}
+  totalSizeCap: ${LINGXI_LOGBACK_TOTALSIZECAP:1GB}
+  serviceName: ${spring.application.name}
   logstash: '10.0.1.93:5044'
 
 spring:

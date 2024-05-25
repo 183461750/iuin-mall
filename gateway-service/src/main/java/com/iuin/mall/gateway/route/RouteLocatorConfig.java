@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author Fa
  */
-@Configuration
+//@Configuration
 public class RouteLocatorConfig {
     private static final String PATH_SUFFIX = "/**";
     private static final String URI_PREFIX = "lb://";

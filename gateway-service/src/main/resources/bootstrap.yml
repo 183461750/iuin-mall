@@ -4,16 +4,6 @@ spring:
     include: common,common-${spring.profiles.active}
   application:
     name: gateway-service
-  cloud:
-    gateway:
-      routes:
-        - id: USER-SERVICE
-          uri: lb://USER-SERVICE
-          predicates:
-            - Path=/users/**
-        - id: DEPARTMENT-SERVICE
-          uri: lb://DEPARTMENT-SERVICE
-          predicates:
-            - Path=/departments/**
   main:
     web-application-type: reactive
+

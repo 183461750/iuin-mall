@@ -4,7 +4,7 @@
     <include resource="logback-file-include.xml"/>
 
     <!--日志文件的配置参数，在bootstrap-common-XXX配置文件中-->
-    <springProperty scope="context" name="LOGGING_LOGSTASH" source="logging.logstash"/>
+    <springProperty scope="context" name="LOGBACK_LOGSTASH" source="logback.logstash"/>
     <springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
 
 <!--  sw oap 语法 #[key=value] 前后需要空格隔开 以 #end 结束 (用于在es中生成新的索引字段) -->
@@ -30,7 +30,7 @@
 
     <!--    logstash配置-->
     <appender name="ls_tcp" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>${LOGGING_LOGSTASH}</destination>
+        <destination>${LOGBACK_LOGSTASH}</destination>
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
 <!--                <provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider"/>-->

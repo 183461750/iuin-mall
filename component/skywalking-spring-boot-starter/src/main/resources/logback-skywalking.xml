@@ -4,7 +4,7 @@
     <include resource="logback-file-include.xml"/>
 
     <!--日志文件的配置参数，在bootstrap-common-XXX配置文件中-->
-    <springProperty scope="context" name="LOGGING_LOGSTASH" source="logging.logstash"/>
+    <springProperty scope="context" name="LOGBACK_LOGSTASH" source="logback.logstash"/>
     <springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
 
     <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger:%L - %msg%n"/>
@@ -29,7 +29,7 @@
 
     <!--    logstash配置-->
     <appender name="ls_tcp" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>${LOGGING_LOGSTASH}</destination>
+        <destination>${LOGBACK_LOGSTASH}</destination>
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
 <!--                <provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider"/>-->
@@ -45,7 +45,7 @@
                         "tid": "%X{tid}",
                         "sw_ctx": "%X{sw_ctx}",
                         "thread": "%thread",
-                        "class": "%logger{1.}:%L",
+                        "class": "%logger:%L",
                         "message": "%message",
                         "stackTrace": "%exception{10}",
                         "app_name": "${spring.application.name}"
