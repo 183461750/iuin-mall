@@ -3,6 +3,7 @@ dependencies {
     implementation project(':common')
     implementation project(':component:base-spring-boot-starter')
     implementation project(':component:es-spring-boot-starter')
+    implementation project(':component:nacos-spring-boot-starter')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.projectlombok:lombok'

@@ -7,4 +7,13 @@ nacos:
   server-addr: 10.0.1.90:8848
   namespace: fa-dev
   group: v1
+#  group: Fa-Local
+  default-group: DEFAULT_GROUP
   register-enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"

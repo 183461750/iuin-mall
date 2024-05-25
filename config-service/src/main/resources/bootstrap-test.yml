@@ -1,0 +1,20 @@
+server:
+  port: 9900
+
+spring:
+  application:
+    name: search-service
+  jpa:
+    open-in-view: true
+    show-sql: true
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+  elasticsearch:
+    uris:
+      - ${elasticsearch.uris}
+    username: ${elasticsearch.username}
+    password: ${elasticsearch.password}
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss

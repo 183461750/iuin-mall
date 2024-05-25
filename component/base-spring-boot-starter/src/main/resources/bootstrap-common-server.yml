@@ -3,4 +3,6 @@ nacos:
   port: ${IUIN_NACOS_PORT:8848}
   namespace: ${IUIN_NACOS_NAMESPACE:fa-server-sso}
   group: ${IUIN_NACOS_GROUP:v1}
+#  group: ${IUIN_NACOS_GROUP:DEFAULT_GROUP}
+#  default-group: ${IUIN_NACOS_DEFAULT_GROUP:DEFAULT_GROUP}
   register-enabled: ${IUIN_NACOS_REGISTER_ENABLED:true}

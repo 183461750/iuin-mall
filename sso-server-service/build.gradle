@@ -5,6 +5,7 @@ dependencies {
     implementation project(':common')
     implementation project(':component:base-spring-boot-starter')
     implementation project(':component:jpa-spring-boot-starter')
+    implementation project(':component:nacos-spring-boot-starter')
 
     implementation project(':sso-server-service:sso-server-service-api')
 

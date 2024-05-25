@@ -8,6 +8,7 @@ dependencies {
     implementation project(':component:base-spring-boot-starter')
     implementation project(':component:mybatis-plus-spring-boot-starter')
     implementation project(':component:skywalking-spring-boot-starter')
+    implementation project(':component:nacos-spring-boot-starter')
 
     // mybatis plus有bug, 先暂时手动添加下这个依赖
     implementation('org.mybatis:mybatis:3.5.16')

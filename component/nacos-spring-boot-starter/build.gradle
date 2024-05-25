@@ -1,0 +1,14 @@
+// 需要依赖包
+jar.enabled = true
+// 无需启动包
+bootJar.enabled = false
+
+dependencies {
+    implementation(project(':component:base-spring-boot-starter'))
+
+    //nacos
+    api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+
+}

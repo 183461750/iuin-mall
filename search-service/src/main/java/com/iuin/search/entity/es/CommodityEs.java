@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Document(indexName = EsIndexConstant.TEST_COMMODITY)
-@Setting(settingPath = "elasticsearch/settings.json")
+//@Setting(settingPath = "elasticsearch/settings.json")
 public class CommodityEs {
 
     /**
@@ -21,8 +21,8 @@ public class CommodityEs {
     /**
      * 商品名称
      */
-    @MultiField(mainField = @Field(type = FieldType.Text, searchAnalyzer = "ik_smart", analyzer = "ik_max_word"),
-            otherFields = @InnerField(suffix = "inner", type = FieldType.Text, analyzer = "pinyin"))
+//    @MultiField(mainField = @Field(type = FieldType.Text, searchAnalyzer = "ik_smart", analyzer = "ik_max_word"),
+//            otherFields = @InnerField(suffix = "inner", type = FieldType.Text, analyzer = "pinyin"))
     private String name;
     /**
      * 最小(价格/积分)

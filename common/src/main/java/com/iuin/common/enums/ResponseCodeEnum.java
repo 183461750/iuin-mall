@@ -46,6 +46,7 @@ public enum ResponseCodeEnum {
      * 前端发送Http Post Json请求时，接口所需的参数没有传递
      */
     REQUEST_BODY_IS_MISSING(1105, "请求体参数解析异常"),
+    HEADER_SHOP_ID_CAN_NOT_BE_EMPTY(1106, "请求头的商城ID不能为空"),
 
     /**
      * 用户账号或密码错误
@@ -71,6 +72,11 @@ public enum ResponseCodeEnum {
      * ip获取异常，无法获取客户端ip
      */
     IP_ACQUISITION_EXCEPTION(1212, "ip获取异常，无法获取客户端ip"),
+
+    /**
+     * 请求对象丢失
+     */
+    REQUEST_OBJECT_LOST(1213, "请求对象丢失"),
 
     /**
      * 服务内部错误（未处理的异常默认返回）

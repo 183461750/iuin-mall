@@ -26,8 +26,10 @@ arthas:
   # telnetPort、httpPort为-1 ，则不提供监听端口，为0 ，则提供随机端口（~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志）
   # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
   # 通过命令行 telnet 进行连接
-  telnetPort: 1${server.port}
-  httpPort: 2${server.port}
+  telnetPort: -1
+  httpPort: -1
+#  telnetPort: 1${server.port}
+#  httpPort: 2${server.port}
   # tunnel-server地址
   tunnel-server: ws://arthas:7777/ws
 
@@ -36,3 +38,7 @@ logging:
     com.iuin.commodity: debug
   config: classpath:logback-skywalking.xml
   logstash: '10.0.1.93:5044'
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss

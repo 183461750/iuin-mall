@@ -1,12 +1,12 @@
 package com.iuin.shardingsphere.repostory.mapper;
 
-import com.github.yulichang.base.MPJBaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.iuin.shardingsphere.repostory.entity.ComUserDO;
 
 /**
  * @author fa
  */
-public interface ComUserMapper extends MPJBaseMapper<ComUserDO> {
+public interface ComUserMapper extends BaseMapper<ComUserDO> {
 
 }
 

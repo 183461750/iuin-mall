@@ -29,6 +29,8 @@ include 'component:shardingsphere-spring-boot-starter'
 include 'component:cache-spring-boot-starter'
 include 'component:yapi-spring-boot-starter'
 include 'component:skywalking-spring-boot-starter'
+include 'component:nacos-spring-boot-starter'
+
 include 'component:test'
 include 'component:test:feign'
 include 'component:test:mysql'

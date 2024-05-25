@@ -1,12 +1,17 @@
 package com.iuin.component.base.config;
 
-import com.iuin.component.base.EnableBaseComponent;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author fa
  */
-@ComponentScan(basePackageClasses = EnableBaseComponent.class)
+//@ComponentScan(basePackageClasses = EnableBaseComponent.class)
+@ComponentScan(basePackages = "com.iuin.component.base.handle")
+@Import({
+        ValidationConfig.class,
+        IpMonitorConfig.class,
+})
 public class BaseAutoConfig {
 
 }

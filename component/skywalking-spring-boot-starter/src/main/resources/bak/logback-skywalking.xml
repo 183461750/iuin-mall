@@ -68,4 +68,13 @@
         <appender-ref ref="file_error"/>
     </root>
 
+    <springProfile name="test | dev | prod">
+        <logger name="com.cloud.iot.*" level="debug"/>
+        <logger name="org.apache.kafka.clients.*" level="error"/>
+        <logger name="org.springframework.scheduling.support.*" level="off" addtivity="false">
+            <appender-ref ref="console"/>
+        </logger>
+        <logger name="org.springfromework.*" level="info"/>
+    </springProfile>
+
 </configuration>

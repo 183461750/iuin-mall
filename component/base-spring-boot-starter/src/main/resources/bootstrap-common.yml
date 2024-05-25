@@ -5,7 +5,11 @@ spring:
         server-addr: ${nacos.server-addr}
         namespace: ${nacos.namespace}
         group: ${nacos.group}
+        default-group: ${nacos.default-group:DEFAULT_GROUP}
         register-enabled: ${nacos.register-enabled:true}
+        metadata:
+          Nacos-Version: Fa-Local-Version
+          group: Fa-Local-Group
       config:
         server-addr: ${nacos.server-addr}
         file-extension: yml

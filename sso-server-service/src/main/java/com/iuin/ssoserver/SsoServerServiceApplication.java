@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  * @author fa
  */
 @EnableJpaAuditing
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @SpringBootApplication
 //@ComponentScan(basePackages = {"com.iuin.common"})
 @EnableBaseComponent

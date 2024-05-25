@@ -135,6 +135,7 @@ subprojects {
 
             // mybatis plus
             dependency 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.6'
+            dependency 'com.github.yulichang:mybatis-plus-join-boot-starter:1.4.6'
 
         }
     }
