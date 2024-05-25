@@ -1,6 +1,6 @@
 package com.iuin.yapi;
 
-import com.iuin.component.base.EnableBaseComponent;
+import com.iuin.component.base.annos.EnableBaseComponent;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

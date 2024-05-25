@@ -2,7 +2,7 @@ package com.iuin.mall.gateway.filter;
 
 import com.iuin.common.constants.CommonConstant;
 import com.iuin.common.enums.ResponseCodeEnum;
-import com.iuin.component.base.exceptions.BusinessException;
+import com.iuin.common.model.exceptions.BusinessException;
 import com.iuin.component.cache.component.CacheComponent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;

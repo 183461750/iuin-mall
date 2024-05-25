@@ -87,4 +87,9 @@ public class ModuleConstant implements Serializable {
      */
     public static final String SEARCH_PATH_PREFIX = CharPool.SLASH + SEARCH;
 
+    /**
+     * 搜索服务接口路径前缀
+     */
+    public static final String SEARCH_FEIGN_PATH_PREFIX = CharPool.SLASH + SEARCH + CharPool.SLASH + FEIGN;
+
 }

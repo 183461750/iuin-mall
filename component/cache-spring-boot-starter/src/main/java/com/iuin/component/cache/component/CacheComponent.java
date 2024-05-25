@@ -2,6 +2,7 @@ package com.iuin.component.cache.component;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.ReactiveStringRedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
 
@@ -55,8 +56,8 @@ public class CacheComponent {
     /**
      * 执行lua脚本
      */
-    public <T> T executeLua(String luaScript, List<String> keys, List<?> args, Class<T> clazz) {
-        return reactiveStringRedisTemplate.execute(RedisScript.of(luaScript, clazz), keys, args).next().block();
+    public <T> T executeLua(String luaScriptPath, List<String> keys, List<?> args, Class<T> clazz) {
+        return reactiveStringRedisTemplate.execute(RedisScript.of(new ClassPathResource(luaScriptPath), clazz), keys, args).next().block();
     }
 
 }

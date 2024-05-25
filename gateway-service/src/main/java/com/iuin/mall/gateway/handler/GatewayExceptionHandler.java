@@ -3,7 +3,7 @@ package com.iuin.mall.gateway.handler;
 import cn.hutool.json.JSONUtil;
 import com.iuin.common.enums.ResponseCodeEnum;
 import com.iuin.common.utils.RespResult;
-import com.iuin.component.base.exceptions.BusinessException;
+import com.iuin.common.model.exceptions.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.core.annotation.Order;

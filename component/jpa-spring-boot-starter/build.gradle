@@ -1,4 +1,4 @@
-archivesBaseName = 'jpa-spring-boot-starter'
+
 // 需要依赖包
 jar.enabled = true
 // 无需启动包
@@ -6,12 +6,23 @@ bootJar.enabled = false
 
 dependencies {
 
-    api 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'org.postgresql:postgresql'
+
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     // QueryDSL
     api("com.querydsl:querydsl-core")
     api("com.querydsl:querydsl-jpa")
     api("com.querydsl:querydsl-sql")
+    api("com.querydsl:querydsl-codegen")
+
+    annotationProcessor(
+            "org.springframework.boot:spring-boot-starter-data-jpa",
+            "com.querydsl:querydsl-apt:5.0.0:jpa",
+//            "com.querydsl:querydsl-apt::jpa",
+            "org.hibernate.javax.persistence:hibernate-jpa-2.1-api",
+            'javax.annotation:javax.annotation-api',
+            'org.hibernate:hibernate-jpamodelgen'
+    )
 
 }

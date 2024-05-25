@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author Fa
  */
-//@Configuration
+@Configuration
 public class RouteLocatorConfig {
     private static final String PATH_SUFFIX = "/**";
     private static final String URI_PREFIX = "lb://";
@@ -27,6 +27,10 @@ public class RouteLocatorConfig {
                 .route(ModuleConstant.SEARCH_SERVICE,
                         r -> r.path(ModuleConstant.SEARCH_PATH_PREFIX + PATH_SUFFIX)
                                 .uri(URI_PREFIX + ModuleConstant.SEARCH_SERVICE))
+                // sso-server
+                .route(ModuleConstant.SSO_SERVER_SERVICE,
+                        r -> r.path(ModuleConstant.SSO_SERVER_PATH_PREFIX + PATH_SUFFIX)
+                                .uri(URI_PREFIX + ModuleConstant.SSO_SERVER_SERVICE))
                 .build();
     }
 }

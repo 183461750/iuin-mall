@@ -1,7 +1,7 @@
 package com.iuin.mall.gateway.filter;
 
 import com.iuin.common.enums.ResponseCodeEnum;
-import com.iuin.component.base.exceptions.BusinessException;
+import com.iuin.common.model.exceptions.BusinessException;
 import com.iuin.component.base.utils.IpUtil;
 import com.iuin.component.cache.constants.RedisConstant;
 import com.iuin.component.cache.component.CacheComponent;

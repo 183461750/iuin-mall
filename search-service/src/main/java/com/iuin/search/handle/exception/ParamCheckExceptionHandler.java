@@ -3,6 +3,7 @@ package com.iuin.search.handle.exception;
 import com.iuin.common.utils.RespResult;
 import com.iuin.common.enums.ResponseCodeEnum;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  *
  * @author Fa
  */
+@Slf4j
 @RestControllerAdvice
 @Order(1)
 public class ParamCheckExceptionHandler {
@@ -60,6 +62,7 @@ public class ParamCheckExceptionHandler {
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public RespResult<?> requestMethodsException(HttpRequestMethodNotSupportedException exception) {
+        log.error("请求method不支持异常 ", exception);
         return RespResult.fail(ResponseCodeEnum.REQUEST_METHOD_NOT_SUPPORTED, ResponseCodeEnum.REQUEST_METHOD_NOT_SUPPORTED.getMessage());
     }
 

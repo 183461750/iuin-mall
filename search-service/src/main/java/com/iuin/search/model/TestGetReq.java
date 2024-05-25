@@ -1,6 +1,6 @@
 package com.iuin.search.model;
 
-import com.iuin.common.model.CommonPage;
+import com.iuin.common.model.req.CommonPageReq;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class TestGetReq extends CommonPage {
+public class TestGetReq extends CommonPageReq {
 
     private String test;
     /**

@@ -1,4 +1,4 @@
-package com.iuin.common.model;
+package com.iuin.common.model.req;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import lombok.Data;
  * @author fa
  */
 @Data
-public class CommonPage {
+public class CommonPageReq {
 
     /**
      * 当前页
@@ -18,7 +18,7 @@ public class CommonPage {
      */
     private int pageSize;
 
-    public CommonPage() {
+    public CommonPageReq() {
         this.current = 1;
         this.pageSize = 10;
     }

@@ -4,7 +4,7 @@ import cn.hutool.core.text.StrPool;
 import com.iuin.common.constants.ProjectConstant;
 import com.iuin.common.enums.ModuleEnum;
 import com.iuin.common.enums.ResponseCodeEnum;
-import com.iuin.component.base.exceptions.BusinessException;
+import com.iuin.common.model.exceptions.BusinessException;
 import com.iuin.component.yapi.model.ListGroupResp;
 import com.iuin.component.yapi.model.ListProjectResp;
 import com.iuin.component.yapi.model.TupleResp;

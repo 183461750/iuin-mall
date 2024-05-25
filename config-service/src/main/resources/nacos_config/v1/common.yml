@@ -48,3 +48,10 @@ logback:
 spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+
+feign:
+  circuitbreaker:
+    enabled: true
+  httpclient:
+    connection-timeout: 120000
+    enabled: true

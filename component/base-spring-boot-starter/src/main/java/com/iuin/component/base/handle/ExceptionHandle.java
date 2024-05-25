@@ -51,26 +51,13 @@ public class ExceptionHandle {
         return RespResult.fail(ResponseCodeEnum.REQUEST_PARAM_CHECK_FAILED, errMsg);
     }
 
-//    @ExceptionHandler(Exception.class)
-//    public Object exception(Exception exception) {
-//        StackTraceElement[] stackTraceElements = exception.getStackTrace();
-//        for (int i = 0; i < stackTraceElements.length; i++) {
-//            StackTraceElement stackTraceElement = stackTraceElements[i];
-//            if (!StrUtil.contains(stackTraceElement.getClassName(), "example")) {
-//                stackTraceElements[i] = null;
-//            }
-//        }
-//        log.error(exception.getLocalizedMessage(), exception);
-//        return RespResult.fail(exception.getMessage());
-//    }
-
     private static final PrintStream PRINT_STREAM = new PrintStream(System.err);
 
     @ExceptionHandler(Exception.class)
     public Object exception(Exception exception) {
         // 打印包名中包含 iuin 的堆栈即可
-        Arrays.stream(exception.getStackTrace()).filter(o -> o.getClassName().contains("iuin")).forEach(o -> PRINT_STREAM.println("\tat " + o));
-
+//        Arrays.stream(exception.getStackTrace()).filter(o -> o.getClassName().contains("iuin")).forEach(o -> PRINT_STREAM.println("\tat " + o));
+        log.error("未知异常 ", exception);
         return RespResult.fail(exception.getMessage());
     }
 

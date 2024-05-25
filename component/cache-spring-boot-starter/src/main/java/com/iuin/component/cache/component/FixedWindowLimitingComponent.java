@@ -19,7 +19,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class FixedWindowLimitingComponent {
     private final CacheComponent cacheComponent;
-    private static final String LUA_PATH = "scripts/fixedWindowLimiting.lua";
+    private static final String LUA_SCRIPT_PATH = "scripts/fixedWindowLimiting.lua";
 
     /**
      * 基于固定窗口的流量监控
@@ -31,6 +31,6 @@ public class FixedWindowLimitingComponent {
      */
     public Boolean doLimiting(String key, long threshold, long seconds) {
         // 执行lua脚本
-        return cacheComponent.executeLua(LUA_PATH, Collections.singletonList(key), Arrays.asList(String.valueOf(threshold), String.valueOf(seconds)), Boolean.class);
+        return cacheComponent.executeLua(LUA_SCRIPT_PATH, Collections.singletonList(key), Arrays.asList(String.valueOf(threshold), String.valueOf(seconds)), Boolean.class);
     }
 }

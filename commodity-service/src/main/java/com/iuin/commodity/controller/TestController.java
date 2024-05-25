@@ -1,6 +1,8 @@
 package com.iuin.commodity.controller;
 
+import com.iuin.commodity.model.resp.Test1Resp;
 import com.iuin.commodity.service.ComUserService;
+import com.iuin.commodity.service.ITestService;
 import com.iuin.common.utils.RespResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 public class TestController {
 
     private final ComUserService comUserService;
+    private final ITestService testService;
 
 
     @PostMapping("/while")
@@ -50,6 +53,12 @@ public class TestController {
     public ResponseEntity<String> get(String str) {
         log.info("测试: str:{}", str);
         return ResponseEntity.ok(str);
+    }
+
+    @GetMapping("/get3")
+    public RespResult<Test1Resp> get3(String str) {
+        log.info("测试: str:{}", str);
+        return RespResult.success(testService.test1(str));
     }
 
 }

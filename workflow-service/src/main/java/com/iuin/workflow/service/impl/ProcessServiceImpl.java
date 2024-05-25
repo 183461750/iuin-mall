@@ -1,6 +1,6 @@
 package com.iuin.workflow.service.impl;
 
-import com.iuin.component.base.exceptions.BusinessException;
+import com.iuin.common.model.exceptions.BusinessException;
 import com.iuin.workflow.common.enums.ProcessDefEnum;
 import com.iuin.workflow.config.AppProcessConfig;
 import com.iuin.workflow.model.dto.ProcessDefDTO;

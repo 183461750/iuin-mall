@@ -7,7 +7,7 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.iuin.common.enums.ResponseCodeEnum;
-import com.iuin.component.base.exceptions.BusinessException;
+import com.iuin.common.model.exceptions.BusinessException;
 import com.iuin.component.cache.component.CacheComponent;
 import com.iuin.component.yapi.common.enums.YapiDeployUriEnum;
 import com.iuin.component.yapi.config.YapiDeployConfig;

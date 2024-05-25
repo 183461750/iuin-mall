@@ -2,7 +2,7 @@ package com.iuin.component.base.utils;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.iuin.common.enums.ResponseCodeEnum;
-import com.iuin.component.base.exceptions.BusinessException;
+import com.iuin.common.model.exceptions.BusinessException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

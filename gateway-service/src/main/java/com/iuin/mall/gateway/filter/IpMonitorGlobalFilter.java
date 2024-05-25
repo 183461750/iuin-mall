@@ -3,7 +3,7 @@ package com.iuin.mall.gateway.filter;
 import com.iuin.component.base.enums.IpMonitorTypeEnum;
 import com.iuin.common.enums.ResponseCodeEnum;
 import com.iuin.component.base.config.IpMonitorConfig;
-import com.iuin.component.base.exceptions.BusinessException;
+import com.iuin.common.model.exceptions.BusinessException;
 import com.iuin.component.base.utils.IpUtil;
 import com.iuin.component.cache.component.FixedWindowLimitingComponent;
 import lombok.RequiredArgsConstructor;

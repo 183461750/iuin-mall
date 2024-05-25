@@ -5,6 +5,9 @@ dependencies {
     implementation project(':component:es-spring-boot-starter')
     implementation project(':component:nacos-spring-boot-starter')
 
+    implementation project(':search-service:search-service-api')
+    implementation project(':sso-server-service:sso-server-service-api')
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.projectlombok:lombok'
     testImplementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'

@@ -10,20 +10,25 @@ import com.iuin.ssoserver.entity.RoleDO;
 import com.iuin.ssoserver.entity.StudentDO;
 import com.iuin.ssoserver.repository.StudentRepository;
 import com.iuin.ssoserver.service.IStudentService;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
  * @author fa
  */
 @Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements IStudentService {
 
-    @Resource
-    private StudentRepository studentRepository;
-//    @Resource
-//    private JPAQueryFactory jpaQueryFactory;
+    private final StudentRepository studentRepository;
+    // TODO @Fa 没有在jpa组件中自动注入这个类
+//    private final JPAQueryFactory jpaQueryFactory;
+
+//    private static final QStudentDO qStudentDO = QStudentDO.studentDO;
+
 
     @Override
     public StudentDO add(StudentAddRequest studentAddRequest) {
@@ -51,12 +56,14 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public StudentDO info(StudentReq studentReq) {
-//        QStudentDO qStudentDO = QStudentDO.studentDO;
 //        JPAQuery<StudentDO> jpaQuery = jpaQueryFactory
 //                .selectFrom(qStudentDO)
 //                .where(qStudentDO.name.like("%" + studentReq.getName() + "%"));
 //        return jpaQuery.fetchFirst();
-        return null;
+        // TODO @Fa 动态生成Q版实体有问题
+        StudentDO studentDO = new StudentDO();
+        studentDO.setName(studentReq.getName());
+        return studentDO;
     }
 
 }

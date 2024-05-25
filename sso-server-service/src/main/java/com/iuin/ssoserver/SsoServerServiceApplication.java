@@ -1,10 +1,10 @@
 package com.iuin.ssoserver;
 
 import cn.dev33.satoken.SaManager;
-import com.iuin.component.base.EnableBaseComponent;
+import com.iuin.component.base.annos.EnableBaseComponent;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing
 //@EnableDiscoveryClient
 @SpringBootApplication
-//@ComponentScan(basePackages = {"com.iuin.common"})
+@EnableFeignClients(basePackages = {"com.iuin.**.api.feign"})
 @EnableBaseComponent
 public class SsoServerServiceApplication {
 

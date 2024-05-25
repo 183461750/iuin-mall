@@ -1,0 +1,11 @@
+dependencies {
+    implementation project(':common')
+    implementation project(':component:base-spring-boot-starter')
+
+    api group: 'jakarta.validation', name: 'jakarta.validation-api'
+
+    // spring cloud
+    api 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+
+}

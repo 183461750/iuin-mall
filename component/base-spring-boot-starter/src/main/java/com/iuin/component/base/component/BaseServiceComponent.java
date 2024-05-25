@@ -3,7 +3,7 @@ package com.iuin.component.base.component;
 import cn.hutool.core.util.StrUtil;
 import com.iuin.common.enums.ResponseCodeEnum;
 import com.iuin.component.base.constants.ServiceHeaderConstant;
-import com.iuin.component.base.exceptions.BusinessException;
+import com.iuin.common.model.exceptions.BusinessException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

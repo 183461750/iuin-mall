@@ -1,4 +1,4 @@
-package com.iuin.component.base.exceptions;
+package com.iuin.common.model.exceptions;
 
 
 import com.iuin.common.enums.ResponseCodeEnum;

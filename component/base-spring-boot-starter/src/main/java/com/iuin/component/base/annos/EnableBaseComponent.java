@@ -1,4 +1,4 @@
-package com.iuin.component.base;
+package com.iuin.component.base.annos;
 
 import com.iuin.component.base.config.BaseAutoConfig;
 import org.springframework.context.annotation.Import;
