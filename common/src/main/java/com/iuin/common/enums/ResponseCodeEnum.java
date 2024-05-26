@@ -47,6 +47,7 @@ public enum ResponseCodeEnum {
      */
     REQUEST_BODY_IS_MISSING(1105, "请求体参数解析异常"),
     HEADER_SHOP_ID_CAN_NOT_BE_EMPTY(1106, "请求头的商城ID不能为空"),
+    HEADER_PARAM_CAN_NOT_BE_EMPTY(1107, "请求头{}不能为空"),
 
     /**
      * 用户账号或密码错误

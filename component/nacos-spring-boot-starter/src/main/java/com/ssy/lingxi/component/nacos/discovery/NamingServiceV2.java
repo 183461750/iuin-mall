@@ -11,6 +11,7 @@ import com.alibaba.nacos.client.naming.event.InstancesChangeEvent;
 import com.alibaba.nacos.client.naming.event.InstancesChangeNotifier;
 import com.alibaba.nacos.client.naming.remote.NamingClientProxy;
 import com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate;
+import com.alibaba.nacos.client.naming.utils.CollectionUtils;
 import com.alibaba.nacos.client.naming.utils.InitUtils;
 import com.alibaba.nacos.client.utils.PreInitUtils;
 import com.alibaba.nacos.client.utils.ValidatorUtils;
@@ -20,10 +21,7 @@ import com.alibaba.nacos.common.utils.StringUtils;
 import com.iuin.component.base.component.BaseServiceComponent;
 import com.iuin.component.base.constants.ServiceHeaderConstant;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
-import java.util.UUID;
+import java.util.*;
 
 import static com.alibaba.nacos.client.utils.LogUtils.NAMING_LOGGER;
 
@@ -121,6 +119,37 @@ public class NamingServiceV2 extends NacosNamingService {
             serviceInfo = clientProxy.queryInstancesOfService(serviceName, groupName, clusterString, false);
         }
         return serviceInfo;
+    }
+
+    @Override
+    public List<Instance> selectInstances(String serviceName, String groupName, List<String> clusters, boolean healthy,
+                                          boolean subscribe) throws NacosException {
+        ServiceInfo serviceInfo = getServiceInfo(serviceName, groupName, clusters, subscribe);
+        return selectInstances(serviceInfo, healthy);
+    }
+
+    private List<Instance> selectInstances(ServiceInfo serviceInfo, boolean healthy) {
+        List<Instance> list;
+        if (serviceInfo == null || CollectionUtils.isEmpty(list = serviceInfo.getHosts())) {
+            return new ArrayList<>();
+        }
+
+        // 自定义通过请求头选择实例
+        boolean anyMatchHeaderVersion = list.stream().anyMatch(instance -> Objects.equals(baseServiceComponent.getHeaderNacosVersion(), instance.getMetadata().get(ServiceHeaderConstant.HEADER_NACOS_VERSION)));
+        if (Boolean.TRUE.equals(anyMatchHeaderVersion)) {
+            list.removeIf(instance -> !Objects.equals(baseServiceComponent.getHeaderNacosVersion(), instance.getMetadata().get(ServiceHeaderConstant.HEADER_NACOS_VERSION)));
+            return list;
+        }
+
+        Iterator<Instance> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Instance instance = iterator.next();
+            if (healthy != instance.isHealthy() || !instance.isEnabled() || instance.getWeight() <= 0) {
+                iterator.remove();
+            }
+        }
+
+        return list;
     }
 
 }

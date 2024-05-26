@@ -35,6 +35,7 @@ arthas:
 
 logging:
   level:
+    root: info
     com.iuin: debug
   config: classpath:logback-skywalking.xml
 logback:

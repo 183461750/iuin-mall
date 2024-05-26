@@ -54,7 +54,7 @@ public class NacosServiceDiscoveryV2 extends NacosServiceDiscovery {
      * 获取NamingService
      */
     @SneakyThrows
-    private NamingService namingService() {
+    private NamingServiceV2 namingService() {
 //        return this.nacosServiceManager.getNamingService();
         return new NamingServiceV2(discoveryProperties.getNacosProperties(), baseServiceComponent);
     }

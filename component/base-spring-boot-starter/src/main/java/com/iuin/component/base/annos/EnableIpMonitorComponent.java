@@ -1,6 +1,5 @@
 package com.iuin.component.base.annos;
 
-import com.iuin.component.base.config.BaseAutoConfig;
 import com.iuin.component.base.config.IpMonitorConfig;
 import org.springframework.context.annotation.Import;
 
