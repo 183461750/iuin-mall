@@ -1,4 +1,4 @@
-package com.ssy.lingxi.component.nacos.interceptor;
+package com.ssy.lingxi.component.nacos.interceptors;
 
 import com.iuin.component.base.component.BaseServiceComponent;
 import com.iuin.component.base.constants.ServiceHeaderConstant;
@@ -6,8 +6,6 @@ import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Component;
 
 /**

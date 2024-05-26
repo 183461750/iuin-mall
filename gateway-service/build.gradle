@@ -1,7 +1,9 @@
 
 dependencies {
     implementation project(':common-dependencies')
-    implementation(project(':component:base-spring-boot-starter'))
+    implementation(project(':component:base-spring-boot-starter')) {
+        exclude(group: 'org.springframework.boot', module: 'spring-boot-starter-web')
+    }
     implementation project(':component:cache-spring-boot-starter')
     implementation project(':component:skywalking-spring-boot-starter')
     implementation project(':component:nacos-spring-boot-starter')

@@ -26,7 +26,7 @@ public class VersionServiceInstanceListSupplierConfiguration {
 
     @Bean
     @ConditionalOnClass(name = "org.springframework.web.servlet.DispatcherServlet")
-    @ConditionalOnProperty(value = "spring.main.web-application-type", havingValue = "servlet")
+    @ConditionalOnProperty(value = "spring.main.web-application-type", havingValue = "servlet", matchIfMissing = true)
     public VersionServiceInstanceListSupplier versionServiceInstanceListSupplierV1(
             ConfigurableApplicationContext context) {
         log.info("===========> versionServiceInstanceListSupplierV1");
