@@ -1,4 +1,4 @@
-package com.ssy.lingxi.component.nacos.discovery;
+package com.iuin.mall.component.nacos.discovery;
 
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.pojo.Instance;

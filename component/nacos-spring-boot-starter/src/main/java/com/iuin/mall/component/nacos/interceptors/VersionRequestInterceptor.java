@@ -1,4 +1,4 @@
-package com.ssy.lingxi.component.nacos.interceptors;
+package com.iuin.mall.component.nacos.interceptors;
 
 import com.iuin.component.base.component.BaseServiceComponent;
 import com.iuin.component.base.constants.ServiceHeaderConstant;

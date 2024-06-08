@@ -1,6 +1,6 @@
 package com.iuin.mall.gateway.nacos.test2.nacos.config;
 
-import com.ssy.lingxi.gateway.nacos.filters.GrayReactiveLoadBalancerClientFilter;
+import com.iuin.mall.gateway.nacos.test2.nacos.filters.GrayReactiveLoadBalancerClientFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cloud.gateway.config.GatewayLoadBalancerProperties;

@@ -1,7 +1,7 @@
-package com.ssy.lingxi.component.nacos.config;
+package com.iuin.mall.component.nacos.config;
 
 import com.iuin.component.base.component.BaseServiceComponent;
-import com.ssy.lingxi.component.nacos.interceptors.VersionRequestInterceptor;
+import com.iuin.mall.component.nacos.interceptors.VersionRequestInterceptor;
 import feign.Client;
 import feign.Feign;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;

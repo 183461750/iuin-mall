@@ -1,4 +1,4 @@
-package com.ssy.lingxi.component.nacos.filters;
+package com.iuin.mall.component.nacos.filters;
 
 import cn.hutool.json.JSONUtil;
 import com.iuin.component.base.constants.ServiceHeaderConstant;

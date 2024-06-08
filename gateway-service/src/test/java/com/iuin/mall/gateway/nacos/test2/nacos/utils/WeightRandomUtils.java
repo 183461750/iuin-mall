@@ -1,7 +1,8 @@
 package com.iuin.mall.gateway.nacos.test2.nacos.utils;
 
 
-import com.ssy.lingxi.gateway.nacos.filters.WeightMeta;
+
+import com.iuin.mall.gateway.nacos.test2.nacos.filters.WeightMeta;
 
 import java.util.HashMap;
 import java.util.Map;

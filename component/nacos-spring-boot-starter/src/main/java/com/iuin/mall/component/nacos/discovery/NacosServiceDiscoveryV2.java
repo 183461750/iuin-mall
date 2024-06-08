@@ -1,14 +1,12 @@
-package com.ssy.lingxi.component.nacos.discovery;
+package com.iuin.mall.component.nacos.discovery;
 
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
 import com.alibaba.cloud.nacos.NacosServiceManager;
 import com.alibaba.cloud.nacos.discovery.NacosServiceDiscovery;
 import com.alibaba.nacos.api.exception.NacosException;
-import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.iuin.component.base.component.BaseServiceComponent;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.cloud.client.ServiceInstance;
 

@@ -1,4 +1,4 @@
-package com.ssy.lingxi.component.nacos.loadbalancer;
+package com.iuin.mall.component.nacos.loadbalancer;
 
 import com.iuin.component.base.constants.ServiceHeaderConstant;
 import lombok.extern.slf4j.Slf4j;

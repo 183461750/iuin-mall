@@ -1,6 +1,5 @@
-package com.ssy.lingxi.component.nacos.config;
+package com.iuin.mall.component.nacos.config;
 
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -8,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 //@AutoConfiguration
 @ComponentScan(basePackages = {
-        "com.ssy.lingxi.component.nacos",
+        "com.iuin.mall.component.nacos",
 })
 public class NacosAutoConfig {
 

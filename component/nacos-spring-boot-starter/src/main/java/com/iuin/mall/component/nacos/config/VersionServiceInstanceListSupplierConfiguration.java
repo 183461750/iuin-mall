@@ -1,18 +1,13 @@
-package com.ssy.lingxi.component.nacos.config;
+package com.iuin.mall.component.nacos.config;
 
-import com.ssy.lingxi.component.nacos.loadbalancer.VersionServiceInstanceListSupplier;
+import com.iuin.mall.component.nacos.loadbalancer.VersionServiceInstanceListSupplier;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.WebApplicationType;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.client.discovery.ReactiveDiscoveryClient;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * 此处选择全局配置

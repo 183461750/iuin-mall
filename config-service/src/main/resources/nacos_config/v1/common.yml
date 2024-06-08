@@ -39,10 +39,10 @@ logging:
     com.iuin: debug
   config: classpath:logback-skywalking.xml
 logback:
-  path: ${LINGXI_LOGBACK_PATH:../logs}
-  maxHistory: ${LINGXI_LOGBACK_MAXHISTORY:7}
-  maxFileSize: ${LINGXI_LOGBACK_MAXFILESIZE:100MB}
-  totalSizeCap: ${LINGXI_LOGBACK_TOTALSIZECAP:1GB}
+  path: ${IUIN_LOGBACK_PATH:../logs}
+  maxHistory: ${IUIN_LOGBACK_MAXHISTORY:7}
+  maxFileSize: ${IUIN_LOGBACK_MAXFILESIZE:100MB}
+  totalSizeCap: ${IUIN_LOGBACK_TOTALSIZECAP:1GB}
   serviceName: ${spring.application.name}
   logstash: '10.0.1.93:5044'
 

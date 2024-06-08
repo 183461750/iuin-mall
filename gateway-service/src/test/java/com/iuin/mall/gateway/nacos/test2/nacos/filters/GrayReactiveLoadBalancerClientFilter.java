@@ -1,6 +1,5 @@
 package com.iuin.mall.gateway.nacos.test2.nacos.filters;
 
-import com.ssy.lingxi.gateway.nacos.config.GrayLoadBalancer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.DefaultRequest;

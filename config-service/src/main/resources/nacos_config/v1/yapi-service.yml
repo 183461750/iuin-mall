@@ -23,7 +23,7 @@ feign:
     enabled: true  
 
 yapi:
-  serverUrl: https://yapi.shushangyun.com
+  serverUrl: https://yapi.iuin.com
   email: fa@iuin.com
   password: iuin
   groupId: 1814

@@ -1,7 +1,7 @@
 package com.iuin.mall.gateway.nacos.test1.nacos.filters;
 
 import cn.hutool.http.HttpUtil;
-import com.ssy.lingxi.gateway.nacos.lbs.GrayLoadBalancer;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.DefaultRequest;
@@ -20,7 +20,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.Resource;
 import java.net.URI;
 
 /**

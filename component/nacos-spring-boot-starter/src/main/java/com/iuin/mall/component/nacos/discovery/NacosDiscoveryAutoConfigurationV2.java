@@ -1,4 +1,4 @@
-package com.ssy.lingxi.component.nacos.discovery;
+package com.iuin.mall.component.nacos.discovery;
 
 import com.alibaba.cloud.nacos.ConditionalOnNacosDiscoveryEnabled;
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
