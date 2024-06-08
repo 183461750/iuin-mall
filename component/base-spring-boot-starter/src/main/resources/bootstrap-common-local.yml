@@ -1,15 +1,11 @@
-#nacos:
-#  server-addr: nacos-0.nacos-headless.middleware:8848,nacos-1.nacos-headless.middleware:8848
-#  namespace: iuin-mall
-#  group: v1
-#  register-enabled: true
 nacos:
   server-addr: 10.0.1.90:8848
   namespace: fa-dev
   group: v1
   register-enabled: true
   metadata:
-    Nacos-Version: Fa-Local-Version
+    # 自己的版本使用变量示例: Fa-${nacos.namespace}-version 加上 register-enabled:true 实现灰度发布自己的服务, 并配合添加请求头 nacos-version 实现路由到自己的灰度版本中
+    nacos-version: ${nacos.namespace}-version
 
 management:
   endpoints:

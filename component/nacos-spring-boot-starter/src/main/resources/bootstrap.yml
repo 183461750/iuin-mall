@@ -7,7 +7,7 @@ spring:
         group: ${nacos.group}
         register-enabled: ${nacos.register-enabled:true}
         metadata:
-          Nacos-Version: ${nacos.metadata.Nacos-Version:default}
+          nacos-version: ${nacos.metadata.nacos-version:${nacos.namespace}-version}
       config:
         server-addr: ${nacos.server-addr}
         file-extension: yml

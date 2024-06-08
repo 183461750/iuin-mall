@@ -13,16 +13,16 @@ public class ServiceHeaderConstant {
     /**
      * 商城Id
      */
-    public static final String HEADER_SHOP_ID = "Shopid";
+    public static final String HEADER_SHOP_ID = "shopid";
 
     /**
      * nacos版本
      */
-    public static final String HEADER_NACOS_VERSION = "Nacos-Version";
+    public static final String HEADER_NACOS_VERSION = "nacos-version";
 
     /**
      * nacos分组
      */
-    public static final String HEADER_NACOS_GROUP = "Nacos-Group";
+    public static final String HEADER_NACOS_GROUP = "nacos-group";
 
 }

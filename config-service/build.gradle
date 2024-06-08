@@ -7,6 +7,7 @@ dependencies {
     implementation project(':common')
     implementation project(':component:base-spring-boot-starter')
     implementation project(':component:jpa-spring-boot-starter')
+    implementation project(':component:cache-spring-boot-starter')
     implementation project(':component:es-spring-boot-starter')
     implementation project(':component:nacos-spring-boot-starter')
 

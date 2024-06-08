@@ -5,4 +5,4 @@ nacos:
   group: ${IUIN_NACOS_GROUP:v1}
   register-enabled: ${IUIN_NACOS_REGISTER_ENABLED:true}
   metadata:
-    Nacos-Version: ${IUIN_NACOS_METADATA_VERSION:default}
+    nacos-version: ${IUIN_NACOS_METADATA_VERSION:${nacos.namespace}-version}
