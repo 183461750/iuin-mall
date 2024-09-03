@@ -36,6 +36,7 @@ include 'component:test'
 include 'component:test:feign'
 include 'component:test:mysql'
 include 'component:test:jpa'
+include 'component:test:testcontainers'
 
 include 'component:pluggable-annotation'
 include 'component:pluggable-annotation:version-pluggable'

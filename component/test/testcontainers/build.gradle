@@ -1,0 +1,30 @@
+
+ext {
+    version = [
+            set('testcontainers', "1.20.0"),
+            set('rest_assured', "5.3.2"),
+    ]
+}
+
+dependencies {
+    implementation project(':common-dependencies')
+    implementation project(':common')
+    implementation project(':component:base-spring-boot-starter')
+    implementation project(':component:jpa-spring-boot-starter')
+
+    implementation('org.springframework.boot:spring-boot-starter-data-rest')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testImplementation("io.rest-assured:rest-assured-all:${rest_assured}")
+    testImplementation("io.rest-assured:spring-mock-mvc:${rest_assured}")
+
+    testImplementation("org.testcontainers:testcontainers:${testcontainers}")
+    testImplementation("org.testcontainers:junit-jupiter:${testcontainers}")
+    testImplementation("org.testcontainers:postgresql:${testcontainers}")
+
+}
+
+test {
+    useJUnitPlatform()
+}
