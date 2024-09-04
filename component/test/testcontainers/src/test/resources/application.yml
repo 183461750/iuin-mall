@@ -3,6 +3,8 @@ spring:
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
 #    url: jdbc:tc:postgresql:9.6:///
 #    url: jdbc:tc:postgresql:9.6:///?TC_INITSCRIPT=file:src/main/resources/init_db.sql
-    url: jdbc:tc:postgresql:9.6:///?TC_INITSCRIPT=classpath:init_db.sql
+#    url: jdbc:tc:postgresql:9.6:///?TC_INITSCRIPT=classpath:init_db.sql
+    url: jdbc:tc:postgresql:9.6:///?TC_INITSCRIPT=tc-initscript.sql
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database-platform: org.hibernate.dialect.PostgresPlusDialect
+    generate-ddl: false
