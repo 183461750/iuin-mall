@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: local
+    include: common,common-${spring.profiles.active}
+  application:
+    name: agent-service
+  main:
+    allow-bean-definition-overriding: true 

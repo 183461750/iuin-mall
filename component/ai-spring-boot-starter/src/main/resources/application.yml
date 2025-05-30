@@ -1,0 +1,5 @@
+spring:
+  ai:
+    deepseek:
+      api-key: sk-xxx-your-key
+      base-url: https://api.deepseek.com/v1 

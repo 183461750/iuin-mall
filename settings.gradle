@@ -31,6 +31,7 @@ include 'component:cache-spring-boot-starter'
 include 'component:yapi-spring-boot-starter'
 include 'component:skywalking-spring-boot-starter'
 include 'component:nacos-spring-boot-starter'
+include 'component:ai-spring-boot-starter'
 
 include 'component:test'
 include 'component:test:feign'
@@ -41,4 +42,6 @@ include 'component:test:testcontainers'
 include 'component:pluggable-annotation'
 include 'component:pluggable-annotation:version-pluggable'
 include 'component:pluggable-annotation:take_time_processor'
+
+include 'agent-service'
 

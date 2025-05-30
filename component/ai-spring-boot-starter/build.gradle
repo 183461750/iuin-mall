@@ -1,0 +1,27 @@
+archivesBaseName = 'ai-spring-boot-starter'
+jar.enabled = true
+bootJar.enabled = false
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.spring.io/snapshot' }
+    maven {
+        name = 'Central Portal Snapshots'
+        url = 'https://central.sonatype.com/repository/maven-snapshots/'
+    }
+}
+
+dependencies {
+    api project(':common')
+    api('org.springframework.boot:spring-boot-starter')
+    api('org.springframework.boot:spring-boot-starter-actuator')
+    api('org.springframework.boot:spring-boot-starter-validation')
+    api('org.springframework.boot:spring-boot-starter-web')
+    api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    implementation platform('org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT')
+    implementation 'org.springframework.ai:spring-ai-starter-model-deepseek'
+}
+
+test {
+    useJUnitPlatform()
+} 
