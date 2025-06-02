@@ -6,9 +6,7 @@ import com.iuin.agent.task.TaskParser;
 import com.iuin.agent.task.TaskScheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ai.mcp.client.McpSyncClient;
-import org.springframework.ai.mcp.schema.CallToolRequest;
-import org.springframework.ai.mcp.schema.CallToolResult;
+import org.springframework.ai.mcp.client.McpClient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,8 +18,8 @@ import java.util.concurrent.*;
 public class AgentController {
     private static final Logger log = LoggerFactory.getLogger(AgentController.class);
 
-    @Autowired(required = false)
-    private List<McpSyncClient> mcpSyncClients;
+    @Autowired
+    private McpClient mcpClient;
 
     @Autowired
     private TaskParser taskParser;
@@ -105,32 +103,27 @@ public class AgentController {
     private String decideToolName(Task task, List<String> memory) {
         // 1. 获取所有MCP工具详细信息
         List<String> toolInfos = new ArrayList<>();
-        if (mcpSyncClients != null && !mcpSyncClients.isEmpty()) {
-            try {
-                // 依赖 spring-ai-mcp-client 1.0.0+，需引入McpToolUtils
-                var toolCallbacks = org.springframework.ai.mcp.util.McpToolUtils.getToolCallbacksFromSyncClients(mcpSyncClients);
-                for (var tc : toolCallbacks) {
-                    var def = tc.getToolDefinition();
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("工具名: ").append(def.getName()).append("\n");
-                    sb.append("描述: ").append(def.getDescription()).append("\n");
-                    sb.append("参数: ");
-                    if (def.getParameters() != null && !def.getParameters().isEmpty()) {
-                        def.getParameters().forEach((k, v) -> sb.append(k).append(": ").append(v).append(", "));
-                    } else {
-                        sb.append("无");
-                    }
-                    toolInfos.add(sb.toString());
+        try {
+            var toolDescriptions = mcpClient.listTools();
+            for (var def : toolDescriptions) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("工具名: ").append(def.getName()).append("\n");
+                sb.append("描述: ").append(def.getDescription()).append("\n");
+                sb.append("参数: ");
+                if (def.getParameters() != null && !def.getParameters().isEmpty()) {
+                    def.getParameters().forEach((k, v) -> sb.append(k).append(": ").append(v).append(", "));
+                } else {
+                    sb.append("无");
                 }
-            } catch (Exception e) {
-                log.warn("获取MCP工具信息失败: {}", e.getMessage());
+                toolInfos.add(sb.toString());
             }
+        } catch (Exception e) {
+            log.warn("获取MCP工具信息失败: {}", e.getMessage());
         }
         // 2. 将工具信息放入memory，供LLM推理
         memory.add("可用工具列表:\n" + String.join("\n\n", toolInfos));
         // 3. 通过LLM决策选择合适的tool（调用deepseek LLM）
-        // 这里假设有 deepSeekChatClient，可用 prompt 让LLM选择工具名
-        String toolName = "db_query"; // fallback
+        String toolName = "dbQuery"; // fallback
         try {
             if (taskParser != null && taskParser.deepSeekChatClient != null) {
                 StringBuilder prompt = new StringBuilder();
@@ -163,12 +156,8 @@ public class AgentController {
      * Agent 统一调用 MCP Tool
      */
     private Object callTool(String toolName, Map<String, Object> params) {
-        if (mcpSyncClients == null || mcpSyncClients.isEmpty()) return "MCP Client 未配置";
-        McpSyncClient client = mcpSyncClients.get(0);
         try {
-            CallToolRequest req = new CallToolRequest(toolName, params);
-            CallToolResult result = client.callTool(req);
-            return result.result();
+            return mcpClient.callTool(toolName, params);
         } catch (Exception e) {
             log.error("MCP Tool 调用异常", e);
             return "MCP Tool 调用异常: " + e.getMessage();
@@ -180,7 +169,8 @@ public class AgentController {
      */
     private boolean isTaskDone(String question, List<Object> results, List<String> memory) {
         // 可扩展为 LLM 判断
-        return TaskParser.llmIsTaskDone(question, results, mcpSyncClients);
+        // 这里建议后续也用 mcpClient 调用 LLM 工具
+        return TaskParser.llmIsTaskDone(question, results, mcpClient);
     }
 
     /**
