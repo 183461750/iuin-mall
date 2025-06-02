@@ -12,14 +12,19 @@ repositories {
 }
 
 dependencies {
-    api project(':common')
-    api('org.springframework.boot:spring-boot-starter')
-    api('org.springframework.boot:spring-boot-starter-actuator')
-    api('org.springframework.boot:spring-boot-starter-validation')
-    api('org.springframework.boot:spring-boot-starter-web')
-    api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-    implementation platform('org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT')
+    implementation project(':common-dependencies')
+    implementation project(':common')
+    implementation project(':component:base-spring-boot-starter')
+
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
+
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-client'
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
+    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+
     implementation 'org.springframework.ai:spring-ai-starter-model-deepseek'
+
+    developmentOnly 'org.springframework.ai:spring-ai-spring-boot-docker-compose'
 }
 
 test {

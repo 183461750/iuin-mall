@@ -15,7 +15,7 @@ import cn.hutool.json.JSONObject;
 @Component
 public class TaskParser {
     @Autowired(required = false)
-    private ChatClient deepSeekChatClient;
+    private ChatClient chatClient;
 
     public static List<Task> parse(String question) {
         if (question.contains("并行")) {
@@ -26,7 +26,7 @@ public class TaskParser {
     }
 
     public List<Task> llmParseWithDeepSeek(String question, List<String> memory) {
-        if (deepSeekChatClient == null) return parse(question);
+        if (chatClient == null) return parse(question);
         StringBuilder prompt = new StringBuilder();
         prompt.append("你是一个任务拆解专家，请将用户问题拆解为一组可执行的子任务。\n");
         prompt.append("请严格按照如下 JSON Schema 返回结果：\n");
@@ -35,7 +35,7 @@ public class TaskParser {
         for (String m : memory) prompt.append(m).append("\n");
         prompt.append("用户问题：").append(question);
         try {
-            String result = deepSeekChatClient.prompt(prompt.toString()).call().content();
+            String result = chatClient.prompt(prompt.toString()).call().content();
             return parseJsonArrayToTasks(result);
         } catch (Exception e) {
             // fallback

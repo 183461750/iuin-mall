@@ -25,6 +25,12 @@ dependencies {
 //    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
     api 'com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'
 
+    // spring boot
+    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
     //spring cloud
 
     //arthas
