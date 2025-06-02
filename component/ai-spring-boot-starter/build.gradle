@@ -16,13 +16,13 @@ dependencies {
     implementation project(':common')
     implementation project(':component:base-spring-boot-starter')
 
-    implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
+    api 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
 
-    implementation 'org.springframework.ai:spring-ai-starter-mcp-client'
-    implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
-    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+    api 'org.springframework.ai:spring-ai-starter-mcp-client'
+    api 'org.springframework.ai:spring-ai-starter-mcp-server'
+    api 'org.springframework.ai:spring-ai-starter-model-openai'
 
-    implementation 'org.springframework.ai:spring-ai-starter-model-deepseek'
+    api 'org.springframework.ai:spring-ai-starter-model-deepseek'
 
     developmentOnly 'org.springframework.ai:spring-ai-spring-boot-docker-compose'
 }
