@@ -2,15 +2,15 @@ package com.iuin.component.ai.config;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.ai.deepseek.DeepSeekChatClient;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.ChatClient.Builder;
 
 @AutoConfiguration
 public class AiAutoConfig {
 
     @Bean
-    public DeepSeekChatClient deepSeekChatClient(@Value("${spring.ai.deepseek.api-key}") String apiKey,
-                                                 @Value("${spring.ai.deepseek.base-url:https://api.deepseek.com/v1}") String baseUrl) {
-        return new DeepSeekChatClient(apiKey, baseUrl);
+    public ChatClient deepSeekChatClient(Builder chatClientBuilder) {
+        // 默认构建，使用 spring-ai deepseek 自动配置的 ChatModel
+        return chatClientBuilder.build();
     }
 } 
