@@ -1,6 +1,6 @@
 package com.iuin.agent.mcp;
 
-import org.springframework.ai.mcp.server.tool.McpTool;
+import org.springframework.ai.tool.Tool;
 import org.springframework.stereotype.Component;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +11,7 @@ public class DatabaseQueryTool {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @McpTool(
-        name = "db_query",
-        description = "数据库查询",
-        parameters = {
-            @McpTool.Parameter(name = "sql", type = "string", description = "要执行的SQL语句")
-        }
-    )
+    @Tool(description = "数据库查询，传入SQL语句，返回结果列表")
     public Object dbQuery(String sql) {
         try {
             return jdbcTemplate.queryForList(sql);
