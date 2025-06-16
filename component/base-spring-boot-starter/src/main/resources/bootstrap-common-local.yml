@@ -1,6 +1,6 @@
 nacos:
-  server-addr: 10.0.1.90:8848
-  namespace: fa-dev
+  server-addr: 10.0.16.146:8848
+  namespace: dev
   group: v1
   register-enabled: true
   metadata:
