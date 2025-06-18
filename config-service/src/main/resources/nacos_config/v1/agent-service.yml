@@ -50,8 +50,8 @@ spring:
             default:
               url: http://localhost:8080/mcp/message
     deepseek:
-      api-key: sk-xxx-your-key
-      base-url: https://api.deepseek.com/v1
+      api-key: ${deepseek.api-key}
+      base-url: ${deepseek.base-url:-https://api.deepseek.com/v1}
       mcp:
         enabled: true
 

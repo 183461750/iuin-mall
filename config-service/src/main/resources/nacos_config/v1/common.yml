@@ -19,6 +19,9 @@ elasticsearch:
   username: elastic
   password: kibana
 
+deepseek:
+  api-key: sk-xxx-your-key
+  base-url: https://api.deepseek.com/v1
 
 #线上问题排查工具
 arthas:
