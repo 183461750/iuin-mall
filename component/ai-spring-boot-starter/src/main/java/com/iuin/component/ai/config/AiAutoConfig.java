@@ -8,9 +8,9 @@ import org.springframework.ai.chat.client.ChatClient.Builder;
 @AutoConfiguration
 public class AiAutoConfig {
 
-    @Bean
-    public ChatClient deepSeekChatClient(Builder chatClientBuilder) {
-        // 默认构建，使用 spring-ai deepseek 自动配置的 ChatModel
-        return chatClientBuilder.build();
-    }
+//    @Bean
+//    public ChatClient deepSeekChatClient(Builder chatClientBuilder) {
+//        // 默认构建，使用 spring-ai deepseek 自动配置的 ChatModel
+//        return chatClientBuilder.build();
+//    }
 } 
