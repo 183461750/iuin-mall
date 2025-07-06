@@ -1,25 +1,7 @@
-plugins {
-    id 'org.springframework.boot'
-    id 'io.spring.dependency-management'
-    id 'java'
-}
-
-archivesBaseName = 'agent-service'
-
-jar.enabled = true
-bootJar.enabled = true
-
-repositories {
-    mavenCentral()
-    maven { url = 'https://repo.spring.io/snapshot' }
-    maven {
-        name = 'Central Portal Snapshots'
-        url = 'https://central.sonatype.com/repository/maven-snapshots/'
-    }
-}
 
 dependencies {
     implementation project(':common-dependencies')
+//    implementation project(':common')
     implementation project(':component:base-spring-boot-starter')
     implementation project(':component:skywalking-spring-boot-starter')
     implementation project(':component:nacos-spring-boot-starter')
@@ -29,6 +11,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.postgresql:postgresql'
+
+    // Lombok for logging and annotations
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
 }
 
 test {

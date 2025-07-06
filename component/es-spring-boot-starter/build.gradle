@@ -4,6 +4,10 @@ jar.enabled = true
 // 无需启动包
 bootJar.enabled = false
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     //es
     api 'org.springframework.boot:spring-boot-starter-data-elasticsearch'

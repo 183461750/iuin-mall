@@ -1,82 +1,114 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
-// 1. 使用 plugins {} 块集中管理插件版本，并应用到所有子项目
 plugins {
-    // 将插件应用到根项目，并通过 allprojects/subprojects 传递配置
     id 'base'
     id 'java-library'
     id 'org.springframework.boot' version '3.5.0'
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
-defaultTasks 'build'
+group = 'com.iuin'
+version = '0.0.1-SNAPSHOT'
 
-// 2. 使用 allprojects 为所有项目（包括根项目和子项目）进行通用配置
-allprojects {
-    group = "com.iuin"
+java {
+    // 指定JDK版本
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17) // 指定 Java 17
+    }
 }
 
-//apply from: "config.gradle"
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
 
-// 3. 使用 subprojects 为所有子项目进行通用配置
+repositories {
+    mavenLocal()
+    maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
+    maven { url 'https://repo.spring.io/release' }
+    mavenCentral()
+}
+
+apply from: "config.gradle"
+
+
+// 子项目的通用配置
 subprojects {
-    // 3.1 为所有子项目应用之前在根项目 plugins{} 中定义的插件
-    apply plugin: 'java-library'
+    // 为所有子项目应用 Java 插件
+    apply plugin: 'java'
+
+    // 在这里使用plugin
+    /* 使用二进制插件 */
+    apply plugin: 'idea' /* 同上  让Gradle自动生成Intellij的项目文件*/
+    /* 注意gradle插件不再自动应用，所以这里需要指定 */
     apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
+    /* 依赖管理插件仍然是一个spring-boot-gradle-plugin传递依赖，所以无需在build.gradle配置中明确列出此依赖。 */
+    apply plugin: 'io.spring.dependency-management' /* 依赖管理，用来传递spring的依赖 */
+
+    // 可以使用api编译
+    apply plugin: 'java-library'
+
+    /* java编译的时候缺省状态下会因为中文字符而失败 */
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    // A project can be configured to build both an executable archive and a normal archive at the same time by enabling the jar or war task:
+    // 可以参考：https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/
+
+    // 默认bootJar和bootWar is true
+    // jar和war 是false
+    // springboot打出的bootJar包  一般是 不能被依赖的
+    // 可以参考：https://www.cnblogs.com/karlMa/p/11304524.html
+    // 打出来的jar包可以子模块间相互依赖，但经过个人测试后发现不可以被执行
+    // 如果不开启的话，后续是会出现模块间找不到依赖的问题！
+    jar.enabled = true
+
+    // 为所有子项目配置 Java 工具链为 JDK 17
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(17))
+        }
+    }
+
+    bootJar {
+        setProperty('archiveClassifier', 'boot')
+    }
 
     repositories {
         mavenLocal()
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
         mavenCentral()
-        maven { url 'https://jitpack.io' }
+        // 添加新的仓库地址以解析缺失的依赖
+        maven { url "https://repo.spring.io/release" }
     }
 
-    configurations.all {
-        resolutionStrategy.cacheChangingModulesFor 0, "minutes"
-    }
-
-    // 3.2 统一配置Java版本和编码
-    java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
-        }
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    tasks.withType(JavaCompile).configureEach {
-        options.encoding = 'UTF-8'
-    }
-
-    // 3.3 统一配置依赖
     configurations {
         compileOnly {
             extendsFrom annotationProcessor
         }
     }
 
+    // 所有工程都使用lombok打印日志
     dependencies {
-        // 所有子项目都依赖 Lombok，版本由 Spring Boot BOM 管理
+        repositories {
+            mavenLocal()
+            maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
+            mavenCentral()
+        }
+
+        // 所有工程都使用lombok打印日志
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
-//        api platform(SpringBootPlugin.BOM_COORDINATES)
-//        api platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
-//        api platform("com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}")
-//        api platform("org.springframework.ai:spring-ai-bom:${springAiVersion}")
-//        api platform("org.camunda.bpm:camunda-bom:${sb_camundaBpm}")
-
     }
 
-    // 3.4 统一管理依赖版本 (BOM)
     dependencyManagement {
         imports {
-//            mavenBom SpringBootPlugin.BOM_COORDINATES
+            mavenBom(SpringBootPlugin.BOM_COORDINATES)
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
             mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
             mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
             mavenBom "org.camunda.bpm:camunda-bom:${sb_camundaBpm}"
         }
-        // 这里可以继续定义不在 BOM 中的依赖版本
         dependencies {
 
             dependency 'com.dtflys.forest:forest-spring-boot-starter:1.5.26'
@@ -119,15 +151,8 @@ subprojects {
         }
     }
 
-    // 3.5 Spring Boot 打包配置
-    bootJar {
-        enabled = false // 默认子模块不打可执行的 bootJar
-    }
-    jar {
-        enabled = true // 默认子模块打成可被依赖的普通 jar
-    }
-
     tasks.named('test') {
         useJUnitPlatform()
     }
+
 }
