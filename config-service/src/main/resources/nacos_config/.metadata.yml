@@ -37,3 +37,7 @@ metadata:
   dataId: gateway-service.yml
   group: v1
   type: yaml
+- appName: ''
+  dataId: agent-service.yml
+  group: v1
+  type: yaml
