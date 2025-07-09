@@ -1,7 +1,7 @@
 
 dependencies {
     implementation project(':common-dependencies')
-//    implementation project(':common')
+    implementation project(':common')
     implementation project(':component:base-spring-boot-starter')
     implementation project(':component:skywalking-spring-boot-starter')
     implementation project(':component:nacos-spring-boot-starter')
@@ -20,4 +20,4 @@ dependencies {
 
 test {
     useJUnitPlatform()
-} 
+}

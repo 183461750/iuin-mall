@@ -9,31 +9,16 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
-defaultTasks 'build'
+group = "com.iuin"
+version = projectVersion
 
 // 2. 使用 allprojects 为所有项目（包括根项目和子项目）进行通用配置
 allprojects {
-    group = "com.iuin"
-}
 
-//apply from: "config.gradle"
-
-// 3. 使用 subprojects 为所有子项目进行通用配置
-subprojects {
     // 3.1 为所有子项目应用之前在根项目 plugins{} 中定义的插件
     apply plugin: 'java-library'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
-
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
-    }
-
-    configurations.all {
-        resolutionStrategy.cacheChangingModulesFor 0, "minutes"
-    }
 
     // 3.2 统一配置Java版本和编码
     java {
@@ -55,22 +40,26 @@ subprojects {
         }
     }
 
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+// 3. 使用 subprojects 为所有子项目进行通用配置
+subprojects {
+
     dependencies {
         // 所有子项目都依赖 Lombok，版本由 Spring Boot BOM 管理
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
-//        api platform(SpringBootPlugin.BOM_COORDINATES)
-//        api platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
-//        api platform("com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}")
-//        api platform("org.springframework.ai:spring-ai-bom:${springAiVersion}")
-//        api platform("org.camunda.bpm:camunda-bom:${sb_camundaBpm}")
-
     }
 
     // 3.4 统一管理依赖版本 (BOM)
     dependencyManagement {
         imports {
-//            mavenBom SpringBootPlugin.BOM_COORDINATES
+            mavenBom SpringBootPlugin.BOM_COORDINATES
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
             mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
             mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
@@ -117,14 +106,6 @@ subprojects {
             dependency 'com.github.yulichang:mybatis-plus-join-boot-starter:1.4.6'
 
         }
-    }
-
-    // 3.5 Spring Boot 打包配置
-    bootJar {
-        enabled = false // 默认子模块不打可执行的 bootJar
-    }
-    jar {
-        enabled = true // 默认子模块打成可被依赖的普通 jar
     }
 
     tasks.named('test') {

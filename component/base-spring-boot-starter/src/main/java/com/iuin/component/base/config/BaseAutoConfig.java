@@ -1,10 +1,12 @@
 package com.iuin.component.base.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author fa
  */
+@Slf4j
 @ComponentScan({
 //        "com.iuin.component.base.handle",
 //        "com.iuin.component.base.component",
@@ -12,5 +14,9 @@ import org.springframework.context.annotation.ComponentScan;
         "com.iuin.component.base",
 })
 public class BaseAutoConfig {
+
+    public BaseAutoConfig() {
+        log.info("BaseAutoConfig init...");
+    }
 
 }

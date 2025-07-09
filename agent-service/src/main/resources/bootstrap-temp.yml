@@ -1,3 +1,13 @@
+
+nacos:
+  server-addr: 10.0.16.146:8848
+  namespace: dev
+  group: v1
+  register-enabled: true
+  metadata:
+    # 自己的版本使用变量示例: Fa-${nacos.namespace}-version 加上 register-enabled:true 实现灰度发布自己的服务, 并配合添加请求头 nacos-version 实现路由到自己的灰度版本中
+    nacos-version: ${nacos.namespace}-version
+
 server:
   port: 9002
   tomcat:
@@ -5,6 +15,33 @@ server:
   max-http-request-header-size: 50KB
 
 spring:
+  config:
+    import:
+      - nacos:common.${spring.cloud.nacos.config.file-extension}?refreshEnabled=true&group=${nacos.group}
+      - nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}?refreshEnabled=true&group=${nacos.group}
+      - nacos:common-logback.xml?refreshEnabled=true&group=${nacos.group}
+  cloud:
+    loadbalancer:
+      nacos:
+        enabled: true
+    nacos:
+      discovery:
+        server-addr: ${nacos.server-addr}
+        namespace: ${nacos.namespace}
+        group: ${nacos.group}
+        register-enabled: ${nacos.register-enabled:true}
+        metadata:
+          nacos-version: ${nacos.metadata.nacos-version:${nacos.namespace}-version}
+      config:
+        server-addr: ${nacos.server-addr}
+        file-extension: yml
+        namespace: ${nacos.namespace}
+        group: ${nacos.group}
+        prefix: ${spring.application.name}
+      server-addr: ${nacos.server-addr}
+      username: ${nacos.username}
+      password: ${nacos.password}
+
   datasource:
     url: jdbc:postgresql://${pgsql.address}:${pgsql.port}/${pgsql.dbname}?stringtype=unspecified
     username: ${pgsql.username}

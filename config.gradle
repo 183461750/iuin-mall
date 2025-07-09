@@ -1,9 +1,0 @@
-//ext {
-//    version = [
-//            set('springAiVersion', "1.0.0"),
-//            set('springCloudVersion', "2025.0.0"),
-//            set('springCloudAlibabaVersion', "2025.0.0"),
-//            set('sb_camundaBpm', "7.20.0"),
-//            set('querydsl', "4.4.0"),
-//    ]
-//}
