@@ -60,7 +60,7 @@
     <root level="INFO">
         <appender-ref ref="sw_stdout"/>
         <appender-ref ref="sw_grpc_log"/>
-        <appender-ref ref="ls_tcp"/>
+<!--        <appender-ref ref="ls_tcp"/>-->
 
 <!--        <appender-ref ref="stdout"/>-->
         <appender-ref ref="file"/>
