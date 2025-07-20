@@ -49,4 +49,5 @@ include 'component:pluggable-annotation:version-pluggable'
 include 'component:pluggable-annotation:take_time_processor'
 
 include 'agent-service'
+include 'mcp-service'
 

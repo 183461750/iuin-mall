@@ -1,4 +1,4 @@
-package com.iuin.agent.mcp;
+package com.iuin.mcp.tools;
 
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
