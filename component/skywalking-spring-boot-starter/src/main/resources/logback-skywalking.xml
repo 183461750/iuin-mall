@@ -8,8 +8,7 @@
     <springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
 
     <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger:%L - %msg%n"/>
-    <property name="log.pattern.stdout"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %green([%thread]) %logger:%L - %msg%n"/>
+    <property name="log.pattern.stdout" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %green([%thread]) %logger:%L - %msg%n"/>
 
     <appender name="sw_stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
