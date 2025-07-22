@@ -10,4 +10,4 @@ spring:
     allow-bean-definition-overriding: true
 
 #  config:
-#    import: optional:classpath:bootstrap-common-local.yml
+#    import: optional:classpath:bootstrap-base-local.yml

@@ -2,7 +2,7 @@ spring:
   profiles:
     active: local
 #    active: temp2
-    include: common,common-${spring.profiles.active}
+    include: nacos,base-${spring.profiles.active}
 #    include: common
   application:
     name: mcp-service
@@ -10,4 +10,4 @@ spring:
     allow-bean-definition-overriding: true
 
 #  config:
-#    import: optional:classpath:bootstrap-common-local.yml
+#    import: optional:classpath:bootstrap-base-local.yml
