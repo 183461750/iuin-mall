@@ -9,11 +9,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author fa
  */
-//@Configuration(proxyBeanMethods = false)
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(Feign.class)
 @ConditionalOnBean(Client.class)
 @AutoConfigureAfter(FeignAutoConfiguration.class)

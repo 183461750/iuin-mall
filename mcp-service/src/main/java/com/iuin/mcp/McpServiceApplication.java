@@ -1,15 +1,7 @@
 package com.iuin.mcp;
 
-import io.modelcontextprotocol.client.McpSyncClient;
-import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
-import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.ChatClient.Builder;
-import org.springframework.ai.chat.memory.MessageWindowChatMemory;
-import java.util.List;
 
 @SpringBootApplication
 public class McpServiceApplication {
@@ -17,4 +9,4 @@ public class McpServiceApplication {
         SpringApplication.run(McpServiceApplication.class, args);
     }
 
-} 
+}
