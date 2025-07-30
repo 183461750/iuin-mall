@@ -57,10 +57,11 @@ public class TransactionTimeAspect {
 
             // 打印事务执行时间及方法信息，包括行号
             Map<String, Integer> threadTransCountMap = getThreadTransCountMap();
-            log.info("[事务时间统计数据]: 事务持续时间: {} ms, 线程ID: {}, 事务方法代码位置: {}, 调用者方法代码位置: {}, 线程-事务计数: {}",
+            // PS: 代码行为 -1 时, 则代表可能是框架内部调用的, 就只需要看 [事务方法代码位置] 就行
+            log.info("[事务时间统计]: 事务持续时间: {} ms, 线程ID: {}, 事务方法代码位置: {}, 调用者方法代码位置: {}, 线程-事务计数: {}",
                     duration, Thread.currentThread().getId(), methodInfo.transLocation(), methodInfo.callerLocation(), threadTransCountMap);
         } catch (Exception e) {
-            log.error("[事务时间统计数据]: afterMethod异常", e);
+            log.error("[事务时间统计]: afterMethod异常", e);
         } finally {
             // 确保在任何情况下都移除 ThreadLocal 的值
             methodInfoMap.remove(key);
@@ -84,10 +85,11 @@ public class TransactionTimeAspect {
 
             // 打印事务执行时间、方法信息和异常信息，包括行号
             Map<String, Integer> threadTransCountMap = getThreadTransCountMap();
-            log.info("[事务时间统计数据]: 事务持续时间 {} ms in 线程ID: {}, 事务方法代码位置: {}, 调用者方法代码位置: {}, 线程-事务计数: {}, 异常消息: {}",
+            // PS: 代码行为 -1 时, 则代表可能是框架内部调用的, 就只需要看 [事务方法代码位置] 就行
+            log.info("[事务时间统计]: 事务持续时间 {} ms in 线程ID: {}, 事务方法代码位置: {}, 调用者方法代码位置: {}, 线程-事务计数: {}, 异常消息: {}",
                     duration, Thread.currentThread().getId(), methodInfo.transLocation(), methodInfo.callerLocation(), threadTransCountMap, ex.getMessage());
         } catch (Exception e) {
-            log.error("[事务时间统计数据]: afterThrowing异常", e);
+            log.error("[事务时间统计]: afterThrowing异常", e);
         } finally {
             // 确保在任何情况下都移除 ThreadLocal 的值
             methodInfoMap.remove(key);
@@ -100,7 +102,9 @@ public class TransactionTimeAspect {
 
     private static String getKeyByThreadAndLocation(String className, String methodName) {
         long threadId = Thread.currentThread().getId();
-        return StrUtil.join("-", threadId, getLocation(className, methodName), getCallerLocation());
+        String threadName = Thread.currentThread().getName();
+        String threadStr = threadId + "-" + threadName;
+        return StrUtil.join("-", threadStr, getLocation(className, methodName), getCallerLocation());
     }
 
     /**
