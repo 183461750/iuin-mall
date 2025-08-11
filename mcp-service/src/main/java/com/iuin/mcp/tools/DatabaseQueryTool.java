@@ -13,7 +13,7 @@ public class DatabaseQueryTool {
 
     private final JdbcTemplate jdbcTemplate;
 
-    @Tool(description = "数据库查询，传入SQL语句，返回结果列表")
+    @Tool(description = "pgsql数据库sql执行工具")
     public String dbQuery(@ToolParam(description = "需要查询的sql") String sql,
                           ToolContext toolContext) {
         try {
