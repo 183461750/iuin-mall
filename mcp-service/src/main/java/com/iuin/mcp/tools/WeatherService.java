@@ -1,6 +1,6 @@
 package com.iuin.mcp.tools;
 
-import org.slf4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.model.ToolContext;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
@@ -9,10 +9,9 @@ import org.springframework.web.client.RestClient;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
 public class WeatherService {
-
-    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(WeatherService.class);
 
     private final RestClient restClient;
 

@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 public class McpConfig {
 
     @Bean
-    public ToolCallbackProvider tools(WeatherService weatherService, DatabaseQueryTool databaseQueryTool) {
-        return MethodToolCallbackProvider.builder().toolObjects(weatherService).build();
+    public ToolCallbackProvider toolCallbackProvider(WeatherService weatherService, DatabaseQueryTool databaseQueryTool) {
+        return MethodToolCallbackProvider.builder().toolObjects(weatherService, databaseQueryTool).build();
     }
 
 }
