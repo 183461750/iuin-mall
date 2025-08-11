@@ -5,16 +5,7 @@ dependencies {
     implementation project(':component:base-spring-boot-starter')
     implementation project(':component:skywalking-spring-boot-starter')
     implementation project(':component:nacos-spring-boot-starter')
-
     implementation project(':component:ai-spring-boot-starter')
-
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.postgresql:postgresql'
-
-    // Lombok for logging and annotations
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
 
 }
 
