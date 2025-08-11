@@ -32,12 +32,16 @@ spring:
         register-enabled: ${nacos.register-enabled:true}
         metadata:
           nacos-version: ${nacos.metadata.nacos-version:${nacos.namespace}-version}
+        username: ${nacos.username}
+        password: ${nacos.password}
       config:
         server-addr: ${nacos.server-addr}
         file-extension: yml
         namespace: ${nacos.namespace}
         group: ${nacos.group}
         prefix: ${spring.application.name}
+        username: ${nacos.username}
+        password: ${nacos.password}
       server-addr: ${nacos.server-addr}
       username: ${nacos.username}
       password: ${nacos.password}

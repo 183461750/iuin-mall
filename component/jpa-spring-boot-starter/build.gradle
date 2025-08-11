@@ -9,6 +9,7 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
 
     api 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compileOnly('org.springframework.cloud:spring-cloud-starter-bootstrap')
 
     // QueryDSL
     api("com.querydsl:querydsl-core")

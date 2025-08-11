@@ -2,7 +2,7 @@ spring:
   profiles:
     active: local
 #    active: temp2
-    include: nacos,base-${spring.profiles.active}
+    include: base-${spring.profiles.active},jpa,nacos,common
 #    include: common
   application:
     name: mcp-service

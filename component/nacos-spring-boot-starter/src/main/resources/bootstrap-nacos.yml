@@ -11,6 +11,8 @@ spring:
     nacos:
       discovery:
         server-addr: ${nacos.server-addr}
+        username: ${nacos.username}
+        password: ${nacos.password}
         namespace: ${nacos.namespace}
         group: ${nacos.group}
         register-enabled: ${nacos.register-enabled:true}
@@ -18,6 +20,8 @@ spring:
           nacos-version: ${nacos.metadata.nacos-version:${nacos.namespace}-version}
       config:
         server-addr: ${nacos.server-addr}
+        username: ${nacos.username}
+        password: ${nacos.password}
         file-extension: yml
         namespace: ${nacos.namespace}
         group: ${nacos.group}
@@ -25,3 +29,13 @@ spring:
       server-addr: ${nacos.server-addr}
       username: ${nacos.username}
       password: ${nacos.password}
+
+  nacos:
+    config:
+      server-addr: ${nacos.server-addr}
+      username: ${nacos.username}
+      password: ${nacos.password}
+      file-extension: yml
+      prefix: ${spring.application.name}
+    server-addr: ${nacos.server-addr}
+    username: ${nacos.username}

@@ -1,6 +1,7 @@
 nacos:
-  address: ${IUIN_NACOS_ADDR:10.0.1.148}
-  port: ${IUIN_NACOS_PORT:8848}
+  server-addr: ${IUIN_NACOS_SERVER_ADDR:10.0.1.148:8848}
+  username: ${IUIN_NACOS_USERNAME:nacos}
+  password: ${IUIN_NACOS_PASSWORD:nacos}
   namespace: ${IUIN_NACOS_NAMESPACE:fa-server-sso}
   group: ${IUIN_NACOS_GROUP:v1}
   register-enabled: ${IUIN_NACOS_REGISTER_ENABLED:true}

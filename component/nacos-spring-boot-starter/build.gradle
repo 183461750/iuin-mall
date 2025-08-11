@@ -12,6 +12,7 @@ dependencies {
     api 'org.springframework.cloud:spring-cloud-starter-openfeign'
 //    api 'org.springframework.cloud:spring-cloud-loadbalancer'
     api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+    api 'com.github.ben-manes.caffeine:caffeine'
 
     //nacos
 //    api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
