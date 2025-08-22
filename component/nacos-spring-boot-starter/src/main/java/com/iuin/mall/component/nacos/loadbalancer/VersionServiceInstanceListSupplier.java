@@ -95,7 +95,7 @@ public class VersionServiceInstanceListSupplier extends DelegatingServiceInstanc
             log.info("返回请求服务:[{}]为version:[{}]的有:[{}]个", getServiceId(), version, selectServiceInstances.size());
             return selectServiceInstances;
         }
-        log.info("返回请求服务:[{}]为version:[{}]的有:[{}]个", getServiceId(), DEFAULT_NACOS_VERSION, selectServiceInstances.size());
+        log.info("返回请求服务:[{}]为version:[{}]的有:[{}]个", getServiceId(), DEFAULT_NACOS_VERSION, 0);
 
         // 3、返回所有实例
         return instances;
