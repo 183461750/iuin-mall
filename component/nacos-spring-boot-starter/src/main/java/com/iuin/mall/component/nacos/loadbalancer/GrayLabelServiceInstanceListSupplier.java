@@ -27,17 +27,17 @@ import java.util.Objects;
  * @since 2023/6/19 - 21:14
  */
 @Slf4j
-public class VersionServiceInstanceListSupplier extends DelegatingServiceInstanceListSupplier {
+public class GrayLabelServiceInstanceListSupplier extends DelegatingServiceInstanceListSupplier {
 
     /**
      * 请求头的名字， 通过这个 version 字段和 服务中的元数据来version字段进行比较，
      * 得到最终的实例数据
      */
-    private static final String VERSION_HEADER_NAME = ServiceHeaderConstant.HEADER_NACOS_VERSION;
-    private static final String DEFAULT_NACOS_VERSION = "default";
+    private static final String VERSION_HEADER_NAME = ServiceHeaderConstant.HEADER_GRAY_LABEL;
+    private static final String DEFAULT_GRAY_LABEL = "default";
 
 
-    public VersionServiceInstanceListSupplier(ServiceInstanceListSupplier delegate) {
+    public GrayLabelServiceInstanceListSupplier(ServiceInstanceListSupplier delegate) {
         super(delegate);
     }
 
@@ -89,13 +89,13 @@ public class VersionServiceInstanceListSupplier extends DelegatingServiceInstanc
 
         // 2、返回 version=default 的实例
         selectServiceInstances = instances.stream().filter(
-                instance -> Objects.equals(instance.getMetadata().get(VERSION_HEADER_NAME), DEFAULT_NACOS_VERSION)
+                instance -> Objects.equals(instance.getMetadata().get(VERSION_HEADER_NAME), DEFAULT_GRAY_LABEL)
         ).toList();
         if (!selectServiceInstances.isEmpty()) {
             log.info("返回请求服务:[{}]为version:[{}]的有:[{}]个", getServiceId(), version, selectServiceInstances.size());
             return selectServiceInstances;
         }
-        log.info("返回请求服务:[{}]为version:[{}]的有:[{}]个", getServiceId(), DEFAULT_NACOS_VERSION, 0);
+        log.info("返回请求服务:[{}]为version:[{}]的有:[{}]个", getServiceId(), DEFAULT_GRAY_LABEL, 0);
 
         // 3、返回所有实例
         return instances;

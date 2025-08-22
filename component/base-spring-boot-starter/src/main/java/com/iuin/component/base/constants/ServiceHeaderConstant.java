@@ -18,7 +18,7 @@ public class ServiceHeaderConstant {
     /**
      * nacos版本
      */
-    public static final String HEADER_NACOS_VERSION = "nacos-version";
+    public static final String HEADER_GRAY_LABEL = "gray-label";
 
     /**
      * nacos分组

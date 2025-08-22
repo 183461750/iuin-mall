@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
- * 将version请求头通过feign传递到下游
+ * 将gray-label请求头通过feign传递到下游
  *
  * @author huan.fu
  * @since 2023/6/20 - 08:27
@@ -17,14 +17,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class VersionRequestInterceptor implements RequestInterceptor {
+public class GrayLabelRequestInterceptor implements RequestInterceptor {
 
     private final BaseServiceComponent baseServiceComponent;
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        String version = baseServiceComponent.getHeaderNacosVersion();
+        String version = baseServiceComponent.getHeaderGrayLabel();
         log.info("feign 中传递的 version 请求头的值为:[{}]", version);
-        requestTemplate.header(ServiceHeaderConstant.HEADER_NACOS_VERSION, version);
+        requestTemplate.header(ServiceHeaderConstant.HEADER_GRAY_LABEL, version);
     }
 }

@@ -47,19 +47,19 @@ public class BaseServiceComponent {
     }
 
     /**
-     * 获取请求头中的nacos版本
+     * 获取请求头中的灰度标签
      */
-    public String getHeaderNacosVersion() {
-        return this.getHeaderNacosVersion(false);
+    public String getHeaderGrayLabel() {
+        return this.getHeaderGrayLabel(false);
     }
 
     /**
-     * 获取请求头中的nacos版本
+     * 获取请求头中的灰度标签
      */
-    public String getHeaderNacosVersion(Boolean isThrow) {
+    public String getHeaderGrayLabel(Boolean isThrow) {
         HttpServletRequest request = getRequest();
 
-        String headerValue = request.getHeader(ServiceHeaderConstant.HEADER_NACOS_VERSION);
+        String headerValue = request.getHeader(ServiceHeaderConstant.HEADER_GRAY_LABEL);
 
         if (Boolean.FALSE.equals(isThrow)) {
             return headerValue;
@@ -67,7 +67,7 @@ public class BaseServiceComponent {
 
         return Optional.ofNullable(headerValue).filter(StrUtil::isNotBlank).orElseThrow(
                 () -> new BusinessException(ResponseCodeEnum.HEADER_PARAM_CAN_NOT_BE_EMPTY, CharSequenceUtil.format(
-                        ResponseCodeEnum.HEADER_PARAM_CAN_NOT_BE_EMPTY.getMessage(), ServiceHeaderConstant.HEADER_NACOS_VERSION
+                        ResponseCodeEnum.HEADER_PARAM_CAN_NOT_BE_EMPTY.getMessage(), ServiceHeaderConstant.HEADER_GRAY_LABEL
                 ))
         );
     }

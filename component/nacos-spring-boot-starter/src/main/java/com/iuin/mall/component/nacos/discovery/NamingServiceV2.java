@@ -57,9 +57,9 @@ public class NamingServiceV2 extends NacosNamingService {
         ServiceInfo serviceInfo = getServiceInfo(serviceName, groupName, clusters, subscribe);
 
         // 自定义通过请求头选择实例
-        String nacosVersion = baseServiceComponent.getHeaderNacosVersion();
+        String nacosVersion = baseServiceComponent.getHeaderGrayLabel();
         for (Instance instance : serviceInfo.getHosts()) {
-            if (Objects.equals(nacosVersion, instance.getMetadata().get(ServiceHeaderConstant.HEADER_NACOS_VERSION))) {
+            if (Objects.equals(nacosVersion, instance.getMetadata().get(ServiceHeaderConstant.HEADER_GRAY_LABEL))) {
                 return instance;
             }
         }
@@ -135,9 +135,9 @@ public class NamingServiceV2 extends NacosNamingService {
         }
 
         // 自定义通过请求头选择实例
-        boolean anyMatchHeaderVersion = list.stream().anyMatch(instance -> Objects.equals(baseServiceComponent.getHeaderNacosVersion(), instance.getMetadata().get(ServiceHeaderConstant.HEADER_NACOS_VERSION)));
+        boolean anyMatchHeaderVersion = list.stream().anyMatch(instance -> Objects.equals(baseServiceComponent.getHeaderGrayLabel(), instance.getMetadata().get(ServiceHeaderConstant.HEADER_GRAY_LABEL)));
         if (Boolean.TRUE.equals(anyMatchHeaderVersion)) {
-            list.removeIf(instance -> !Objects.equals(baseServiceComponent.getHeaderNacosVersion(), instance.getMetadata().get(ServiceHeaderConstant.HEADER_NACOS_VERSION)));
+            list.removeIf(instance -> !Objects.equals(baseServiceComponent.getHeaderGrayLabel(), instance.getMetadata().get(ServiceHeaderConstant.HEADER_GRAY_LABEL)));
             return list;
         }
 

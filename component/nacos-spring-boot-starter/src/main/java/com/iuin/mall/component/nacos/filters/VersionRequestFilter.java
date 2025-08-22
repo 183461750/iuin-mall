@@ -10,7 +10,6 @@ import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -38,7 +37,7 @@ public class VersionRequestFilter implements GlobalFilter, Ordered {
         // ③ 将灰度标记放入请求头中
         ServerHttpRequest tokenRequest = exchange.getRequest().mutate()
                 // 将灰度标记传递过去
-                .header(ServiceHeaderConstant.HEADER_NACOS_VERSION, headers.getFirst(ServiceHeaderConstant.HEADER_NACOS_VERSION))
+                .header(ServiceHeaderConstant.HEADER_GRAY_LABEL, headers.getFirst(ServiceHeaderConstant.HEADER_GRAY_LABEL))
                 .build();
 
         HttpHeaders headers2 = tokenRequest.getHeaders();

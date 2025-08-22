@@ -5,8 +5,8 @@ nacos:
   group: v1
   register-enabled: true
   metadata:
-    # 自己的版本使用变量示例: Fa-${nacos.namespace}-version 加上 register-enabled:true 实现灰度发布自己的服务, 并配合添加请求头 nacos-version 实现路由到自己的灰度版本中
-    nacos-version: ${nacos.namespace}-version
+    # 自己的版本使用变量示例: Fa 加上 register-enabled:true 实现灰度发布自己的服务, 并配合添加请求头 gray-label 实现路由到自己的灰度版本中
+    gray-label: default
 
 server:
   port: 9002
@@ -31,7 +31,7 @@ spring:
         group: ${nacos.group}
         register-enabled: ${nacos.register-enabled:true}
         metadata:
-          nacos-version: ${nacos.metadata.nacos-version:${nacos.namespace}-version}
+          gray-label: ${nacos.metadata.gray-label:default}
         username: ${nacos.username}
         password: ${nacos.password}
       config:

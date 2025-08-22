@@ -17,7 +17,7 @@ spring:
         group: ${nacos.group}
         register-enabled: ${nacos.register-enabled:true}
         metadata:
-          nacos-version: ${nacos.metadata.nacos-version:${nacos.namespace}-version}
+          gray-label: ${nacos.metadata.gray-label:default}
       config:
         server-addr: ${nacos.server-addr}
         username: ${nacos.username}
