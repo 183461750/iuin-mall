@@ -50,4 +50,4 @@ include 'component:pluggable-annotation:take_time_processor'
 
 include 'agent-service'
 include 'mcp-service'
-
+include 'mcp-service:mcp-service-api'

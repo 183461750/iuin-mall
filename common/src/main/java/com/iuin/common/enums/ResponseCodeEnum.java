@@ -135,6 +135,11 @@ public enum ResponseCodeEnum {
     SEARCH_SERVER_ERROR(2012, "请求搜索服务失败"),
 
     /**
+     * 请求mcp服务失败
+     */
+    MCP_SERVER_ERROR(2013, "请求mcp服务失败"),
+
+    /**
      * 获取锁超时
      */
     SERVICE_LOCK_TIME_OUT(2023, "系统繁忙，请稍后再试"),

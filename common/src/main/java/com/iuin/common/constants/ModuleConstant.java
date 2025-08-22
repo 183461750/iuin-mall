@@ -53,6 +53,11 @@ public class ModuleConstant implements Serializable {
     public static final String SEARCH = "search";
 
     /**
+     * mcp
+     */
+    public static final String MCP = "mcp";
+
+    /**
      * 单点登录服务名
      */
     public static final String SSO_SERVER_SERVICE = SSO_SERVER + CharPool.DASHED + SERVICE;
@@ -66,6 +71,11 @@ public class ModuleConstant implements Serializable {
      * 搜索服务名
      */
     public static final String SEARCH_SERVICE = SEARCH + CharPool.DASHED + SERVICE;
+
+    /**
+     * mcp服务名
+     */
+    public static final String MCP_SERVICE = MCP + CharPool.DASHED + SERVICE;
 
     /**
      * 单点登录服务接口路径前缀
@@ -91,5 +101,10 @@ public class ModuleConstant implements Serializable {
      * 搜索服务接口路径前缀
      */
     public static final String SEARCH_FEIGN_PATH_PREFIX = CharPool.SLASH + SEARCH + CharPool.SLASH + FEIGN;
+
+    /**
+     * mcp服务接口路径前缀
+     */
+    public static final String MCP_FEIGN_PATH_PREFIX = CharPool.SLASH + MCP + CharPool.SLASH + FEIGN;
 
 }
