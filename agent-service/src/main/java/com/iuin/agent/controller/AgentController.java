@@ -1,5 +1,6 @@
 package com.iuin.agent.controller;
 
+import com.iuin.common.constants.ModuleConstant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.ChatClientResponse;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/agent")
+@RequestMapping(ModuleConstant.AGENT_SERVER_PATH_PREFIX)
 public class AgentController {
 
     private final ChatClient chatClient;

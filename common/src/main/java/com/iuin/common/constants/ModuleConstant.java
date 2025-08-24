@@ -28,6 +28,11 @@ public class ModuleConstant implements Serializable {
     public static final String SSO_SERVER = "sso-server";
 
     /**
+     * agent服务
+     */
+    public static final String AGENT = "agent";
+
+    /**
      * 支撑
      */
     public static final String SUPPORT = "support";
@@ -63,6 +68,11 @@ public class ModuleConstant implements Serializable {
     public static final String SSO_SERVER_SERVICE = SSO_SERVER + CharPool.DASHED + SERVICE;
 
     /**
+     * agent服务名
+     */
+    public static final String AGENT_SERVER_SERVICE = AGENT + CharPool.DASHED + SERVICE;
+
+    /**
      * 商品服务名
      */
     public static final String COMMODITY_SERVICE = COMMODITY + CharPool.DASHED + SERVICE;
@@ -81,6 +91,11 @@ public class ModuleConstant implements Serializable {
      * 单点登录服务接口路径前缀
      */
     public static final String SSO_SERVER_PATH_PREFIX = CharPool.SLASH + SSO_SERVER;
+
+    /**
+     * agent服务接口路径前缀
+     */
+    public static final String AGENT_SERVER_PATH_PREFIX = CharPool.SLASH + AGENT;
 
     /**
      * 单点登录服务内部接口路径前缀

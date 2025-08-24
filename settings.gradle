@@ -3,7 +3,7 @@ rootProject.name = 'iuin-mall'
 include 'common-dependencies'
 
 // TODO @Fa 先注释掉先
-//include 'gateway-service'
+include 'gateway-service'
 //include 'config-service'
 //include 'sso-server-service'
 //include 'sso-server-service:sso-server-service-api'

@@ -1,0 +1,51 @@
+nacos:
+  server-addr: 10.0.16.146:8848
+  namespace: dev
+  group: v1
+  username: nacos
+  password: nacos
+  register-enabled: true
+  metadata:
+    gray-label: default
+
+redis:
+  address: 10.0.16.146
+  port: 6379
+  password: foobared
+
+server:
+  port: 8100
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+    nacos:
+      discovery:
+        server-addr: ${nacos.server-addr}
+        namespace: ${nacos.namespace}
+        group: ${nacos.group}
+        username: ${nacos.username}
+        password: ${nacos.password}
+        register-enabled: ${nacos.register-enabled:true}
+        metadata:
+          gray-label: ${nacos.metadata.gray-label:default}
+      config:
+        server-addr: ${nacos.server-addr}
+        namespace: ${nacos.namespace}
+        group: ${nacos.group}
+        username: ${nacos.username}
+        password: ${nacos.password}
+  data:
+    redis:
+      host: ${redis.address}
+      port: ${redis.port}
+      password: ${redis.password}

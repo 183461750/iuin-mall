@@ -31,6 +31,10 @@ public class RouteLocatorConfig {
                 .route(ModuleConstant.SSO_SERVER_SERVICE,
                         r -> r.path(ModuleConstant.SSO_SERVER_PATH_PREFIX + PATH_SUFFIX)
                                 .uri(URI_PREFIX + ModuleConstant.SSO_SERVER_SERVICE))
+                // agent-server
+                .route(ModuleConstant.AGENT_SERVER_SERVICE,
+                        r -> r.path(ModuleConstant.AGENT_SERVER_PATH_PREFIX + PATH_SUFFIX)
+                                .uri(URI_PREFIX + ModuleConstant.AGENT_SERVER_SERVICE))
                 .build();
     }
 }

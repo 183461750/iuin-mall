@@ -1,6 +1,7 @@
 package com.iuin.agent.controller;
 
 import com.iuin.agent.service.ITestService;
+import com.iuin.common.constants.ModuleConstant;
 import com.iuin.common.utils.RespResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/test")
+@RequestMapping(ModuleConstant.AGENT_SERVER_PATH_PREFIX + "/test")
 public class TestController {
 
     private final ITestService testService;
