@@ -1,6 +1,6 @@
 package com.iuin.mall.component.nacos.loadbalancer;
 
-import com.iuin.component.base.constants.ServiceHeaderConstant;
+import com.iuin.mall.component.nacos.constant.NacosHeaderConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.Request;
@@ -17,14 +17,13 @@ import java.util.Objects;
  * 自定义 根据服务名 获取服务实例 列表
  * <p>
  * 需求： 用户通过请求访问 网关<br />
- * 1、如果请求头中的 version 值和 下游服务元数据的 version 值一致，则选择该 服务。<br />
- * 2、如果请求头中的 version 值和 下游服务元数据的 version 值不一致，且 不存在 version 的值 为 default 则直接报错。<br />
- * 3、如果请求头中的 version 值和 下游服务元数据的 version 值不一致，且 存在 version 的值 为 default，则选择该服务。<br />
+ * 1、如果请求头中的 version 值和 下游服务元数据的 version 值一致，则选择该 服务列表。<br />
+ * 2、如果请求头中的 version 值和 下游服务元数据的 version 值不一致，且 存在 version 的值 为 default，则选择该服务列表。<br />
+ * 3、如果请求头中的 version 值和 下游服务元数据的 version 值不一致，且 不存在 version 的值 为 default 则放回所有服务列表。<br />
  * <p>
  * 参考: {@link org.springframework.cloud.loadbalancer.core.HintBasedServiceInstanceListSupplier} 实现
  *
- * @author huan.fu
- * @since 2023/6/19 - 21:14
+ * @author Fa
  */
 @Slf4j
 public class GrayLabelServiceInstanceListSupplier extends DelegatingServiceInstanceListSupplier {
@@ -33,9 +32,8 @@ public class GrayLabelServiceInstanceListSupplier extends DelegatingServiceInsta
      * 请求头的名字， 通过这个 version 字段和 服务中的元数据来version字段进行比较，
      * 得到最终的实例数据
      */
-    private static final String VERSION_HEADER_NAME = ServiceHeaderConstant.HEADER_GRAY_LABEL;
+    private static final String VERSION_HEADER_NAME = NacosHeaderConstant.HEADER_GRAY_LABEL;
     private static final String DEFAULT_GRAY_LABEL = "default";
-
 
     public GrayLabelServiceInstanceListSupplier(ServiceInstanceListSupplier delegate) {
         super(delegate);
@@ -59,7 +57,7 @@ public class GrayLabelServiceInstanceListSupplier extends DelegatingServiceInsta
         if (requestContext instanceof RequestDataContext) {
             version = getVersionFromHeader((RequestDataContext) requestContext);
         }
-        log.info("获取到需要请求服务[{}]的version:[{}]", getServiceId(), version);
+//        log.info("[nacos]: 获取到需要请求服务[{}]的version:[{}]", getServiceId(), version);
         return version;
     }
 
@@ -83,7 +81,7 @@ public class GrayLabelServiceInstanceListSupplier extends DelegatingServiceInsta
                 instance -> Objects.equals(instance.getMetadata().get(VERSION_HEADER_NAME), version)
         ).toList();
         if (!selectServiceInstances.isEmpty()) {
-            log.info("返回请求服务:[{}]为version:[{}]的有:[{}]个", getServiceId(), version, selectServiceInstances.size());
+            log.info("[nacos]: 返回请求服务:[{}]为version:[{}]的有:[{}]个", getServiceId(), version, selectServiceInstances.size());
             return selectServiceInstances;
         }
 
@@ -92,10 +90,10 @@ public class GrayLabelServiceInstanceListSupplier extends DelegatingServiceInsta
                 instance -> Objects.equals(instance.getMetadata().get(VERSION_HEADER_NAME), DEFAULT_GRAY_LABEL)
         ).toList();
         if (!selectServiceInstances.isEmpty()) {
-            log.info("返回请求服务:[{}]为version:[{}]的有:[{}]个", getServiceId(), version, selectServiceInstances.size());
+            log.info("[nacos]: 返回请求服务:[{}]为version:[{}]的有:[{}]个", getServiceId(), version, selectServiceInstances.size());
             return selectServiceInstances;
         }
-        log.info("返回请求服务:[{}]为version:[{}]的有:[{}]个", getServiceId(), DEFAULT_GRAY_LABEL, 0);
+        log.info("[nacos]: 返回请求服务:[{}]为version:[{}]的有:[{}]个", getServiceId(), DEFAULT_GRAY_LABEL, 0);
 
         // 3、返回所有实例
         return instances;

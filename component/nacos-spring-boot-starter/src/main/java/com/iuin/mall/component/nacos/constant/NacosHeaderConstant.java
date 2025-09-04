@@ -1,0 +1,28 @@
+package com.iuin.mall.component.nacos.constant;
+
+import lombok.NoArgsConstructor;
+
+/**
+ * 服务请求头常量
+ *
+ * @author fa
+ */
+@NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
+public class NacosHeaderConstant {
+
+    /**
+     * 商城Id
+     */
+    public static final String HEADER_SHOP_ID = "shopid";
+
+    /**
+     * nacos版本
+     */
+    public static final String HEADER_GRAY_LABEL = "gray-label";
+
+    /**
+     * nacos分组
+     */
+    public static final String HEADER_NACOS_GROUP = "nacos-group";
+
+}

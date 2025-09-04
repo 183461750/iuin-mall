@@ -1,6 +1,6 @@
 package com.iuin.mall.component.nacos.config;
 
-import com.iuin.component.base.component.BaseServiceComponent;
+import com.iuin.mall.component.nacos.components.NacosHeaderComponent;
 import com.iuin.mall.component.nacos.interceptors.GrayLabelRequestInterceptor;
 import feign.Client;
 import feign.Feign;
@@ -21,8 +21,8 @@ import org.springframework.context.annotation.Configuration;
 public class FeignAutoConfig {
 
     @Bean
-    public GrayLabelRequestInterceptor versionRequestInterceptor(BaseServiceComponent baseServiceComponent) {
-        return new GrayLabelRequestInterceptor(baseServiceComponent);
+    public GrayLabelRequestInterceptor versionRequestInterceptor(NacosHeaderComponent nacosHeaderComponent) {
+        return new GrayLabelRequestInterceptor(nacosHeaderComponent);
     }
 
 }
