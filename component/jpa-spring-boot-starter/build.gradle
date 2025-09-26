@@ -5,6 +5,7 @@ jar.enabled = true
 bootJar.enabled = false
 
 dependencies {
+    implementation project(':common')
 
     runtimeOnly 'org.postgresql:postgresql'
 

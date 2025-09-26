@@ -1,9 +1,10 @@
-package com.iuin.agent.aspect;
+package com.iuin.component.base.handle.aspect;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 @Aspect
 @Component
 @Slf4j
+// 有事务注解存在时，才会注册到bean容器中
+@ConditionalOnClass(name = "org.springframework.transaction.annotation.Transactional")
 public class TransactionTimeAspect {
 
     private final Map<String, MethodInfo> methodInfoMap = new HashMap<>();
@@ -25,7 +28,7 @@ public class TransactionTimeAspect {
     /**
      * 配置切入规则
      */
-    @Pointcut("execution(* *(..)) && @annotation(org.springframework.transaction.annotation.Transactional)")
+    @Pointcut("execution(* com.iuin..*(..)) && @annotation(org.springframework.transaction.annotation.Transactional)")
     public void transactionTimeAspect() {
     }
 
