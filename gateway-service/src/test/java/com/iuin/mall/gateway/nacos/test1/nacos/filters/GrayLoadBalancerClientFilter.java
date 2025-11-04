@@ -1,6 +1,7 @@
 package com.iuin.mall.gateway.nacos.test1.nacos.filters;
 
 import cn.hutool.http.HttpUtil;
+import com.iuin.mall.gateway.nacos.test1.nacos.lbs.GrayLoadBalancer;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.ServiceInstance;
