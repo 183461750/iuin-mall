@@ -54,6 +54,9 @@ subprojects {
         // 所有子项目都依赖 Lombok，版本由 Spring Boot BOM 管理
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
+
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
     }
 
     // 3.4 统一管理依赖版本 (BOM)
