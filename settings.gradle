@@ -47,6 +47,7 @@ include 'component:test:testcontainers'
 include 'component:pluggable-annotation'
 include 'component:pluggable-annotation:version-pluggable'
 include 'component:pluggable-annotation:take_time_processor'
+include 'component:pluggable-annotation:compile-time-code-gen'
 
 include 'agent-service'
 include 'mcp-service'
