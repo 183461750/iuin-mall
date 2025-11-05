@@ -23,6 +23,9 @@ dependencies {
     implementation project(':component:pluggable-annotation:version-pluggable')
     annotationProcessor project(':component:pluggable-annotation:version-pluggable')
 
+    implementation project(':component:pluggable-annotation:compile-time-code-gen')
+    annotationProcessor project(':component:pluggable-annotation:compile-time-code-gen')
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // https://mvnrepository.com/artifact/org.apache.tika/tika-core
