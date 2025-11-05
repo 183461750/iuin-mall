@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-// 为了简化，暂时注释掉AutoService，后面可以手动创建服务文件
+// 使用AutoService自动注册注解处理器
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 @SupportedAnnotationTypes("com.iuin.component.pluggable_annotation.compile_time_code_gen.annotation.ClassSignatureConstants")
-//@AutoService(Processor.class)
+@AutoService(Processor.class)
 public class ClassSignatureConstantsProcessor extends AbstractProcessor {
 
     private Filer filer;

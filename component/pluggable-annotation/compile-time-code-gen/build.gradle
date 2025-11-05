@@ -4,8 +4,8 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 configurations {
@@ -19,9 +19,21 @@ repositories {
 }
 
 dependencies {
+    // Lombok核心依赖
+    implementation 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    
+    // AutoService用于生成META-INF/services文件
     implementation 'com.google.auto.service:auto-service:1.0-rc6'
     annotationProcessor 'com.google.auto.service:auto-service:1.0-rc6'
+    
+    // JavaPoet用于更方便地生成Java代码
     implementation 'com.squareup:javapoet:1.13.0'
+    
+    // JDK工具依赖，用于编译期代码生成
+    implementation files("${System.properties['java.home']}/../lib/tools.jar")
+    
+    // 测试依赖
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
