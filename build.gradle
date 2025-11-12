@@ -1,4 +1,5 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
+import org.gradle.api.JavaVersion
 
 // 1. 使用 plugins {} 块集中管理插件版本，并应用到所有子项目
 plugins {
@@ -12,38 +13,58 @@ plugins {
 group = "com.iuin"
 version = projectVersion
 
+// Gradle Wrapper配置，确保使用兼容Java 17的版本
+wrapper {
+    gradleVersion = '8.14.2' // 使用最新的兼容版本
+    distributionUrl = 'https://services.gradle.org/distributions/gradle-8.14.2-bin.zip'
+}
+
 // 2. 使用 allprojects 为所有项目（包括根项目和子项目）进行通用配置
 allprojects {
-
-    // 3.1 为所有子项目应用之前在根项目 plugins{} 中定义的插件
-    apply plugin: 'java-library'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
-
-    // 3.2 统一配置Java版本和编码
-    java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
-        }
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
+    // 基础配置对所有项目都适用
     tasks.withType(JavaCompile).configureEach {
         options.encoding = 'UTF-8'
     }
 
-    // 3.3 统一配置依赖
+    // 统一配置依赖
     configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
+        compileOnly {}
     }
 
     repositories {
         mavenLocal()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+    }
+    
+    // 根据项目路径应用不同的插件和Java配置
+    if (path == ':component:pluggable-annotation:compile-time-code-gen') {
+        // compile-time-code-gen模块特殊处理
+        apply plugin: 'java'
+        apply plugin: 'java-library'
+        
+        // 确保使用Java 17
+        java {
+            toolchain {
+                languageVersion = JavaLanguageVersion.of(17)
+            }
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
+        }
+    } else {
+        // 其他项目正常应用所有插件和Java 17配置
+        apply plugin: 'java-library'
+        apply plugin: 'org.springframework.boot'
+        apply plugin: 'io.spring.dependency-management'
+        
+        // 配置Java 17
+        java {
+            toolchain {
+                languageVersion = JavaLanguageVersion.of(17)
+            }
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
+        }
     }
 }
 
