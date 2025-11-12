@@ -21,30 +21,12 @@ public class UserService {
      */
     public void testGeneratedConstants() {
         // 访问生成的类名常量
-        String className = User.UserConstants.CLASS_NAME;
-        String fullClassName = User.UserConstants.FULL_CLASS_NAME;
-        
-        // 访问生成的字段名常量
-        String usernameField = User.UserConstants.FIELD_USERNAME;
-        String emailField = User.UserConstants.FIELD_EMAIL;
-        
-        // 访问生成的字段路径常量
-        String usernamePath = User.UserConstants.PATH_USERNAME;
-        String emailPath = User.UserConstants.PATH_EMAIL;
-        
-        // 访问生成的完整字段路径常量
-        String fullUsernamePath = User.UserConstants.FULL_PATH_USERNAME;
-        String fullEmailPath = User.UserConstants.FULL_PATH_EMAIL;
-        
+        String simple = User_UserConstants.SIMPLE_CLASS_NAME;
+        String full = User_UserConstants.CLASS_NAME;
+
         // 打印常量值
-        System.out.println("类名: " + className);
-        System.out.println("完整类名: " + fullClassName);
-        System.out.println("username字段名: " + usernameField);
-        System.out.println("email字段名: " + emailField);
-        System.out.println("username路径: " + usernamePath);
-        System.out.println("email路径: " + emailPath);
-        System.out.println("username完整路径: " + fullUsernamePath);
-        System.out.println("email完整路径: " + fullEmailPath);
+        System.out.println("简单类名: " + simple);
+        System.out.println("完整类名: " + full);
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,12 @@
-# Compile-time Code Gen 组件
+# Compile-time Code Gen 组件（JDK 17）
 
-一个编译时期自动生成类名和方法签名常量的注解处理器组件，类似于Lombok的@FieldNameConstants，但专注于生成类签名相关的常量。
+一个编译时期自动生成类名和方法签名常量的注解处理器组件，类似于 Lombok 的 `@FieldNameConstants`，但专注于生成类名常量，并适配 JDK 17。
+
+## 环境与兼容性
+- 要求 JDK 17；Gradle 已配置 `toolchain` 指向 Java 17。
+- 依赖 `org.projectlombok:lombok:1.18.24` 作为编译期处理器；支持 Lombok SPI 与标准 Processor 两种模式：
+  - 标准 Processor 模式（当前默认）：在包内为每个被注解类型生成顶层 `<TypeSimpleName>_Signatures` 类，避免命名冲突。
+  - Lombok SPI 模式（可选扩展）：在被注解类内部生成 `Signatures`（或自定义名）类型；如启用需在 JDK17 环境下增加编译器导出参数并引入 Lombok SPI 处理器。
 
 ## 功能特性
 
@@ -24,7 +30,7 @@ implementation project(':component:pluggable-annotation:compile-time-code-gen')
 annotationProcessor project(':component:pluggable-annotation:compile-time-code-gen')
 ```
 
-### 基本使用
+### 基本使用（类名常量）
 
 ```java
 import com.iuin.component.pluggable_annotation.compile_time_code_gen.annotation.ClassSignatureConstants;
@@ -40,9 +46,9 @@ public class UserService {
     }
 }
 
-// 使用生成的常量
-String className = UserService.Signatures.CLASS_NAME; // "包名.UserService"
-String methodSignature = UserService.Signatures.CREATE_USER; // "void createUser(String, String)"
+// 使用生成的类名常量
+String simple = UserService_Signatures.SIMPLE_CLASS_NAME; // 不含包名："UserService"
+String full = UserService_Signatures.CLASS_NAME; // 二进制全名："com.xxx.UserService"
 ```
 
 ## 注解参数说明
@@ -70,8 +76,8 @@ public class ProductService {
     }
 }
 
-// 使用枚举常量
-String methodValue = ProductService.Signatures.FIND_ALL.getValue(); // "List<Product> findAll()"
+// 使用枚举常量名（如需枚举值，请自行扩展枚举实现）
+String simpleConstName = ProductService_Signatures.SIMPLE_CLASS_NAME; // 顶层签名类常量名
 ```
 
 ### 2. 自定义前缀和后缀
@@ -84,8 +90,8 @@ public class OrderService {
     }
 }
 
-// 使用自定义前缀后缀的常量
-String methodSig = OrderService.Signatures.META_PROCESS_ORDER_SIG; // "void processOrder(long)"
+// 使用自定义前缀后缀的常量名（示例）
+String simpleConst = OrderService_Signatures.META_SIMPLE_CLASS_NAME_SIG; // "UserService"
 ```
 
 ### 3. 只包含公共方法
@@ -99,7 +105,7 @@ public class SecurityUtil {
     
     private static String getSessionId() {
         return "";
-    } // 私有方法不会生成常量
+    } // 私有方法不会生成常量（如启用方法签名生成时）
 }
 ```
 
@@ -119,8 +125,7 @@ public class UserRepository extends BaseRepository<User> {
     }
 }
 
-// 可以访问继承的方法常量
-String inheritedMethodSig = UserRepository.Signatures.FIND_BY_ID; // "T findById(long)"
+// 如启用方法签名生成，可访问继承的方法常量
 ```
 
 ## 常见问题
@@ -142,6 +147,27 @@ String inheritedMethodSig = UserRepository.Signatures.FIND_BY_ID; // "T findById
 
 ## 注意事项
 
-1. 生成的常量值包含完整的方法签名，包括返回类型、方法名和参数列表
-2. 对于泛型方法，生成的签名包含泛型参数声明
-3. 当使用`includeInheritedMethods=true`时，可能会生成大量常量，请谨慎使用
+1. 类名常量：
+  - `SIMPLE_CLASS_NAME` 为不含包名的二进制简单名；嵌套类使用 `$`（如 `Outer$Inner`）。
+  - `CLASS_NAME` 为二进制全限定名，包含包与 `$`（如 `com.example.Outer$Inner`）。
+  - 标准模式生成类名为 `<TypeSimpleName>_Signatures`（可通过注解参数 `innerClassName` 自定义后缀）。
+2. 对于泛型类，常量不包含类型参数（符合 Java 命名规范）。
+3. 当启用方法签名生成与 `includeInheritedMethods=true` 时，可能生成大量常量，请谨慎使用。
+
+## 示例：嵌套类与泛型类
+```java
+public class Outer {
+  @ClassSignatureConstants
+  public static class Inner {}
+}
+
+@ClassSignatureConstants
+public class GenericClass<T> {}
+
+assert "Outer$Inner".equals(Inner_Signatures.SIMPLE_CLASS_NAME);
+assert GenericClass_Signatures.SIMPLE_CLASS_NAME.equals("GenericClass");
+```
+
+## 运行测试
+- 在 `component/test` 提供了覆盖普通类、内部类、泛型类、匿名类影响的 JUnit 5 用例（`ClassNameGenerationTest`）。
+- 测试断言 `SIMPLE_CLASS_NAME/CLASS_NAME` 与预期一致。

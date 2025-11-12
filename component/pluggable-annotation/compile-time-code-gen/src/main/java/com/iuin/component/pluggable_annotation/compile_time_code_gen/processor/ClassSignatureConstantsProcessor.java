@@ -11,6 +11,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic;
 import java.io.IOException;
 import java.util.Set;
@@ -45,52 +46,62 @@ public class ClassSignatureConstantsProcessor extends AbstractProcessor {
     }
 
     private void generateClassConstants(TypeElement typeElement) throws IOException {
-        String className = typeElement.getSimpleName().toString();
-        String packageName = processingEnv.getElementUtils().getPackageOf(typeElement).toString();
-        String classSignature = typeElement.getQualifiedName().toString();
-        
-        // 生成常量名，将类名转换为大写并用下划线分隔
-        String constantName = convertToConstantName(className);
-        
-        // 创建常量字段
-        FieldSpec fieldSpec = FieldSpec.builder(
-                String.class,
-                constantName,
-                Modifier.PUBLIC, Modifier.STATIC, Modifier.FINAL
-            )
-            .initializer("$S", classSignature)
-            .build();
-        
-        // 创建内部类Clazz
-        TypeSpec clazzInnerClass = TypeSpec.classBuilder("Clazz")
-            .addModifiers(Modifier.PUBLIC, Modifier.STATIC, Modifier.FINAL)
-            .addField(fieldSpec)
-            .build();
-        
-        // 创建Java文件
-        JavaFile javaFile = JavaFile.builder(packageName, clazzInnerClass)
-            .build();
-        
-        // 写入文件
+        Elements elements = processingEnv.getElementUtils();
+        String packageName = elements.getPackageOf(typeElement).getQualifiedName().toString();
+        String binaryFull = elements.getBinaryName(typeElement).toString();
+        String simpleBinary = stripPackage(binaryFull);
+
+        ClassSignatureConstants ann = typeElement.getAnnotation(ClassSignatureConstants.class);
+        boolean asEnum = ann != null && ann.asEnum();
+        String innerName = ann != null && !ann.innerClassName().isBlank() ? ann.innerClassName() : "Signatures";
+        String generatedTypeName = typeElement.getSimpleName().toString() + "_" + innerName;
+        String prefix = ann != null ? ann.prefix() : "";
+        String suffix = ann != null ? ann.suffix() : "";
+
+        String fieldSimple = buildConstName(prefix, "SIMPLE_CLASS_NAME", suffix);
+        String fieldFull = buildConstName(prefix, "CLASS_NAME", suffix);
+
+        TypeSpec.Builder typeBuilder;
+        if (asEnum) {
+            typeBuilder = TypeSpec.enumBuilder(generatedTypeName)
+                .addModifiers(Modifier.PUBLIC);
+        } else {
+            typeBuilder = TypeSpec.classBuilder(generatedTypeName)
+                .addModifiers(Modifier.PUBLIC)
+                .addModifiers(Modifier.FINAL);
+        }
+
+        if (!asEnum) {
+            FieldSpec simpleConst = FieldSpec.builder(String.class, fieldSimple, Modifier.PUBLIC, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$S", simpleBinary)
+                .build();
+            FieldSpec fullConst = FieldSpec.builder(String.class, fieldFull, Modifier.PUBLIC, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$S", binaryFull)
+                .build();
+            typeBuilder.addField(simpleConst);
+            typeBuilder.addField(fullConst);
+        } else {
+            // 枚举场景：仅声明枚举常量名；值由名称表达（保持与 Lombok 风格一致）
+            // 这里仍提供两个枚举常量名，用户可通过 name() 或自定义方法扩展获取字符串
+            typeBuilder.addEnumConstant(fieldSimple);
+            typeBuilder.addEnumConstant(fieldFull);
+        }
+
+        JavaFile javaFile = JavaFile.builder(packageName, typeBuilder.build()).build();
         javaFile.writeTo(processingEnv.getFiler());
-        
-        processingEnv.getMessager().printMessage(
-            Diagnostic.Kind.NOTE,
-            "已生成类签名常量: " + packageName + ".Clazz." + constantName
-        );
+        processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE,
+            "已生成类名常量: " + packageName + "." + generatedTypeName + ".(" + fieldSimple + ", " + fieldFull + ")");
     }
     
-    private String convertToConstantName(String className) {
-        // 将驼峰命名转换为大写下划线命名
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < className.length(); i++) {
-            char c = className.charAt(i);
-            if (i > 0 && Character.isUpperCase(c)) {
-                sb.append('_');
-            }
-            sb.append(Character.toUpperCase(c));
-        }
-        return sb.toString();
+    private String stripPackage(String binaryFull) {
+        int idx = binaryFull.lastIndexOf('.');
+        return idx >= 0 ? binaryFull.substring(idx + 1) : binaryFull;
+    }
+
+    private String buildConstName(String prefix, String base, String suffix) {
+        String p = prefix == null ? "" : prefix;
+        String s = suffix == null ? "" : suffix;
+        return (p + base + s).replaceAll("[^A-Za-z0-9_$]", "_");
     }
 
     @Override
