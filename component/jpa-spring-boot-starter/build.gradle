@@ -9,22 +9,66 @@ dependencies {
 
     runtimeOnly 'org.postgresql:postgresql'
 
-    api 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // QueryDSL核心依赖
+    api "com.querydsl:querydsl-core:${querydslVersion}"
+    api "com.querydsl:querydsl-jpa:${querydslVersion}:jakarta"
+
+    // Jakarta API依赖
+    api "jakarta.persistence:jakarta.persistence-api"
+    api "jakarta.annotation:jakarta.annotation-api"
+
+    // Spring Data JPA依赖
+    api "org.springframework.boot:spring-boot-starter-data-jpa"
+
+//    // Hibernate依赖
+//    api "org.hibernate:hibernate-core"
+
+
+
+    // APT处理器依赖
+    compileOnly "com.querydsl:querydsl-apt:${querydslVersion}:jakarta"
+    compileOnly "org.hibernate:hibernate-jpamodelgen"
+
+
+
+
+
+
+//    api 'org.springframework.boot:spring-boot-starter-data-jpa'
     compileOnly('org.springframework.cloud:spring-cloud-starter-bootstrap')
 
     // QueryDSL
-    api("com.querydsl:querydsl-core")
-    api("com.querydsl:querydsl-jpa")
+//    api("com.querydsl:querydsl-core")
+//    api("com.querydsl:querydsl-jpa")
+//    api("com.querydsl:querydsl-jpa:${querydslVersion}:jakarta")
     api("com.querydsl:querydsl-sql")
     api("com.querydsl:querydsl-codegen")
 
-    annotationProcessor(
-            "org.springframework.boot:spring-boot-starter-data-jpa",
-            "com.querydsl:querydsl-apt:5.0.0:jpa",
-//            "com.querydsl:querydsl-apt::jpa",
-            "org.hibernate.javax.persistence:hibernate-jpa-2.1-api",
-            'javax.annotation:javax.annotation-api',
-            'org.hibernate:hibernate-jpamodelgen'
-    )
+//    annotationProcessor(
+////            "org.springframework.boot:spring-boot-starter-data-jpa",
+////            "com.querydsl:querydsl-apt:5.0.0:jpa",
+////            "com.querydsl:querydsl-apt::jpa",
+//            // QueryDSL APT处理器 - 必需，用于生成Q类
+//            "com.querydsl:querydsl-apt:${querydslVersion}:jakarta",
+//            // Jakarta Persistence API - 必需，提供JPA注解
+//            "jakarta.persistence:jakarta.persistence-api",
+//            // Jakarta Annotation API - 必需，提供基本注解支持
+//            "jakarta.annotation:jakarta.annotation-api",
+////            "org.hibernate.jakarta.persistence:hibernate-jpa-2.1-api",
+////            'jakarta.annotation:jakarta.annotation-api',
+//            // Hibernate 的 JPA 模型生成器, 使用 Hibernate 的元模型功能（如类型安全的 JPA 查询），则需要保留
+//            'org.hibernate:hibernate-jpamodelgen'
+//    )
+
+//    // 测试依赖
+//    testImplementation "com.querydsl:querydsl-jpa:${querydslVersion}:jakarta"
+//    testAnnotationProcessor "com.querydsl:querydsl-apt:${querydslVersion}:jakarta"
 
 }
+
+//// QueryDSL插件配置
+//querydsl {
+//    jpa = true  // 启用JPA支持
+//    querydslSourcesDir = 'src/main/generated'  // Q类生成目录
+//    library = "com.querydsl:querydsl-apt:${querydslVersion}:jakarta"  // 指定使用jakarta分类器
+//}

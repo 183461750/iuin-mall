@@ -1,3 +1,4 @@
+
 archivesBaseName = 'jpa-service'
 
 bootJar {

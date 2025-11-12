@@ -2,12 +2,12 @@ package com.iuin.component.jpa.config;
 
 import com.querydsl.codegen.ClassPathUtils;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityManager;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
 import java.io.IOException;
 
 /**
