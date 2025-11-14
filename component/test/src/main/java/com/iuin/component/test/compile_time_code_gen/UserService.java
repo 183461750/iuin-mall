@@ -27,6 +27,9 @@ public class UserService {
         // 打印常量值
         System.out.println("简单类名: " + simple);
         System.out.println("完整类名: " + full);
+
+        String username = User.Fields.username;
+        System.out.println("username字段名: " + username);
     }
 
     public static void main(String[] args) {
