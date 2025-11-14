@@ -48,5 +48,5 @@ public @interface ClassSignatureConstants {
      * 生成的常量类名
      * 默认为"Signatures"
      */
-    String innerClassName() default "Signatures";
+    String innerClassName() default "Meta";
 }
