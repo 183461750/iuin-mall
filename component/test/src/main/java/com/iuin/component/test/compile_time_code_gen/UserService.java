@@ -21,8 +21,8 @@ public class UserService {
      */
     public void testGeneratedConstants() {
         // 访问生成的类名常量
-        String simple = User.UserConstants.SIMPLE_CLASS_NAME;
-        String full = User.UserConstants.CLASS_NAME;
+        String simple = User.Meta.SIMPLE_CLASS_NAME;
+        String full = User.Meta.CLASS_NAME;
 
         // 打印常量值
         System.out.println("简单类名: " + simple);
