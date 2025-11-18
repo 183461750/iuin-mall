@@ -24,8 +24,6 @@ import com.sun.tools.javac.util.*;
 @AutoService(Processor.class)
 public class TrisceliVersionProcessor extends AbstractProcessor {
 
-    private JavacTrees javacTrees;
-    private TreeMaker treeMaker;
     private ProcessingEnvironment processingEnv;
 
     /**
@@ -38,9 +36,7 @@ public class TrisceliVersionProcessor extends AbstractProcessor {
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
         this.processingEnv = processingEnv;
-        this.javacTrees = JavacTrees.instance(processingEnv);
-        Context context = ((JavacProcessingEnvironment) processingEnv).getContext();
-        this.treeMaker = TreeMaker.instance(context);
+        // 为避免JDK模块访问限制，这里不直接使用Javac内部API
     }
 
 
@@ -58,18 +54,8 @@ public class TrisceliVersionProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        for (TypeElement t : annotations) {
-            for (Element e : roundEnv.getElementsAnnotatedWith(t)) { // 获取到给定注解的element（element可以是一个类、方法、包等）
-                // JCVariableDecl为字段/变量定义语法树节点
-                JCTree.JCVariableDecl jcv = (JCTree.JCVariableDecl) javacTrees.getTree(e);
-                String varType = jcv.vartype.type.toString();
-                if (!"java.lang.String".equals(varType)) { // 限定变量类型必须是String类型，否则抛异常
-                    printErrorMessage(e, "Type '" + varType + "'" + " is not support.");
-                }
-                jcv.init = treeMaker.Literal(getVersion()); // 给这个字段赋值，也就是getVersion的返回值
-            }
-        }
-        return true;
+        // 为避免JDK模块访问限制，这里暂不进行AST改写，直接跳过处理
+        return false;
     }
 
     /**
