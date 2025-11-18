@@ -1,0 +1,2 @@
+com.iuin.component.pluggable_annotation.compile_time_code_gen.processor.MetaConstantsProcessor
+com.iuin.component.pluggable_annotation.compile_time_code_gen.processor.ClassBodyMetaInjectorProcessor
