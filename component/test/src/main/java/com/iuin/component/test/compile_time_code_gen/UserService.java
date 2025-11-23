@@ -30,6 +30,8 @@ public class UserService {
 
         String username = User.Fields.username;
         System.out.println("username字段名: " + username);
+
+        System.out.println("简单类名: " + NormalClass.Metas.SIMPLE_CLASS_NAME);
     }
 
     public static void main(String[] args) {
