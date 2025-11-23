@@ -1,0 +1,40 @@
+# Remote plugin configuration example
+# Supported placeholders:
+#   - ${service}            : current Gradle project name
+#   - ${REMOTE_BASE_DIR}    : value of remote.base.dir
+#   - ${remote.base.dir}    : same as above
+
+# Environment configurations
+# Each environment can have its own settings
+environments:
+  # Development environment configuration (from gradle-dev.properties)
+  dev:
+    remote:
+      server: dev.intranet.iuin
+      base:
+        dir: /data/iuin-mall
+  test:
+    remote:
+      server: test.intranet.iuin
+      base:
+        dir: /data/iuin-mall
+
+# Service ports configuration (previously in service-ports.json)
+service:
+  ports:
+    agent-service: 8888
+    mcp-service: 8888
+    sso-server-service: 8888
+  start:
+    command: $REMOTE_BASE_DIR/$SERVICE_NAME/$SERVICE_NAME-start.sh
+  env:
+    JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=3$SERVICE_PORT
+
+# Configure log file pattern for logTask (logTo<Profile>)
+# Default resolves to: ${REMOTE_BASE_DIR}/../logs/${service}.log
+log:
+  filePattern: ${REMOTE_BASE_DIR}/../logs/${service}.log
+
+# Alternative example:
+# log:
+#   filePattern: /var/log/services/${service}.log
