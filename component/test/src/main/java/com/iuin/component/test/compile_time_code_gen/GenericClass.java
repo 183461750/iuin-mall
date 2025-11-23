@@ -1,8 +1,7 @@
 package com.iuin.component.test.compile_time_code_gen;
 
-import com.iuin.component.pluggable_annotation.compile_time_code_gen.annotation.ClassSignatureConstants;
+import com.iuin.component.pluggable_annotation.compile_time_code_gen.annotation.ClassMetaConstants;
 
-@ClassSignatureConstants
+@ClassMetaConstants
 public class GenericClass<T> {
 }
-

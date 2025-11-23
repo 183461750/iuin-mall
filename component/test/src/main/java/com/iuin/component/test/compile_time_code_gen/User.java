@@ -1,6 +1,6 @@
 package com.iuin.component.test.compile_time_code_gen;
 
-import com.iuin.component.pluggable_annotation.compile_time_code_gen.annotation.ClassSignatureConstants;
+import com.iuin.component.pluggable_annotation.compile_time_code_gen.annotation.ClassMetaConstants;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldNameConstants;
@@ -11,7 +11,7 @@ import lombok.experimental.FieldNameConstants;
 @Setter
 @Getter
 @FieldNameConstants
-@ClassSignatureConstants(innerClassName = "UserConstants")
+@ClassMetaConstants(innerClassName = "UserConstants")
 public class User {
 
     // Getter和Setter方法
@@ -19,11 +19,11 @@ public class User {
     private String email;
     private Integer age;
     private Boolean active;
-    
+
     // 构造方法
     public User() {
     }
-    
+
     public User(String username, String email) {
         this.username = username;
         this.email = email;

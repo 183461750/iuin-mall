@@ -1,10 +1,10 @@
 package com.iuin.component.test.compile_time_code_gen;
 
 /**
- * UserService类，用于测试生成的ClassSignatureConstants常量
+ * UserService类，用于测试生成的ClassMetaConstants常量
  */
 public class UserService {
-    
+
     private String username;
 
     public void createUser(String username, String password) {
@@ -14,7 +14,7 @@ public class UserService {
     public Object findUserById(long id) {
         return null;
     }
-    
+
     /**
      * 测试方法，使用生成的常量
      * 这里会在编译期使用User类中自动生成的UserConstants内部类

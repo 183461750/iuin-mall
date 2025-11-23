@@ -13,19 +13,20 @@ import java.util.*;
 
 public class MetaAugmentProvider extends PsiAugmentProvider {
 
-    private static final String ANNOTATION_FQN = "com.iuin.component.pluggable_annotation.compile_time_code_gen.annotation.ClassSignatureConstants";
+    private static final String ANNOTATION_FQN = "com.iuin.component.pluggable_annotation.compile_time_code_gen.annotation.ClassMetaConstants";
 
     @Override
-    public @NotNull <Psi extends PsiElement> List<Psi> getAugments(@NotNull PsiElement element, @NotNull Class<Psi> type) {
+    public @NotNull <Psi extends PsiElement> List<Psi> getAugments(@NotNull PsiElement element,
+            @NotNull Class<Psi> type) {
         if (!(element instanceof PsiClass)) {
             return Collections.emptyList();
         }
         PsiClass psiClass = (PsiClass) element;
-        
+
         // Only process top-level classes or static inner classes
         if (psiClass.getContainingClass() != null && !psiClass.hasModifierProperty(PsiModifier.STATIC)) {
-             // Actually the processor supports static nested classes, so this check is fine.
-             // But strictly speaking, the annotation might be on any class.
+            // Actually the processor supports static nested classes, so this check is fine.
+            // But strictly speaking, the annotation might be on any class.
         }
 
         PsiAnnotation annotation = psiClass.getAnnotation(ANNOTATION_FQN);
@@ -41,9 +42,9 @@ public class MetaAugmentProvider extends PsiAugmentProvider {
     }
 
     private PsiClass createInnerMetaClass(PsiClass containingClass, PsiAnnotation annotation) {
-        String innerClassName = getAnnotationValue(annotation, "innerClassName", "Meta");
+        String innerClassName = getAnnotationValue(annotation, "innerClassName", "Metas");
         if (StringUtil.isEmpty(innerClassName)) {
-            innerClassName = "Meta";
+            innerClassName = "Metas";
         }
 
         SimpleLightClassBuilder builder = new SimpleLightClassBuilder(containingClass, innerClassName);
@@ -53,15 +54,17 @@ public class MetaAugmentProvider extends PsiAugmentProvider {
 
         // Add fields
         // SIMPLE_CLASS_NAME
-        builder.addMethod(JavaPsiFacade.getElementFactory(containingClass.getProject()).createMethodFromText("private " + innerClassName + "() {}", containingClass));
-        
+        builder.addMethod(JavaPsiFacade.getElementFactory(containingClass.getProject())
+                .createMethodFromText("private " + innerClassName + "() {}", containingClass));
+
         PsiManager manager = containingClass.getManager();
         PsiType stringType = PsiType.getJavaLangString(manager, containingClass.getResolveScope());
 
         LightFieldBuilder simpleNameField = new LightFieldBuilder(manager, "SIMPLE_CLASS_NAME", stringType);
         simpleNameField.setModifiers(PsiModifier.PUBLIC, PsiModifier.STATIC, PsiModifier.FINAL);
         simpleNameField.setContainingClass(builder);
-        simpleNameField.setInitializer(JavaPsiFacade.getElementFactory(containingClass.getProject()).createExpressionFromText("\"" + containingClass.getName() + "\"", builder));
+        simpleNameField.setInitializer(JavaPsiFacade.getElementFactory(containingClass.getProject())
+                .createExpressionFromText("\"" + containingClass.getName() + "\"", builder));
         builder.addField(simpleNameField);
 
         // CLASS_NAME
@@ -69,8 +72,10 @@ public class MetaAugmentProvider extends PsiAugmentProvider {
         fullNameField.setModifiers(PsiModifier.PUBLIC, PsiModifier.STATIC, PsiModifier.FINAL);
         fullNameField.setContainingClass(builder);
         String qualifiedName = containingClass.getQualifiedName();
-        if (qualifiedName == null) qualifiedName = containingClass.getName();
-        fullNameField.setInitializer(JavaPsiFacade.getElementFactory(containingClass.getProject()).createExpressionFromText("\"" + qualifiedName + "\"", builder));
+        if (qualifiedName == null)
+            qualifiedName = containingClass.getName();
+        fullNameField.setInitializer(JavaPsiFacade.getElementFactory(containingClass.getProject())
+                .createExpressionFromText("\"" + qualifiedName + "\"", builder));
         builder.addField(fullNameField);
 
         return builder;

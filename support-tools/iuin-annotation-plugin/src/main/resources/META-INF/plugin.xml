@@ -4,7 +4,7 @@
     <vendor email="support@iuin.com" url="http://www.iuin.com">IUIN</vendor>
 
     <description><![CDATA[
-    Support for IUIN custom annotations like @ClassSignatureConstants.
+    Support for IUIN custom annotations like @ClassMetaConstants.
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>

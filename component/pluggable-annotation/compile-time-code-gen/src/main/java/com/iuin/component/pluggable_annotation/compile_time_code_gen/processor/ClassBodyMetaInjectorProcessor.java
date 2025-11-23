@@ -1,7 +1,7 @@
 package com.iuin.component.pluggable_annotation.compile_time_code_gen.processor;
 
 import com.google.auto.service.AutoService;
-import com.iuin.component.pluggable_annotation.compile_time_code_gen.annotation.ClassSignatureConstants;
+import com.iuin.component.pluggable_annotation.compile_time_code_gen.annotation.ClassMetaConstants;
 import com.sun.source.util.Trees;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -47,7 +47,7 @@ public class ClassBodyMetaInjectorProcessor extends AbstractProcessor {
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return Set.of(ClassSignatureConstants.class.getName());
+        return Set.of(ClassMetaConstants.class.getName());
     }
 
     @Override
@@ -57,21 +57,25 @@ public class ClassBodyMetaInjectorProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        if (annotations.isEmpty()) return false;
+        if (annotations.isEmpty())
+            return false;
         Elements el = processingEnv.getElementUtils();
-        for (Element e : roundEnv.getElementsAnnotatedWith(ClassSignatureConstants.class)) {
+        for (Element e : roundEnv.getElementsAnnotatedWith(ClassMetaConstants.class)) {
             try {
                 Object tree = trees.getTree(e);
-                if (tree == null) continue;
+                if (tree == null)
+                    continue;
                 Class<?> jcClassDecl = Class.forName("com.sun.tools.javac.tree.JCTree$JCClassDecl");
-                if (!jcClassDecl.isInstance(tree)) continue;
+                if (!jcClassDecl.isInstance(tree))
+                    continue;
                 TypeElement te = (TypeElement) e;
-                ClassSignatureConstants cfg = e.getAnnotation(ClassSignatureConstants.class);
-                String innerName = cfg != null && !cfg.innerClassName().isBlank() ? cfg.innerClassName() : "Meta";
+                ClassMetaConstants cfg = e.getAnnotation(ClassMetaConstants.class);
+                String innerName = cfg != null && !cfg.innerClassName().isBlank() ? cfg.innerClassName() : "Metas";
                 String full = el.getBinaryName(te).toString();
                 String simple = stripPackage(full);
                 if (!isStaticAllowed(jcClassDecl.cast(tree))) {
-                    processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "@ClassSignatureConstants 仅允许用于顶层类或静态嵌套类", e);
+                    processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR,
+                            "@ClassMetaConstants 仅允许用于顶层类或静态嵌套类", e);
                     continue;
                 }
                 injectInnerMeta(tree, innerName, simple, full);
@@ -83,7 +87,8 @@ public class ClassBodyMetaInjectorProcessor extends AbstractProcessor {
         return true;
     }
 
-    private void injectInnerMeta(Object owner, String innerName, String simpleBinary, String fullBinary) throws Exception {
+    private void injectInnerMeta(Object owner, String innerName, String simpleBinary, String fullBinary)
+            throws Exception {
         Class<?> tmCls = Class.forName("com.sun.tools.javac.tree.TreeMaker");
         Class<?> modsCls = Class.forName("com.sun.tools.javac.tree.JCTree$JCModifiers");
         Class<?> listCls = Class.forName("com.sun.tools.javac.util.List");
@@ -107,7 +112,8 @@ public class ClassBodyMetaInjectorProcessor extends AbstractProcessor {
 
         Method nil = listCls.getMethod("nil");
         Object nilList = nil.invoke(null);
-        Method classDef = tmCls.getMethod("ClassDef", modsCls, nameCls, listCls, Class.forName("com.sun.tools.javac.tree.JCTree$JCExpression"), listCls, listCls);
+        Method classDef = tmCls.getMethod("ClassDef", modsCls, nameCls, listCls,
+                Class.forName("com.sun.tools.javac.tree.JCTree$JCExpression"), listCls, listCls);
         Object meta = classDef.invoke(treeMaker, mods, name, nilList, null, nilList, nilList);
 
         Field defsFieldOwner = owner.getClass().getField("defs");
@@ -121,8 +127,12 @@ public class ClassBodyMetaInjectorProcessor extends AbstractProcessor {
         Method of = listCls.getMethod("of", Object.class);
         Object emptyStmts = of.invoke(null, (Object) null);
         Object ctorBody = block.invoke(treeMaker, 0L, nilList);
-        Method methodDef = tmCls.getMethod("MethodDef", modsCls, nameCls, Class.forName("com.sun.tools.javac.tree.JCTree$JCExpression"), listCls, listCls, listCls, Class.forName("com.sun.tools.javac.tree.JCTree$JCBlock"), Class.forName("com.sun.tools.javac.tree.JCTree$JCExpression"));
-        Object ctor = methodDef.invoke(treeMaker, privateMods, fromString.invoke(names, "<init>"), null, nilList, nilList, nilList, ctorBody, null);
+        Method methodDef = tmCls.getMethod("MethodDef", modsCls, nameCls,
+                Class.forName("com.sun.tools.javac.tree.JCTree$JCExpression"), listCls, listCls, listCls,
+                Class.forName("com.sun.tools.javac.tree.JCTree$JCBlock"),
+                Class.forName("com.sun.tools.javac.tree.JCTree$JCExpression"));
+        Object ctor = methodDef.invoke(treeMaker, privateMods, fromString.invoke(names, "<init>"), null, nilList,
+                nilList, nilList, ctorBody, null);
 
         Method ident = tmCls.getMethod("Ident", nameCls);
         Method varDef = tmCls.getMethod("VarDef", modsCls, nameCls, jcExpr, jcExpr);
@@ -130,8 +140,10 @@ public class ClassBodyMetaInjectorProcessor extends AbstractProcessor {
         Method literal = tmCls.getMethod("Literal", Object.class);
         Object initSimple = literal.invoke(treeMaker, simpleBinary);
         Object initFull = literal.invoke(treeMaker, fullBinary);
-        Object fSimple = varDef.invoke(treeMaker, makerModifiers.invoke(treeMaker, PUBLIC | STATIC | FINAL), fromString.invoke(names, "SIMPLE_CLASS_NAME"), stringType, initSimple);
-        Object fFull = varDef.invoke(treeMaker, makerModifiers.invoke(treeMaker, PUBLIC | STATIC | FINAL), fromString.invoke(names, "CLASS_NAME"), stringType, initFull);
+        Object fSimple = varDef.invoke(treeMaker, makerModifiers.invoke(treeMaker, PUBLIC | STATIC | FINAL),
+                fromString.invoke(names, "SIMPLE_CLASS_NAME"), stringType, initSimple);
+        Object fFull = varDef.invoke(treeMaker, makerModifiers.invoke(treeMaker, PUBLIC | STATIC | FINAL),
+                fromString.invoke(names, "CLASS_NAME"), stringType, initFull);
 
         Field metaDefs = jcClassDecl.getField("defs");
         Object metaDefs1 = nil.invoke(null);
@@ -145,9 +157,11 @@ public class ClassBodyMetaInjectorProcessor extends AbstractProcessor {
         Class<?> jcClassDecl = Class.forName("com.sun.tools.javac.tree.JCTree$JCClassDecl");
         Field symField = jcClassDecl.getField("sym");
         Object sym = symField.get(decl);
-        if (sym == null) return true;
+        if (sym == null)
+            return true;
         Object owner = sym.getClass().getField("owner").get(sym);
-        if (owner != null && owner.getClass().getSimpleName().contains("PackageSymbol")) return true;
+        if (owner != null && owner.getClass().getSimpleName().contains("PackageSymbol"))
+            return true;
         long flags = (long) sym.getClass().getMethod("flags").invoke(sym);
         long STATIC = Class.forName("com.sun.tools.javac.code.Flags").getField("STATIC").getLong(null);
         return (flags & STATIC) != 0;
@@ -158,17 +172,20 @@ public class ClassBodyMetaInjectorProcessor extends AbstractProcessor {
         Class<?> listCls = Class.forName("com.sun.tools.javac.util.List");
         Field modsField = decl.getClass().getField("mods");
         Object mods = modsField.get(decl);
-        if (mods == null) return;
+        if (mods == null)
+            return;
         Field annsField = modsCls.getField("annotations");
         Object anns = annsField.get(mods);
-        if (anns == null) return;
+        if (anns == null)
+            return;
         Method nil = listCls.getMethod("nil");
         Object filtered = nil.invoke(null);
         Method toString = Class.forName("com.sun.tools.javac.tree.JCTree$JCAnnotation").getMethod("toString");
         Method append = listCls.getMethod("append", Object.class);
         for (Object a : (Iterable<?>) anns) {
             String at = String.valueOf(toString.invoke(a));
-            if (at.endsWith("ClassSignatureConstants") || at.equals(ClassSignatureConstants.class.getName())) continue;
+            if (at.endsWith("ClassMetaConstants") || at.equals(ClassMetaConstants.class.getName()))
+                continue;
             filtered = append.invoke(filtered, a);
         }
         annsField.set(mods, filtered);
@@ -187,7 +204,7 @@ public class ClassBodyMetaInjectorProcessor extends AbstractProcessor {
         Object ownModule = this.getClass().getModule();
         Method implAddOpens = moduleCls.getDeclaredMethod("implAddOpens", String.class, moduleCls);
         forceAccessible(implAddOpens);
-        String[] pkgs = new String[]{
+        String[] pkgs = new String[] {
                 "com.sun.tools.javac.api",
                 "com.sun.tools.javac.processing",
                 "com.sun.tools.javac.tree",
@@ -200,13 +217,17 @@ public class ClassBodyMetaInjectorProcessor extends AbstractProcessor {
                 "com.sun.tools.javac.file",
                 "com.sun.tools.javac.jvm"
         };
-        for (String p : pkgs) implAddOpens.invoke(jdkCompiler, p, ownModule);
+        for (String p : pkgs)
+            implAddOpens.invoke(jdkCompiler, p, ownModule);
         disableIllegalAccessLogger();
     }
 
     private void forceAccessible(Method m) throws Exception {
-        try { m.setAccessible(true); } catch (Throwable ignored) {
-            Field f = Class.forName("jdk.internal.reflect.ReflectionFactory").getDeclaredField("directMethodHandleAccess");
+        try {
+            m.setAccessible(true);
+        } catch (Throwable ignored) {
+            Field f = Class.forName("jdk.internal.reflect.ReflectionFactory")
+                    .getDeclaredField("directMethodHandleAccess");
             f.setAccessible(true);
             m.setAccessible(true);
         }
@@ -218,6 +239,7 @@ public class ClassBodyMetaInjectorProcessor extends AbstractProcessor {
             Field f = logger.getDeclaredField("logger");
             f.setAccessible(true);
             f.set(null, null);
-        } catch (Throwable ignored) {}
+        } catch (Throwable ignored) {
+        }
     }
 }

@@ -9,19 +9,20 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Set;
 
-@SupportedAnnotationTypes("com.iuin.annotation.ClassSignatureConstants")
+@SupportedAnnotationTypes("com.iuin.annotation.ClassMetaConstants")
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
-public class ClassSignatureConstantsProcessor extends AbstractProcessor {
+public class ClassMetaConstantsProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        for (Element element : roundEnv.getElementsAnnotatedWith(ClassSignatureConstants.class)) {
+        for (Element element : roundEnv.getElementsAnnotatedWith(ClassMetaConstants.class)) {
             if (element instanceof TypeElement typeElement) {
-                ClassSignatureConstants annotation = typeElement.getAnnotation(ClassSignatureConstants.class);
+                ClassMetaConstants annotation = typeElement.getAnnotation(ClassMetaConstants.class);
                 String innerClassName = annotation.innerClassName();
                 String className = typeElement.getSimpleName().toString();
-                String packageName = processingEnv.getElementUtils().getPackageOf(typeElement).getQualifiedName().toString();
-                
+                String packageName = processingEnv.getElementUtils().getPackageOf(typeElement).getQualifiedName()
+                        .toString();
+
                 generateConstantsClass(packageName, className, innerClassName);
             }
         }
@@ -31,16 +32,16 @@ public class ClassSignatureConstantsProcessor extends AbstractProcessor {
     private void generateConstantsClass(String packageName, String className, String innerClassName) {
         try {
             JavaFileObject sourceFile = processingEnv.getFiler().createSourceFile(
-                packageName + "." + className + "_" + innerClassName
-            );
-            
+                    packageName + "." + className + "_" + innerClassName);
+
             try (PrintWriter writer = new PrintWriter(sourceFile.openWriter())) {
                 writer.println("package " + packageName + ";");
                 writer.println();
                 writer.println("// 生成的常量类");
                 writer.println("public class " + className + "_" + innerClassName + " {");
-                writer.println("    public static final String CLASS_NAME = \"" + className + \"" + ";");
-                writer.println("    public static final String FULL_CLASS_NAME = \"" + packageName + "." + className + \"" + ";");
+                writer.println("    public static final String CLASS_NAME = \"" + className + "\";");
+                writer.println(
+                        "    public static final String FULL_CLASS_NAME = \"" + packageName + "." + className + "\";");
                 writer.println("    public static final String FIELD_USERNAME = \"username\";");
                 writer.println("    public static final String FIELD_EMAIL = \"email\";");
                 writer.println("    public static final String PATH_USERNAME = \"username\";");
