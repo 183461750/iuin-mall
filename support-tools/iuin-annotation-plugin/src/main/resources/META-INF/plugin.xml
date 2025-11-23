@@ -1,0 +1,16 @@
+<idea-plugin>
+    <id>com.iuin.plugin.annotation-support</id>
+    <name>IUIN Annotation Support</name>
+    <vendor email="support@iuin.com" url="http://www.iuin.com">IUIN</vendor>
+
+    <description><![CDATA[
+    Support for IUIN custom annotations like @ClassSignatureConstants.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.psiAugmentProvider implementation="com.iuin.plugin.MetaAugmentProvider"/>
+    </extensions>
+</idea-plugin>
