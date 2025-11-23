@@ -44,35 +44,26 @@ allprojects {
         compileOnly {}
     }
 
-    // 根据项目路径应用不同的插件和Java配置
-    if (path == ':component:pluggable-annotation:compile-time-code-gen') {
-        // compile-time-code-gen模块特殊处理
-        apply plugin: 'java'
-        apply plugin: 'java-library'
-        
-        // 确保使用Java 17
-        java {
-            toolchain {
-                languageVersion = JavaLanguageVersion.of(17)
-            }
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
+    // 配置Java 17
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
         }
-    } else {
-        // 其他项目正常应用所有插件和Java 17配置
-        apply plugin: 'java-library'
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+
+    // 根据项目路径应用不同的插件
+    if (path != ':component:pluggable-annotation:compile-time-code-gen') {
+        // compile-time-code-gen模块特殊处理
+        // 其他项目正常应用所有插件
         apply plugin: 'org.springframework.boot'
         apply plugin: 'io.spring.dependency-management'
-        
-        // 配置Java 17
-        java {
-            toolchain {
-                languageVersion = JavaLanguageVersion.of(17)
-            }
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
-        }
     }
+
 }
 
 // 3. 使用 subprojects 为所有子项目进行通用配置
