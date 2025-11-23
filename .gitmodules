@@ -1,3 +1,6 @@
 [submodule "deploy"]
 	path = deploy
 	url = git@github.com:183461750/deploy.git
+[submodule "remote-plugin"]
+	path = support-tools/remote-plugin
+	url = git@codeup.aliyun.com:61581a3190f3ca58306f472f/iuin/remote-plugin.git
