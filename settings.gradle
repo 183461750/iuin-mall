@@ -1,3 +1,46 @@
+//gradle插件仓库
+pluginManagement {
+    repositories {
+        //本地
+        mavenLocal()
+//        //私服(Nexus)
+//        maven {
+//            url 'http://10.10.10.11:8080/repository/maven-public/'
+//            allowInsecureProtocol = true
+//        }
+        //国内镜像
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+        //gradle官方门户
+        gradlePluginPortal()
+        //备用
+        mavenCentral()
+    }
+}
+
+//项目依赖仓库
+dependencyResolutionManagement {
+    //settings 里找不到再去子模块仓库找，允许叠加
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        //本地
+        mavenLocal()
+//        //私服(Nexus)
+//        maven {
+//            url 'http://10.10.10.11:8080/repository/maven-public/'
+//            allowInsecureProtocol = true
+//        }
+        //国内镜像
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+        maven { url 'https://jitpack.io' }
+        //备用
+        mavenCentral()
+    }
+}
+
 rootProject.name = 'iuin-mall'
 
 include 'common-dependencies'

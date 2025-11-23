@@ -33,12 +33,6 @@ allprojects {
         compileOnly {}
     }
 
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
-    }
-    
     // 根据项目路径应用不同的插件和Java配置
     if (path == ':component:pluggable-annotation:compile-time-code-gen') {
         // compile-time-code-gen模块特殊处理
