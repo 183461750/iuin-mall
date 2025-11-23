@@ -1,5 +1,14 @@
 //gradle插件仓库
 pluginManagement {
+
+    def secretsFile = file("support-tools/secrets/gradle/secrets.properties")
+    if (secretsFile.exists()) {
+        println("[pluginManagement]加载本地密文")
+        def props = new Properties()
+        secretsFile.withInputStream { props.load(it) }
+        props.each { k, v -> settings.ext[k as String] = v }
+    }
+
     repositories {
         //本地
         mavenLocal()
@@ -8,6 +17,14 @@ pluginManagement {
 //            url 'http://10.10.10.11:8080/repository/maven-public/'
 //            allowInsecureProtocol = true
 //        }
+        // 私服(阿里云)
+        maven {
+            url 'https://packages.aliyun.com/61581a3190f3ca58306f472f/maven/iuin'
+            credentials {
+                username = (settings.hasProperty('ALIYUN_USERNAME') ? settings.ALIYUN_USERNAME : System.getenv('ALIYUN_USERNAME'))
+                password = (settings.hasProperty('ALIYUN_PASSWORD') ? settings.ALIYUN_PASSWORD : System.getenv('ALIYUN_PASSWORD'))
+            }
+        }
         //国内镜像
         maven {
             url 'https://maven.aliyun.com/repository/public'
@@ -23,6 +40,15 @@ pluginManagement {
 dependencyResolutionManagement {
     //settings 里找不到再去子模块仓库找，允许叠加
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+
+    def secretsFile = file("support-tools/secrets/gradle/secrets.properties")
+    if (secretsFile.exists()) {
+        println("[dependencyResolutionManagement]加载本地密文")
+        def props = new Properties()
+        secretsFile.withInputStream { props.load(it) }
+        props.each { k, v -> settings.ext[k as String] = v }
+    }
+
     repositories {
         //本地
         mavenLocal()
@@ -31,6 +57,14 @@ dependencyResolutionManagement {
 //            url 'http://10.10.10.11:8080/repository/maven-public/'
 //            allowInsecureProtocol = true
 //        }
+        // 私服(阿里云)
+        maven {
+            url 'https://packages.aliyun.com/61581a3190f3ca58306f472f/maven/iuin'
+            credentials {
+                username = (settings.hasProperty('ALIYUN_USERNAME') ? settings.ALIYUN_USERNAME : System.getenv('ALIYUN_USERNAME'))
+                password = (settings.hasProperty('ALIYUN_PASSWORD') ? settings.ALIYUN_PASSWORD : System.getenv('ALIYUN_PASSWORD'))
+            }
+        }
         //国内镜像
         maven {
             url 'https://maven.aliyun.com/repository/public'
