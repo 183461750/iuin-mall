@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.experimental.FieldNameConstants;
 
 /**
- * 测试类，用于验证ClassSignatureConstants注解的编译期代码生成功能
+ * 测试类，用于验证ClassMetaConstants注解的编译期代码生成功能
  */
 @Setter
 @Getter

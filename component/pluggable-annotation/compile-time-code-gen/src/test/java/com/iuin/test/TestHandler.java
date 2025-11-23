@@ -4,7 +4,7 @@ import com.iuin.component.pluggable_annotation.compile_time_code_gen.annotation.
 import lombok.Data;
 
 /**
- * 测试类，用于验证ClassSignatureConstantsHandler
+ * 测试类，用于验证ClassMetaConstantsHandler
  */
 @Data
 @ClassMetaConstants(innerClassName = "Constants", prefix = "PREFIX_", suffix = "_SUFFIX")
