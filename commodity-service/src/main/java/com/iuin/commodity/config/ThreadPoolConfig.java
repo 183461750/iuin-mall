@@ -57,7 +57,7 @@ public class ThreadPoolConfig {
         int recommendIOMaxPoolSize = CommonThreadUtil.recommendIOMaxPoolSize();
         int recommendIoQueueCapacity = CommonThreadUtil.RECOMMEND_IO_QUEUE_CAPACITY;
 
-        log.info("marketing-service threadPoolTaskExecutor init: " +
+        log.info("commodity-service threadPoolTaskExecutor init: " +
                         "corePoolSize: {}, maxPoolSize: {}, queueCapacity: {}, namePrefix: {}, keepAlive: {}, " +
                         "recommendIOCorePoolSize: {}, recommendIOMaxPoolSize: {}, recommendIoQueueCapacity: {}",
                 corePoolSize, maxPoolSize, queueCapacity, namePrefix, keepAlive,
