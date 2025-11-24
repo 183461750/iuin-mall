@@ -8,6 +8,4 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FeignConfig {
 
-    // TODO @Fa 添加nacos版本拦截器
-
 }
