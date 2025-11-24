@@ -1,9 +1,11 @@
 package com.iuin.commodity.controller;
 
 import com.iuin.commodity.model.resp.Test1Resp;
+import com.iuin.commodity.model.resp.req.Test1Req;
 import com.iuin.commodity.service.ComUserService;
 import com.iuin.commodity.service.ITestService;
 import com.iuin.common.utils.RespResult;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -55,10 +57,10 @@ public class TestController {
         return ResponseEntity.ok(str);
     }
 
-    @GetMapping("/get3")
-    public RespResult<Test1Resp> get3(String str) {
-        log.info("测试: str:{}", str);
-        return RespResult.success(testService.test1(str));
+    @GetMapping("/test1")
+    public RespResult<Test1Resp> test1(@Valid Test1Req req) {
+        log.info("测试: req:{}", req);
+        return RespResult.success(testService.test1(req));
     }
 
 }
