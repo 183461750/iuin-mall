@@ -77,57 +77,33 @@ dependencyResolutionManagement {
 
 rootProject.name = 'iuin-mall'
 
-include 'common-dependencies'
+// 完全自动包含所有模块
+def includeAllModules(baseDir, prefix) {
 
-// TODO @Fa 先注释掉先
-include 'gateway-service'
-//include 'config-service'
-include 'sso-server-service'
-include 'sso-server-service:sso-server-service-api'
-//include 'a-service'
-//include 'b-service'
-include 'jpa-service'
-//include 'workflow-service'
-//include 'search-service'
-//include 'search-service:search-service-api'
-//include 'commodity-service'
-//include 'mbp-ui-service'
-//include 'shardingsphere-service'
-//include 'yapi-service'
+    baseDir.eachDir { dir ->
 
-include 'common'
+        // 跳过特定目录
+        def skipList = ['temp', 'gradle', 'data', 'src', 'build', 'out', 'target', 'arthas-output', 'deploy', 'deploys', 'support-tools']
+        if (dir.name in skipList || dir.name.startsWith('.')) {
+            return
+        }
 
-include 'component'
-//include 'component:arthas-spring-boot-starter'
-//include 'component:base-spring-boot-starter'
-//include 'component:es-spring-boot-starter'
-//include 'component:jpa-spring-boot-starter'
-//include 'component:mybatis-plus-spring-boot-starter'
-//include 'component:mybatis-plus-mysql-spring-boot-starter'
-//include 'component:shardingsphere-spring-boot-starter'
-//include 'component:cache-spring-boot-starter'
-//include 'component:yapi-spring-boot-starter'
-//include 'component:skywalking-spring-boot-starter'
-//include 'component:nacos-spring-boot-starter'
-//include 'component:ai-spring-boot-starter'
+        def modulePath = prefix.isEmpty() ? dir.name : "${prefix}:${dir.name}"
 
-file("${rootDir}/component").eachDirMatch(~/.*-spring-boot-starter/) {
-    include "component:${it.name}"
+        // 打印当前模块路径
+        println("[includeAllModules]正在遍历modulePath: ${modulePath}")
+
+        // 检查该目录是否为Gradle模块（包含build.gradle文件）
+        if (new File(dir, 'build.gradle').exists()) {
+            include "${modulePath}"
+        }
+
+        // 递归处理子目录
+        includeAllModules(dir, modulePath)
+    }
 }
 
-include 'component:test'
-include 'component:test:feign'
-include 'component:test:mysql'
-include 'component:test:jpa'
-include 'component:test:testcontainers'
-
-include 'component:pluggable-annotation'
-include 'component:pluggable-annotation:version-pluggable'
-include 'component:pluggable-annotation:take_time_processor'
-
-// 正常包含compile-time-code-gen模块
-include 'component:pluggable-annotation:compile-time-code-gen'
-
-include 'agent-service'
-include 'mcp-service'
-include 'mcp-service:mcp-service-api'
+// 调用函数自动包含所有component模块
+//includeComponentModules(file("${rootDir}/component"), "")
+// 调用函数自动包含所有模块
+includeAllModules(file("${rootDir}"), "")
