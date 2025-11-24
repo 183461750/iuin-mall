@@ -63,6 +63,14 @@ public class ThreadPoolConfig {
                 corePoolSize, maxPoolSize, queueCapacity, namePrefix, keepAlive,
                 recommendIOCorePoolSize, recommendIOMaxPoolSize, recommendIoQueueCapacity);
 
+        return buildThreadPoolTaskExecutorBy(recommendIOCorePoolSize, recommendIOMaxPoolSize, recommendIoQueueCapacity);
+    }
+
+    /**
+     * 创建线程池
+     */
+    @NotNull
+    private ThreadPoolTaskExecutor buildThreadPoolTaskExecutorBy(int recommendIOCorePoolSize, int recommendIOMaxPoolSize, int recommendIoQueueCapacity) {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         //配置核心线程数
         taskExecutor.setCorePoolSize(corePoolSize == 0 ? recommendIOCorePoolSize : corePoolSize);
