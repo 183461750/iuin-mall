@@ -49,3 +49,6 @@ build/
 .DS_Store
 
 temp/
+
+*.log
+*.hprof
