@@ -11,12 +11,6 @@ dependencies {
 //    implementation project(':common-dependencies')
     implementation project(':component:base-spring-boot-starter')
 
-    implementation project(':component:pluggable-annotation:take_time_processor')
-    annotationProcessor project(':component:pluggable-annotation:take_time_processor')
-
-    implementation project(':component:pluggable-annotation:version-pluggable')
-    annotationProcessor project(':component:pluggable-annotation:version-pluggable')
-
     implementation project(':component:pluggable-annotation:compile-time-code-gen')
     annotationProcessor project(':component:pluggable-annotation:compile-time-code-gen')
 

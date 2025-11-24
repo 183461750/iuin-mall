@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.iuin.component.pluggable_annotation.version.config.VersionAutoConfiguration
