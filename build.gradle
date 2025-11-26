@@ -46,8 +46,11 @@ allprojects {
 
     // 配置Java 17
     java {
+        // 使用Java Toolchain（推荐做法） 这是Gradle官方最推荐的方式。它允许你声明项目所需的JDK版本，而无需关心每个开发者机器上JDK的具体安装路径。Gradle会自动检测系统中符合要求的JDK，甚至可以在没有时自动下载。
+        // 这种方式能最大程度地保证团队环境和CI/CD环境的一致性
         toolchain {
             languageVersion = JavaLanguageVersion.of(17)
+            // vendor = JvmVendorSpec.ADOPTIUM // 可选：指定供应商，如Eclipse Temurin
         }
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
