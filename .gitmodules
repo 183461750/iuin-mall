@@ -1,10 +1,11 @@
 [submodule "deploy"]
 	path = deploy
 	url = git@github.com:183461750/deploy.git
-[submodule "remote-plugin"]
-	path = support-tools/remote-plugin
-	url = git@github.com:iuin8/remote-plugin.git
 [submodule "support-tools/secrets"]
 	path = support-tools/secrets
 	url = git@github.com:iuin8/secrets.git
 	branch = iuin-mall
+[submodule "support-tools/remote-plugin"]
+	path = support-tools/remote-plugin
+	url = git@github.com:iuin8/remote-plugin.git
+	branch = main
