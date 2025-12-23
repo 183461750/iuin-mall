@@ -1,18 +1,31 @@
-# Remote plugin configuration example
-# Supported placeholders:
-#   - ${service}            : current Gradle project name
-#   - ${REMOTE_BASE_DIR}    : value of remote.base.dir
-#   - ${remote.base.dir}    : same as above
+
+environments:
+  dev:
+    extends: base
+    ssh:
+      server: dev.intranet.iuin
+    jenkins:
+      job: "iuin-mall-后端(dev环境)"
+  test:
+    extends: base
+    ssh:
+      server: test.dj.ssy.company
+    jenkins:
+      job: "iuin-mall-后端(Test环境)"
 
 common:
   base:
+    jenkins:
+      url: "https://your-jenkins-url.com"
+      user: "your_username"
+      token: "your_api_token"
     remote:
       base_dir: /data/iuin-mall
     start:
       #    command: $REMOTE_BASE_DIR/$SERVICE_NAME/$SERVICE_NAME-start.sh
-      command: sudo systemctl restart ${SERVICE_NAME}
+      command: sudo systemctl restart $SERVICE_NAME
     env:
-      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=3$SERVICE_PORT
+      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:3$SERVICE_PORT
     log:
       filePattern: ${REMOTE_BASE_DIR}/../logs/${service}.log
     service_ports:
@@ -20,16 +33,3 @@ common:
       mcp-service: 8888
       sso-server-service: 8888
       commodity-service: 8888
-
-# Environment configurations
-# Each environment can have its own settings
-environments:
-  # Development environment configuration (from gradle-dev.properties)
-  dev:
-    extends: base
-    ssh:
-      server: dev.intranet.iuin
-  test:
-    extends: base
-    ssh:
-      server: test.intranet.iuin
