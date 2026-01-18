@@ -12,6 +12,21 @@ environments:
       server: test.dj.ssy.company
     jenkins:
       job: "iuin-mall-后端(Test环境)"
+  uat:
+    extends: base
+    ssh:
+      server: uat.dj.ssy.company
+    jenkins:
+      job: "iuin-mall-后端(UAT环境)"
+    start:
+      need_confirm: true
+
+  prod:
+    extends: base
+    ssh:
+      server: prod.dj.ssy.company
+    jenkins:
+      job: "iuin-mall-后端(Prod环境)"
 
 common:
   base:
