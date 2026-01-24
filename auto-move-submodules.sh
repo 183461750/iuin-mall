@@ -1,9 +1,11 @@
 #!/bin/bash
 # 自动根据.gitmodules文件内容调整git子模块路径
 # 支持带branch分支的子模块配置
+# 兼容版本：支持bash 3.x（macOS默认版本）
+# 修复版本：解决Git版本检测错误、git仓库检测问题，以及bash 3.x兼容性问题
 # 使用方法:
 # 1. 手动编辑.gitmodules文件，修改子模块的path配置
-# 2. 运行此脚本: ./auto-move-submodules.sh
+# 2. 运行此脚本: ./auto-move-submodules-legacy.sh
 
 set -e
 
@@ -18,6 +20,10 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
+
+# 全局变量声明（使用普通数组模拟关联数组，兼容bash 3.x）
+submodule_map=()
+new_submodule_urls=()
 
 # 日志函数
 log_info() {
@@ -36,9 +42,10 @@ log_normal() {
     echo "$1"
 }
 
-# 版本比较函数
+# 版本比较函数 - 修复版本比较逻辑
 version_ge() {
-    [ "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1" ]
+    # 正确的版本比较：如果版本1 >= 版本2，返回0（true）
+    [ "$(printf '%s\n' "$2" "$1" | sort -V | head -n 1)" = "$2" ]
 }
 
 # 主函数
@@ -49,7 +56,7 @@ main() {
     # 检查Git版本
     check_git_version
 
-    # 检查环境
+    # 检查环境 - 修复git仓库检测
     check_environment
 
     # 备份配置文件
@@ -88,15 +95,17 @@ check_git_version() {
     log_normal "检查Git版本..."
     GIT_VERSION=$(git --version | awk '{print $3}')
 
-    if ! version_ge "$REQUIRED_GIT_VERSION" "$GIT_VERSION"; then
+    if version_ge "$GIT_VERSION" "$REQUIRED_GIT_VERSION"; then
+        log_info "Git版本 $GIT_VERSION 符合要求（需要 $REQUIRED_GIT_VERSION 或更高版本）"
+    else
         log_warn "警告：Git版本 $GIT_VERSION 可能不支持某些功能，建议升级到 $REQUIRED_GIT_VERSION 或更高版本"
     fi
 }
 
-# 检查环境
+# 检查环境 - 修复git仓库检测
 check_environment() {
-    # 检查是否在git仓库中
-    if [ ! -d ".git" ]; then
+    # 检查是否在git仓库中 - 更可靠的检测方法
+    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         log_error "错误：当前目录不是git仓库！"
         exit 1
     fi
@@ -150,10 +159,11 @@ detect_changes() {
     build_submodule_maps
 }
 
-# 构建子模块映射
+# 构建子模块映射 - 兼容bash 3.x，使用普通数组模拟关联数组
 build_submodule_maps() {
-    declare -gA submodule_map
-    declare -gA new_submodule_urls
+    # 清空数组
+    submodule_map=()
+    new_submodule_urls=()
 
     # 从当前配置中获取所有子模块的完整信息
     while IFS= read -r line; do
@@ -164,7 +174,8 @@ build_submodule_maps() {
             branch=$(git config --file .git/config --get "submodule.$name.branch" 2>/dev/null || true)
 
             if [ -n "$url" ]; then
-                submodule_map["$path"]="$name|$url|$branch"
+                # 使用"key=value"格式存储，兼容bash 3.x
+                submodule_map+=("$path=$name|$url|$branch")
             fi
         fi
     done <<< "$CURRENT_SUBMODULES"
@@ -180,10 +191,45 @@ build_submodule_maps() {
             if [ -n "$url" ]; then
                 # 使用URL+branch作为键，支持分支匹配
                 local key="$url|$branch"
-                new_submodule_urls["$key"]="$path|$name"
+                new_submodule_urls+=("$key=$path|$name")
             fi
         fi
     done <<< "$NEW_SUBMODULES"
+}
+
+# 获取子模块信息 - 兼容bash 3.x的get函数
+get_submodule_info() {
+    local key="$1"
+    local array_name="$2"
+
+    # 使用eval获取数组内容
+    local array
+    eval "array=(\"\${$array_name[@]}\")"
+
+    # 遍历数组查找匹配的键
+    for item in "${array[@]}"; do
+        if [[ $item =~ ^$key= ]]; then
+            echo "${item#$key=}"
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+# 查找新子模块URL - 兼容bash 3.x的查找函数
+find_new_submodule_url() {
+    local url="$1"
+
+    # 遍历new_submodule_urls数组查找匹配的URL
+    for item in "${new_submodule_urls[@]}"; do
+        if [[ $item =~ ^$url\| ]]; then
+            echo "${item%%=*}"
+            return 0
+        fi
+    done
+
+    return 1
 }
 
 # 显示变化
@@ -248,16 +294,20 @@ process_single_submodule() {
     log_normal "处理旧路径：$OLD_PATH"
 
     # 获取旧路径的子模块信息
-    if [ -n "${submodule_map[$OLD_PATH]}" ]; then
-        IFS='|' read -r OLD_NAME OLD_URL OLD_BRANCH <<< "${submodule_map[$OLD_PATH]}"
+    local info=$(get_submodule_info "$OLD_PATH" "submodule_map")
+    if [ -n "$info" ]; then
+        IFS='|' read -r OLD_NAME OLD_URL OLD_BRANCH <<< "$info"
         log_normal "  找到子模块：$OLD_NAME (URL: $OLD_URL, 分支: ${OLD_BRANCH:-未指定})"
 
         # 查找对应的新路径（支持分支匹配）
         local found=false
-        for key in "${!new_submodule_urls[@]}"; do
-            if [[ $key == "$OLD_URL"* ]]; then
-                IFS='|' read -r NEW_PATH NEW_NAME <<< "${new_submodule_urls[$key]}"
-                IFS='|' read -r NEW_URL NEW_BRANCH <<< "$key"
+        local matching_key=$(find_new_submodule_url "$OLD_URL")
+
+        if [ -n "$matching_key" ]; then
+            local new_info=$(get_submodule_info "$matching_key" "new_submodule_urls")
+            if [ -n "$new_info" ]; then
+                IFS='|' read -r NEW_PATH NEW_NAME <<< "$new_info"
+                IFS='|' read -r NEW_URL NEW_BRANCH <<< "$matching_key"
 
                 log_normal "  对应新路径：$NEW_PATH (名称: $NEW_NAME, 分支: ${NEW_BRANCH:-$DEFAULT_BRANCH})"
 
@@ -268,12 +318,9 @@ process_single_submodule() {
                 # 执行移动操作
                 move_submodule "$OLD_PATH" "$NEW_PATH" "$OLD_URL" "$target_branch" "$OLD_NAME"
 
-                # 从映射中移除已处理的条目
-                unset new_submodule_urls["$key"]
                 found=true
-                break
             fi
-        done
+        fi
 
         if [ "$found" = false ]; then
             log_warn "  警告：未找到对应的新路径，请手动处理"
@@ -312,10 +359,30 @@ move_submodule() {
 
 # 处理剩余的新路径
 process_remaining_paths() {
-    for key in "${!new_submodule_urls[@]}"; do
-        IFS='|' read -r NEW_PATH NEW_NAME <<< "${new_submodule_urls[$key]}"
+    for item in "${new_submodule_urls[@]}"; do
+        # 提取键和值
+        local key="${item%%=*}"
+        local value="${item#$key=}"
+
+        IFS='|' read -r NEW_PATH NEW_NAME <<< "$value"
         IFS='|' read -r URL BRANCH <<< "$key"
-        log_warn "注意：发现新增的子模块 $NEW_PATH (分支: ${BRANCH:-$DEFAULT_BRANCH})，可能需要手动处理"
+
+        # 检查是否已经处理过
+        local processed=false
+        for old_path in $DELETED_PATHS_CLEAN; do
+            local old_info=$(get_submodule_info "$old_path" "submodule_map")
+            if [ -n "$old_info" ]; then
+                local old_url=$(echo "$old_info" | cut -d'|' -f2)
+                if [ "$old_url" = "$URL" ]; then
+                    processed=true
+                    break
+                fi
+            fi
+        done
+
+        if [ "$processed" = false ]; then
+            log_warn "注意：发现新增的子模块 $NEW_PATH (分支: ${BRANCH:-$DEFAULT_BRANCH})，可能需要手动处理"
+        fi
     done
 }
 
