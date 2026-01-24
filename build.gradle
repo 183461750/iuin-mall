@@ -24,7 +24,7 @@ wrapper {
     distributionUrl = 'https://services.gradle.org/distributions/gradle-8.14.2-bin.zip'
 }
 
-def secretsFile = file("support-tools/secrets/gradle/secrets.properties")
+def secretsFile = file("support-dependencies/configs/secrets/gradle/secrets.properties")
 if (secretsFile.exists()) {
     println("[build]加载本地密文")
     def props = new Properties()

@@ -1,7 +1,7 @@
 //gradle插件仓库
 pluginManagement {
 
-    def secretsFile = file("support-tools/secrets/gradle/secrets.properties")
+    def secretsFile = file("support-dependencies/configs/secrets/gradle/secrets.properties")
     if (secretsFile.exists()) {
         println("[pluginManagement]加载本地密文")
         def props = new Properties()
@@ -41,7 +41,7 @@ dependencyResolutionManagement {
     //settings 里找不到再去子模块仓库找，允许叠加
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
 
-    def secretsFile = file("support-tools/secrets/gradle/secrets.properties")
+    def secretsFile = file("support-dependencies/configs/secrets/gradle/secrets.properties")
     if (secretsFile.exists()) {
         println("[dependencyResolutionManagement]加载本地密文")
         def props = new Properties()
@@ -83,7 +83,7 @@ def includeAllModules(baseDir, prefix) {
     baseDir.eachDir { dir ->
 
         // 跳过特定目录
-        def skipList = ['temp', 'gradle', 'data', 'src', 'build', 'out', 'target', 'arthas-output', 'deploy', 'deploys', 'support-tools']
+        def skipList = ['temp', 'gradle', 'data', 'src', 'build', 'out', 'target', 'arthas-output', 'deploy', 'deploys', 'support-dependencies']
         if (dir.name in skipList || dir.name.startsWith('.')) {
             return
         }
