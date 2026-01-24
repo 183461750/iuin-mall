@@ -1,0 +1,7 @@
+
+common:
+  base:
+    jenkins:
+      user: "fa"
+      # Jenkins设置中获取[API token](http://10.0.11.111:8080/user/fa/configure)
+      token: "xxx"

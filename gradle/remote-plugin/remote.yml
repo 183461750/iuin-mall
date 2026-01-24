@@ -9,31 +9,45 @@ environments:
   test:
     extends: base
     ssh:
-      server: test.dj.ssy.company
+      server: test.intranet.iuin
     jenkins:
       job: "iuin-mall-后端(Test环境)"
   uat:
     extends: base
     ssh:
-      server: uat.dj.ssy.company
+      server: uat.intranet.iuin
     jenkins:
       job: "iuin-mall-后端(UAT环境)"
+    remote:
+      base_dir: /home/fa/data/iuin-mall
     start:
+      # 会重启app的任务都需要二次确认
       need_confirm: true
-
+    log:
+      filePattern: /home/fa/data/logs/${service}.log
   prod:
     extends: base
     ssh:
-      server: prod.dj.ssy.company
-    jenkins:
-      job: "iuin-mall-后端(Prod环境)"
+      server: prod.intranet.iuin
+    remote:
+      # 禁用生产环境的base_dir
+      base_dir: /www
+    # 禁用生产环境的start命令
+    start:
+      # 会重启app的任务都需要二次确认
+      need_confirm: true
+      command: echo "prod"
 
 common:
   base:
+    # `user`和`token`在`remote-local.yml`中配置就行了, 因为`remote-local.yml`会覆盖`remote.yml`, 每个人的Jenkins用户名和密码都不一样
     jenkins:
       url: "https://your-jenkins-url.com"
-      user: "your_username"
-      token: "your_api_token"
+      user: ${JENKINS_USER}
+      # Jenkins设置中获取[API token](http://10.0.11.111:8080/user/fa/configure)
+      token: ${JENKINS_TOKEN}
+    #    ssh:
+    #      user: www
     remote:
       base_dir: /data/iuin-mall
     start:
@@ -42,7 +56,7 @@ common:
     env:
       JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:3$SERVICE_PORT
     log:
-      filePattern: ${REMOTE_BASE_DIR}/../logs/${service}.log
+      filePattern: /data/logs/${service}.log
     service_ports:
       agent-service: 8888
       mcp-service: 8888
