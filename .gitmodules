@@ -1,6 +1,6 @@
 [submodule "support-dependencies/tools/deploy"]
 	path = support-dependencies/tools/deploy
-	url = git@github.com:183461750/deploy.git
+	url = git@github.com:iuin8/deploy.git
 	branch = iuin-mall
 [submodule "support-dependencies/configs/secrets"]
 	path = support-dependencies/configs/secrets
